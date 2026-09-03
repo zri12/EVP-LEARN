@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../features/home/presentation/home_page.dart';
+import '../features/assessment/presentation/assessment_pages.dart';
 import '../features/learning/presentation/learning_pages.dart';
 import '../features/modules/presentation/modules_page.dart';
 import '../features/profile/presentation/profile_page.dart';
@@ -8,6 +9,7 @@ import '../features/progress/presentation/progress_page.dart';
 import '../features/root/presentation/root_app_shell.dart';
 import '../features/splash/presentation/splash_page.dart';
 import '../features/support/presentation/support_pages.dart';
+import '../domain/models/assessment_result.dart';
 
 abstract final class AppRoutes {
   static const root = '/';
@@ -21,12 +23,16 @@ abstract final class AppRoutes {
   static String moduleOverview(int moduleId) => '/module/$moduleId';
   static String objectives(int moduleId) => '/module/$moduleId/objectives';
   static String pretest(int moduleId) => '/module/$moduleId/pretest';
+  static String pretestResult(int moduleId) =>
+      '/module/$moduleId/pretest/result';
   static String theory(int moduleId) => '/module/$moduleId/theory';
   static String vocabulary(int moduleId) => '/module/$moduleId/vocabulary';
   static String reading(int moduleId, [String? readingId]) =>
       '/module/$moduleId/reading${readingId == null ? '' : '/$readingId'}';
   static String practice(int moduleId) => '/module/$moduleId/practice';
   static String posttest(int moduleId) => '/module/$moduleId/posttest';
+  static String posttestResult(int moduleId) =>
+      '/module/$moduleId/posttest/result';
   static String result(int moduleId) => '/module/$moduleId/result';
   static String history(int moduleId) => '/module/$moduleId/history';
 }
@@ -51,10 +57,19 @@ GoRouter createAppRouter() => GoRouter(
         ),
         GoRoute(
           path: 'pretest',
-          builder: (context, state) => LearningGatewayPage(
+          builder: (context, state) => AssessmentPage(
             moduleId: state.pathParameters['moduleId']!,
-            stage: LearningGatewayStage.pretest,
+            type: AssessmentType.pretest,
           ),
+          routes: [
+            GoRoute(
+              path: 'result',
+              builder: (context, state) => AssessmentResultPage(
+                moduleId: state.pathParameters['moduleId']!,
+                type: AssessmentType.pretest,
+              ),
+            ),
+          ],
         ),
         GoRoute(
           path: 'theory',
@@ -82,10 +97,19 @@ GoRouter createAppRouter() => GoRouter(
         ),
         GoRoute(
           path: 'posttest',
-          builder: (context, state) => LearningGatewayPage(
+          builder: (context, state) => AssessmentPage(
             moduleId: state.pathParameters['moduleId']!,
-            stage: LearningGatewayStage.posttest,
+            type: AssessmentType.posttest,
           ),
+          routes: [
+            GoRoute(
+              path: 'result',
+              builder: (context, state) => AssessmentResultPage(
+                moduleId: state.pathParameters['moduleId']!,
+                type: AssessmentType.posttest,
+              ),
+            ),
+          ],
         ),
         GoRoute(
           path: 'result',

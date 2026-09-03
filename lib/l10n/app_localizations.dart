@@ -613,6 +613,156 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Content unavailable. Return to modules.'**
   String get contentUnavailable;
+
+  /// No description provided for @pretest.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-test'**
+  String get pretest;
+
+  /// No description provided for @posttest.
+  ///
+  /// In en, this message translates to:
+  /// **'Post-test'**
+  String get posttest;
+
+  /// No description provided for @question.
+  ///
+  /// In en, this message translates to:
+  /// **'Question'**
+  String get question;
+
+  /// No description provided for @previous.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous'**
+  String get previous;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get next;
+
+  /// No description provided for @answered.
+  ///
+  /// In en, this message translates to:
+  /// **'Answered'**
+  String get answered;
+
+  /// No description provided for @unanswered.
+  ///
+  /// In en, this message translates to:
+  /// **'Unanswered'**
+  String get unanswered;
+
+  /// No description provided for @submitAnswers.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit answers'**
+  String get submitAnswers;
+
+  /// No description provided for @confirmSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Review submission'**
+  String get confirmSubmit;
+
+  /// No description provided for @continueAnswering.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue answering'**
+  String get continueAnswering;
+
+  /// No description provided for @submitConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You answered {answered} questions and left {unanswered} unanswered.'**
+  String submitConfirmMessage(int answered, int unanswered);
+
+  /// No description provided for @pretestResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-test result'**
+  String get pretestResult;
+
+  /// No description provided for @posttestResult.
+  ///
+  /// In en, this message translates to:
+  /// **'Post-test result'**
+  String get posttestResult;
+
+  /// No description provided for @correctAnswers.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct'**
+  String get correctAnswers;
+
+  /// No description provided for @incorrectAnswers.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect'**
+  String get incorrectAnswers;
+
+  /// No description provided for @score.
+  ///
+  /// In en, this message translates to:
+  /// **'Score'**
+  String get score;
+
+  /// No description provided for @weightedScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Weighted score'**
+  String get weightedScore;
+
+  /// No description provided for @diagnosticNote.
+  ///
+  /// In en, this message translates to:
+  /// **'This diagnostic score does not affect your final score.'**
+  String get diagnosticNote;
+
+  /// No description provided for @continueToTheory.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to theory'**
+  String get continueToTheory;
+
+  /// No description provided for @continueToMaterial.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
+  String get continueToMaterial;
+
+  /// No description provided for @finalScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Final result'**
+  String get finalScore;
+
+  /// No description provided for @practiceScore.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice'**
+  String get practiceScore;
+
+  /// No description provided for @learningGain.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning gain'**
+  String get learningGain;
+
+  /// No description provided for @tuntas.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed — Tuntas'**
+  String get tuntas;
+
+  /// No description provided for @needsReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed — Perlu Review'**
+  String get needsReview;
 }
 
 class _AppLocalizationsDelegate

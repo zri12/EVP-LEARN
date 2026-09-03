@@ -278,4 +278,82 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get contentUnavailable => 'Konten tidak tersedia. Kembali ke modul.';
+
+  @override
+  String get pretest => 'Pre-test';
+
+  @override
+  String get posttest => 'Post-test';
+
+  @override
+  String get question => 'Soal';
+
+  @override
+  String get previous => 'Sebelumnya';
+
+  @override
+  String get next => 'Berikutnya';
+
+  @override
+  String get answered => 'Terjawab';
+
+  @override
+  String get unanswered => 'Belum dijawab';
+
+  @override
+  String get submitAnswers => 'Kirim jawaban';
+
+  @override
+  String get confirmSubmit => 'Tinjau pengiriman';
+
+  @override
+  String get continueAnswering => 'Lanjut menjawab';
+
+  @override
+  String submitConfirmMessage(int answered, int unanswered) {
+    return 'Kamu menjawab $answered soal dan menyisakan $unanswered soal belum dijawab.';
+  }
+
+  @override
+  String get pretestResult => 'Hasil Pre-test';
+
+  @override
+  String get posttestResult => 'Hasil Post-test';
+
+  @override
+  String get correctAnswers => 'Benar';
+
+  @override
+  String get incorrectAnswers => 'Salah';
+
+  @override
+  String get score => 'Nilai';
+
+  @override
+  String get weightedScore => 'Nilai berbobot';
+
+  @override
+  String get diagnosticNote =>
+      'Nilai diagnostik ini tidak memengaruhi nilai akhir.';
+
+  @override
+  String get continueToTheory => 'Lanjut ke teori';
+
+  @override
+  String get continueToMaterial => 'Lanjut';
+
+  @override
+  String get finalScore => 'Hasil akhir';
+
+  @override
+  String get practiceScore => 'Latihan';
+
+  @override
+  String get learningGain => 'Peningkatan belajar';
+
+  @override
+  String get tuntas => 'Selesai — Tuntas';
+
+  @override
+  String get needsReview => 'Selesai — Perlu Review';
 }

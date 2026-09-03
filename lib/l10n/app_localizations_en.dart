@@ -276,4 +276,82 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get contentUnavailable => 'Content unavailable. Return to modules.';
+
+  @override
+  String get pretest => 'Pre-test';
+
+  @override
+  String get posttest => 'Post-test';
+
+  @override
+  String get question => 'Question';
+
+  @override
+  String get previous => 'Previous';
+
+  @override
+  String get next => 'Next';
+
+  @override
+  String get answered => 'Answered';
+
+  @override
+  String get unanswered => 'Unanswered';
+
+  @override
+  String get submitAnswers => 'Submit answers';
+
+  @override
+  String get confirmSubmit => 'Review submission';
+
+  @override
+  String get continueAnswering => 'Continue answering';
+
+  @override
+  String submitConfirmMessage(int answered, int unanswered) {
+    return 'You answered $answered questions and left $unanswered unanswered.';
+  }
+
+  @override
+  String get pretestResult => 'Pre-test result';
+
+  @override
+  String get posttestResult => 'Post-test result';
+
+  @override
+  String get correctAnswers => 'Correct';
+
+  @override
+  String get incorrectAnswers => 'Incorrect';
+
+  @override
+  String get score => 'Score';
+
+  @override
+  String get weightedScore => 'Weighted score';
+
+  @override
+  String get diagnosticNote =>
+      'This diagnostic score does not affect your final score.';
+
+  @override
+  String get continueToTheory => 'Continue to theory';
+
+  @override
+  String get continueToMaterial => 'Continue';
+
+  @override
+  String get finalScore => 'Final result';
+
+  @override
+  String get practiceScore => 'Practice';
+
+  @override
+  String get learningGain => 'Learning gain';
+
+  @override
+  String get tuntas => 'Completed — Tuntas';
+
+  @override
+  String get needsReview => 'Completed — Perlu Review';
 }

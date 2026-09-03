@@ -12,6 +12,9 @@ final moduleContentRepositoryProvider = Provider<ModuleContentRepository>((
 
 final learningModuleProvider =
     FutureProvider.family<LearningModuleContent?, String>(
-      (ref, moduleId) =>
-          ref.watch(moduleContentRepositoryProvider).getModuleById(moduleId),
+      (ref, moduleId) => ref
+          .watch(moduleContentRepositoryProvider)
+          .getModuleById(
+            moduleId.startsWith('module_') ? moduleId : 'module_$moduleId',
+          ),
     );
