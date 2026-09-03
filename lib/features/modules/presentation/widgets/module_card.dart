@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_radius.dart';
 import '../../../../app/theme/app_spacing.dart';
+import '../../../../app/router.dart';
 import '../../../../core/widgets/app_progress_bar.dart';
 import '../../../../domain/models/learning_models.dart';
 import '../../../../domain/models/root_module.dart';
@@ -67,132 +69,139 @@ class ModuleCard extends StatelessWidget {
 
     return Semantics(
       label: '${l10n.moduleLabel(module.id)}. ${module.title}. $status.',
-      child: Container(
-        key: Key('module-card-${module.id}'),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          border: Border.all(color: AppColors.border),
-          borderRadius: AppRadius.heroCard,
-        ),
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.md,
-                AppSpacing.md,
-                AppSpacing.md,
-                AppSpacing.sm,
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.sm,
-                      vertical: 5,
-                    ),
-                    decoration: BoxDecoration(
-                      color: visual.tint,
-                      borderRadius: BorderRadius.circular(99),
-                    ),
-                    child: Text(
-                      l10n.moduleLabel(module.id),
-                      style: TextStyle(
-                        color: visual.accent,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 11,
+      child: InkWell(
+        onTap: () => context.push(AppRoutes.moduleOverview(module.id)),
+        borderRadius: AppRadius.heroCard,
+        child: Container(
+          key: Key('module-card-${module.id}'),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            border: Border.all(color: AppColors.border),
+            borderRadius: AppRadius.heroCard,
+          ),
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.md,
+                  AppSpacing.md,
+                  AppSpacing.md,
+                  AppSpacing.sm,
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.sm,
+                        vertical: 5,
                       ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Icon(
-                    progress.status == ModuleStatus.completed
-                        ? Icons.check_circle_rounded
-                        : Icons.radio_button_unchecked_rounded,
-                    size: 15,
-                    color: visual.accent,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    status,
-                    style: const TextStyle(
-                      color: AppColors.secondaryText,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-              child: Text(
-                module.title,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.md,
-                AppSpacing.xs,
-                AppSpacing.md,
-                AppSpacing.sm,
-              ),
-              child: Text(
-                module.subtitle,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ),
-            Container(
-              height: 148,
-              margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-              decoration: BoxDecoration(
-                color: visual.tint,
-                borderRadius: AppRadius.card,
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                module.assetPath,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              child: Column(
-                children: [
-                  AppProgressBar(value: progress.percent, color: visual.accent),
-                  const SizedBox(height: AppSpacing.sm),
-                  Row(
-                    children: [
-                      Text(
-                        l10n.percentComplete(progress.percent),
-                        style: Theme.of(context).textTheme.bodySmall,
+                      decoration: BoxDecoration(
+                        color: visual.tint,
+                        borderRadius: BorderRadius.circular(99),
                       ),
-                      const Spacer(),
-                      Semantics(
-                        label: '$cta ${l10n.moduleLabel(module.id)}',
-                        child: Text(
-                          cta,
-                          style: TextStyle(
-                            color: visual.accent,
-                            fontSize: 13,
-                            fontWeight: FontWeight.w700,
-                          ),
+                      child: Text(
+                        l10n.moduleLabel(module.id),
+                        style: TextStyle(
+                          color: visual.accent,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 11,
                         ),
                       ),
-                      Icon(
-                        Icons.arrow_forward_rounded,
-                        size: 17,
-                        color: visual.accent,
+                    ),
+                    const Spacer(),
+                    Icon(
+                      progress.status == ModuleStatus.completed
+                          ? Icons.check_circle_rounded
+                          : Icons.radio_button_unchecked_rounded,
+                      size: 15,
+                      color: visual.accent,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      status,
+                      style: const TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                child: Text(
+                  module.title,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.md,
+                  AppSpacing.xs,
+                  AppSpacing.md,
+                  AppSpacing.sm,
+                ),
+                child: Text(
+                  module.subtitle,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+              ),
+              Container(
+                height: 148,
+                margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                decoration: BoxDecoration(
+                  color: visual.tint,
+                  borderRadius: AppRadius.card,
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset(
+                  module.assetPath,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.md),
+                child: Column(
+                  children: [
+                    AppProgressBar(
+                      value: progress.percent,
+                      color: visual.accent,
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Row(
+                      children: [
+                        Text(
+                          l10n.percentComplete(progress.percent),
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        const Spacer(),
+                        Semantics(
+                          label: '$cta ${l10n.moduleLabel(module.id)}',
+                          child: Text(
+                            cta,
+                            style: TextStyle(
+                              color: visual.accent,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_forward_rounded,
+                          size: 17,
+                          color: visual.accent,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

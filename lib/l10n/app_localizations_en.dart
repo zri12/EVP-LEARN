@@ -214,4 +214,66 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageSelector => 'Choose app language';
+
+  @override
+  String get moduleOverview => 'Module Overview';
+
+  @override
+  String get aboutThisModule => 'About This Module';
+
+  @override
+  String get learningJourney => 'Learning Journey';
+
+  @override
+  String get learningObjectives => 'Learning Objectives';
+
+  @override
+  String get learningObjectivesIntro => 'What you will learn in this module.';
+
+  @override
+  String get continueToPretest => 'Continue to Pre-test';
+
+  @override
+  String get theory => 'Theory';
+
+  @override
+  String get definitionAndPurpose => 'Definition & Purpose';
+
+  @override
+  String get genericStructure => 'Generic Structure';
+
+  @override
+  String get languageFeatures => 'Language Features';
+
+  @override
+  String get vocabularyPreview => 'Vocabulary Preview';
+
+  @override
+  String get continueToReading => 'Continue to Reading';
+
+  @override
+  String get reading => 'Reading';
+
+  @override
+  String get listenToReading => 'Listen to Reading';
+
+  @override
+  String get localAudio => 'Local audio';
+
+  @override
+  String get nextReading => 'Next Reading';
+
+  @override
+  String get interactivePractice => 'Interactive Practice';
+
+  @override
+  String get pretestGatewayDescription =>
+      'Prepare to check your understanding before studying the material.';
+
+  @override
+  String get nextLearningActivity =>
+      'Your next learning activity will be available here.';
+
+  @override
+  String get contentUnavailable => 'Content unavailable. Return to modules.';
 }

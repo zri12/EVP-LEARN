@@ -493,6 +493,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Choose app language'**
   String get languageSelector;
+
+  /// No description provided for @moduleOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Module Overview'**
+  String get moduleOverview;
+
+  /// No description provided for @aboutThisModule.
+  ///
+  /// In en, this message translates to:
+  /// **'About This Module'**
+  String get aboutThisModule;
+
+  /// No description provided for @learningJourney.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Journey'**
+  String get learningJourney;
+
+  /// No description provided for @learningObjectives.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Objectives'**
+  String get learningObjectives;
+
+  /// No description provided for @learningObjectivesIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'What you will learn in this module.'**
+  String get learningObjectivesIntro;
+
+  /// No description provided for @continueToPretest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to Pre-test'**
+  String get continueToPretest;
+
+  /// No description provided for @theory.
+  ///
+  /// In en, this message translates to:
+  /// **'Theory'**
+  String get theory;
+
+  /// No description provided for @definitionAndPurpose.
+  ///
+  /// In en, this message translates to:
+  /// **'Definition & Purpose'**
+  String get definitionAndPurpose;
+
+  /// No description provided for @genericStructure.
+  ///
+  /// In en, this message translates to:
+  /// **'Generic Structure'**
+  String get genericStructure;
+
+  /// No description provided for @languageFeatures.
+  ///
+  /// In en, this message translates to:
+  /// **'Language Features'**
+  String get languageFeatures;
+
+  /// No description provided for @vocabularyPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Vocabulary Preview'**
+  String get vocabularyPreview;
+
+  /// No description provided for @continueToReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to Reading'**
+  String get continueToReading;
+
+  /// No description provided for @reading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get reading;
+
+  /// No description provided for @listenToReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to Reading'**
+  String get listenToReading;
+
+  /// No description provided for @localAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Local audio'**
+  String get localAudio;
+
+  /// No description provided for @nextReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Reading'**
+  String get nextReading;
+
+  /// No description provided for @interactivePractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Interactive Practice'**
+  String get interactivePractice;
+
+  /// No description provided for @pretestGatewayDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Prepare to check your understanding before studying the material.'**
+  String get pretestGatewayDescription;
+
+  /// No description provided for @nextLearningActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Your next learning activity will be available here.'**
+  String get nextLearningActivity;
+
+  /// No description provided for @contentUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Content unavailable. Return to modules.'**
+  String get contentUnavailable;
 }
 
 class _AppLocalizationsDelegate

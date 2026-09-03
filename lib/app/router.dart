@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 
 import '../features/home/presentation/home_page.dart';
+import '../features/learning/presentation/learning_pages.dart';
 import '../features/modules/presentation/modules_page.dart';
 import '../features/profile/presentation/profile_page.dart';
 import '../features/progress/presentation/progress_page.dart';
@@ -22,7 +23,8 @@ abstract final class AppRoutes {
   static String pretest(int moduleId) => '/module/$moduleId/pretest';
   static String theory(int moduleId) => '/module/$moduleId/theory';
   static String vocabulary(int moduleId) => '/module/$moduleId/vocabulary';
-  static String reading(int moduleId) => '/module/$moduleId/reading';
+  static String reading(int moduleId, [String? readingId]) =>
+      '/module/$moduleId/reading${readingId == null ? '' : '/$readingId'}';
   static String practice(int moduleId) => '/module/$moduleId/practice';
   static String posttest(int moduleId) => '/module/$moduleId/posttest';
   static String result(int moduleId) => '/module/$moduleId/result';
@@ -35,6 +37,64 @@ GoRouter createAppRouter() => GoRouter(
     GoRoute(
       path: AppRoutes.root,
       builder: (context, state) => const SplashPage(),
+    ),
+    GoRoute(
+      path: '/module/:moduleId',
+      builder: (context, state) =>
+          ModuleOverviewPage(moduleId: state.pathParameters['moduleId']!),
+      routes: [
+        GoRoute(
+          path: 'objectives',
+          builder: (context, state) => LearningObjectivesPage(
+            moduleId: state.pathParameters['moduleId']!,
+          ),
+        ),
+        GoRoute(
+          path: 'pretest',
+          builder: (context, state) => LearningGatewayPage(
+            moduleId: state.pathParameters['moduleId']!,
+            stage: LearningGatewayStage.pretest,
+          ),
+        ),
+        GoRoute(
+          path: 'theory',
+          builder: (context, state) =>
+              TheoryPage(moduleId: state.pathParameters['moduleId']!),
+        ),
+        GoRoute(
+          path: 'vocabulary',
+          builder: (context, state) =>
+              VocabularyPage(moduleId: state.pathParameters['moduleId']!),
+        ),
+        GoRoute(
+          path: 'reading/:readingId',
+          builder: (context, state) => ReadingPage(
+            moduleId: state.pathParameters['moduleId']!,
+            readingId: state.pathParameters['readingId']!,
+          ),
+        ),
+        GoRoute(
+          path: 'practice',
+          builder: (context, state) => LearningGatewayPage(
+            moduleId: state.pathParameters['moduleId']!,
+            stage: LearningGatewayStage.practice,
+          ),
+        ),
+        GoRoute(
+          path: 'posttest',
+          builder: (context, state) => LearningGatewayPage(
+            moduleId: state.pathParameters['moduleId']!,
+            stage: LearningGatewayStage.posttest,
+          ),
+        ),
+        GoRoute(
+          path: 'result',
+          builder: (context, state) => LearningGatewayPage(
+            moduleId: state.pathParameters['moduleId']!,
+            stage: LearningGatewayStage.result,
+          ),
+        ),
+      ],
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) =>

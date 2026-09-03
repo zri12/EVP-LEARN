@@ -215,4 +215,67 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get languageSelector => 'Pilih bahasa aplikasi';
+
+  @override
+  String get moduleOverview => 'Ringkasan Modul';
+
+  @override
+  String get aboutThisModule => 'Tentang Modul Ini';
+
+  @override
+  String get learningJourney => 'Perjalanan Belajar';
+
+  @override
+  String get learningObjectives => 'Tujuan Pembelajaran';
+
+  @override
+  String get learningObjectivesIntro =>
+      'Hal yang akan dipelajari pada modul ini.';
+
+  @override
+  String get continueToPretest => 'Lanjut ke Pre-test';
+
+  @override
+  String get theory => 'Teori';
+
+  @override
+  String get definitionAndPurpose => 'Definisi & Tujuan';
+
+  @override
+  String get genericStructure => 'Struktur Generik';
+
+  @override
+  String get languageFeatures => 'Ciri Kebahasaan';
+
+  @override
+  String get vocabularyPreview => 'Pratinjau Kosakata';
+
+  @override
+  String get continueToReading => 'Lanjut ke Bacaan';
+
+  @override
+  String get reading => 'Bacaan';
+
+  @override
+  String get listenToReading => 'Dengarkan Bacaan';
+
+  @override
+  String get localAudio => 'Audio lokal';
+
+  @override
+  String get nextReading => 'Bacaan Berikutnya';
+
+  @override
+  String get interactivePractice => 'Latihan Interaktif';
+
+  @override
+  String get pretestGatewayDescription =>
+      'Siapkan diri untuk memeriksa pemahaman sebelum mempelajari materi.';
+
+  @override
+  String get nextLearningActivity =>
+      'Aktivitas belajar berikutnya akan tersedia di sini.';
+
+  @override
+  String get contentUnavailable => 'Konten tidak tersedia. Kembali ke modul.';
 }
