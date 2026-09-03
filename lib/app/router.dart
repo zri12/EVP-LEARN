@@ -5,6 +5,7 @@ import '../features/assessment/presentation/assessment_pages.dart';
 import '../features/learning/presentation/learning_pages.dart';
 import '../features/modules/presentation/modules_page.dart';
 import '../features/profile/presentation/profile_page.dart';
+import '../features/practice/presentation/practice_pages.dart';
 import '../features/progress/presentation/progress_page.dart';
 import '../features/root/presentation/root_app_shell.dart';
 import '../features/splash/presentation/splash_page.dart';
@@ -33,6 +34,7 @@ abstract final class AppRoutes {
   static String posttest(int moduleId) => '/module/$moduleId/posttest';
   static String posttestResult(int moduleId) =>
       '/module/$moduleId/posttest/result';
+  static String finalResult(int moduleId) => '/module/$moduleId/final';
   static String result(int moduleId) => '/module/$moduleId/result';
   static String history(int moduleId) => '/module/$moduleId/history';
 }
@@ -90,16 +92,15 @@ GoRouter createAppRouter() => GoRouter(
         ),
         GoRoute(
           path: 'practice',
-          builder: (context, state) => LearningGatewayPage(
-            moduleId: state.pathParameters['moduleId']!,
-            stage: LearningGatewayStage.practice,
-          ),
+          builder: (context, state) =>
+              PracticePage(moduleId: state.pathParameters['moduleId']!),
         ),
         GoRoute(
           path: 'posttest',
           builder: (context, state) => AssessmentPage(
             moduleId: state.pathParameters['moduleId']!,
             type: AssessmentType.posttest,
+            enforcePracticeGuard: true,
           ),
           routes: [
             GoRoute(
@@ -110,6 +111,11 @@ GoRouter createAppRouter() => GoRouter(
               ),
             ),
           ],
+        ),
+        GoRoute(
+          path: 'final',
+          builder: (context, state) =>
+              FinalResultPage(moduleId: state.pathParameters['moduleId']!),
         ),
       ],
     ),

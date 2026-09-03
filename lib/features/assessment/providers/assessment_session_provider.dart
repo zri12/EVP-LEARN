@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/models/assessment_result.dart';
@@ -70,17 +72,39 @@ class AssessmentSessionState {
 
 class AssessmentSessionController
     extends StateNotifier<AssessmentSessionState> {
+  static int _nextShuffleSeed = 0;
+
   AssessmentSessionController({
     required String moduleId,
     required AssessmentType type,
     required QuestionBank questionBank,
+    int? shuffleSeed,
   }) : super(
          AssessmentSessionState(
            moduleId: moduleId,
            type: type,
-           questionBank: questionBank,
+           questionBank: _shuffledQuestionBank(
+             questionBank,
+             shuffleSeed ?? ++_nextShuffleSeed,
+           ),
          ),
        );
+
+  static QuestionBank _shuffledQuestionBank(QuestionBank source, int seed) {
+    if (source.questions.length < 2) return source;
+    final questions = List<AssessmentQuestion>.from(source.questions)
+      ..shuffle(math.Random(seed));
+    if (seed.isEven) questions.setAll(0, questions.reversed);
+    if (questions.first.id == source.questions.first.id) {
+      final first = questions.removeAt(0);
+      questions.add(first);
+    }
+    return QuestionBank(
+      id: source.id,
+      contentStatus: source.contentStatus,
+      questions: List.unmodifiable(questions),
+    );
+  }
 
   void selectAnswer(int optionIndex) {
     if (state.isComplete ||
@@ -143,8 +167,8 @@ class AssessmentSessionController
   }
 }
 
-final assessmentSessionProvider =
-    StateNotifierProvider.family<
+final assessmentSessionProvider = StateNotifierProvider.autoDispose
+    .family<
       AssessmentSessionController,
       AssessmentSessionState,
       AssessmentSessionKey

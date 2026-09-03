@@ -75,7 +75,7 @@ class HomePage extends ConsumerWidget {
                 progress: dashboard.progressFor(module.id).percent,
                 accent: visual.accent,
                 tint: visual.tint,
-                onTap: () => context.go(AppRoutes.modules),
+                onTap: () => context.push(AppRoutes.moduleOverview(module.id)),
               );
             },
           ),
@@ -283,6 +283,7 @@ class _ModulePreviewCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     return SizedBox(
       width: 208,
+      key: Key('home-module-preview-$moduleId'),
       child: Material(
         color: AppColors.surface,
         borderRadius: AppRadius.card,

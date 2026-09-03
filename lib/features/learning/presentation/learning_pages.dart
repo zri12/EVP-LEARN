@@ -146,16 +146,39 @@ class TheoryPage extends StatelessWidget {
           child: Text(module.theory.definition),
         ),
         const SizedBox(height: AppSpacing.lg),
+        _TheoryHeroImage(module: module),
+        const SizedBox(height: AppSpacing.lg),
+        _TheoryIllustrationCard(
+          key: Key('module${module.metadata.number}-theory-illustration-1'),
+          module: module,
+          caption: _illustrationCaptions(context, module.metadata.number)[0],
+          painter: _illustrationPainters(module.metadata.number)[0],
+        ),
+        const SizedBox(height: AppSpacing.lg),
         _TheoryList(
           title: AppLocalizations.of(context)!.genericStructure,
           items: module.theory.genericStructure,
           color: moduleVisualFor(module.metadata.number).accent,
         ),
         const SizedBox(height: AppSpacing.lg),
+        _TheoryIllustrationCard(
+          key: Key('module${module.metadata.number}-theory-illustration-2'),
+          module: module,
+          caption: _illustrationCaptions(context, module.metadata.number)[1],
+          painter: _illustrationPainters(module.metadata.number)[1],
+        ),
+        const SizedBox(height: AppSpacing.lg),
         _TheoryList(
           title: AppLocalizations.of(context)!.languageFeatures,
           items: module.theory.languageFeatures,
           color: moduleVisualFor(module.metadata.number).accent,
+        ),
+        const SizedBox(height: AppSpacing.xl),
+        _TheoryIllustrationCard(
+          key: Key('module${module.metadata.number}-theory-illustration-3'),
+          module: module,
+          caption: _illustrationCaptions(context, module.metadata.number)[2],
+          painter: _illustrationPainters(module.metadata.number)[2],
         ),
         const SizedBox(height: AppSpacing.xl),
         _PrimaryButton(
@@ -328,7 +351,11 @@ class LearningPageScaffold extends ConsumerWidget {
             icon: const Icon(Icons.arrow_back_rounded),
             onPressed: () {
               ref.read(learningAudioProvider.notifier).stop();
-              context.pop();
+              if (context.canPop()) {
+                context.pop();
+              } else {
+                context.go(AppRoutes.modules);
+              }
             },
           ),
         ),
@@ -452,6 +479,653 @@ class _TheoryList extends StatelessWidget {
           .toList(),
     ),
   );
+}
+
+List<String> _illustrationCaptions(BuildContext context, int moduleNumber) {
+  final l10n = AppLocalizations.of(context)!;
+  return switch (moduleNumber) {
+    1 => [
+      l10n.theoryVisualFounder,
+      l10n.theoryVisualFurniture,
+      l10n.theoryVisualAssembly,
+    ],
+    2 => [
+      l10n.theoryVisualPos,
+      l10n.theoryVisualShelves,
+      l10n.theoryVisualJacket,
+    ],
+    _ => [
+      l10n.theoryVisualScan,
+      l10n.theoryVisualPayment,
+      l10n.theoryVisualReceipt,
+    ],
+  };
+}
+
+List<CustomPainter> _illustrationPainters(int moduleNumber) {
+  final visual = moduleVisualFor(moduleNumber);
+  return switch (moduleNumber) {
+    1 => [
+      _FounderStoryPainter(visual.accent, visual.tint),
+      _FurnitureJourneyPainter(visual.accent, visual.tint),
+      _FlatPackPainter(visual.accent, visual.tint),
+    ],
+    2 => [
+      _PosTerminalPainter(visual.accent, visual.tint),
+      _GondolaPainter(visual.accent, visual.tint),
+      _LeatherJacketPainter(visual.accent, visual.tint),
+    ],
+    _ => [
+      _ScanCheckoutPainter(visual.accent, visual.tint),
+      _PaymentPainter(visual.accent, visual.tint),
+      _ReceiptPainter(visual.accent, visual.tint),
+    ],
+  };
+}
+
+class _TheoryIllustrationCard extends StatelessWidget {
+  const _TheoryIllustrationCard({
+    required this.module,
+    required this.caption,
+    required this.painter,
+    super.key,
+  });
+  final LearningModuleContent module;
+  final String caption;
+  final CustomPainter painter;
+
+  @override
+  Widget build(BuildContext context) {
+    final visual = moduleVisualFor(module.metadata.number);
+    return Semantics(
+      container: true,
+      label: caption,
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: AppRadius.card,
+          border: Border.all(color: AppColors.border),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 156,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: visual.tint,
+                borderRadius: AppRadius.small,
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: CustomPaint(painter: painter),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+            Text(
+              caption,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: visual.accent,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TheoryHeroImage extends StatelessWidget {
+  const _TheoryHeroImage({required this.module});
+  final LearningModuleContent module;
+
+  @override
+  Widget build(BuildContext context) {
+    final visual = moduleVisualFor(module.metadata.number);
+    return Semantics(
+      container: true,
+      label: module.metadata.title,
+      child: ClipRRect(
+        borderRadius: AppRadius.card,
+        child: SizedBox(
+          key: Key('module${module.metadata.number}-theory-hero'),
+          height: 154,
+          width: double.infinity,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                AppAssets.moduleArt[module.metadata.id]!,
+                fit: BoxFit.cover,
+              ),
+              DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.transparent,
+                      visual.accent.withValues(alpha: .82),
+                    ],
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.md),
+                  child: Text(
+                    module.metadata.title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+abstract class _TheoryPainter extends CustomPainter {
+  _TheoryPainter(this.accent, this.tint);
+  final Color accent;
+  final Color tint;
+
+  Paint paintFor(
+    Color color, {
+    double width = 1,
+    PaintingStyle style = PaintingStyle.fill,
+  }) => Paint()
+    ..color = color
+    ..strokeWidth = width
+    ..style = style
+    ..strokeCap = StrokeCap.round
+    ..strokeJoin = StrokeJoin.round;
+
+  void rounded(Canvas canvas, Rect rect, Color color, {double radius = 12}) {
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(rect, Radius.circular(radius)),
+      paintFor(color),
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _TheoryPainter oldDelegate) => false;
+}
+
+class _FounderStoryPainter extends _TheoryPainter {
+  _FounderStoryPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .06, h * .18, w * .88, h * .66),
+      Colors.white,
+    );
+    final line = paintFor(
+      accent.withValues(alpha: .28),
+      width: 4,
+      style: PaintingStyle.stroke,
+    );
+    canvas.drawLine(Offset(w * .18, h * .61), Offset(w * .82, h * .61), line);
+    for (final x in [.2, .5, .8]) {
+      canvas.drawCircle(Offset(w * x, h * .61), 7, paintFor(accent));
+    }
+    canvas.drawCircle(Offset(w * .22, h * .36), 15, paintFor(accent));
+    final person = Path()
+      ..moveTo(w * .13, h * .55)
+      ..quadraticBezierTo(w * .22, h * .42, w * .31, h * .55)
+      ..close();
+    canvas.drawPath(person, paintFor(accent.withValues(alpha: .8)));
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .42, h * .3, w * .16, h * .16),
+      accent.withValues(alpha: .16),
+      radius: 8,
+    );
+    canvas.drawCircle(Offset(w * .5, h * .38), 11, paintFor(accent));
+    final arrow = paintFor(accent, width: 3, style: PaintingStyle.stroke);
+    canvas.drawLine(Offset(w * .58, h * .38), Offset(w * .72, h * .38), arrow);
+    canvas.drawLine(Offset(w * .67, h * .33), Offset(w * .72, h * .38), arrow);
+    canvas.drawLine(Offset(w * .67, h * .43), Offset(w * .72, h * .38), arrow);
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .74, h * .28, w * .12, h * .2),
+      accent.withValues(alpha: .2),
+      radius: 7,
+    );
+    canvas.drawLine(
+      Offset(w * .77, h * .34),
+      Offset(w * .83, h * .34),
+      paintFor(accent, width: 3),
+    );
+    canvas.drawLine(
+      Offset(w * .77, h * .4),
+      Offset(w * .83, h * .4),
+      paintFor(accent, width: 3),
+    );
+  }
+}
+
+class _FurnitureJourneyPainter extends _TheoryPainter {
+  _FurnitureJourneyPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .08, h * .22, w * .35, h * .46),
+      Colors.white,
+      radius: 10,
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .13, h * .3, w * .25, h * .23),
+      tint,
+      radius: 6,
+    );
+    canvas.drawLine(
+      Offset(w * .25, h * .3),
+      Offset(w * .25, h * .53),
+      paintFor(accent, width: 3),
+    );
+    canvas.drawLine(
+      Offset(w * .13, h * .42),
+      Offset(w * .38, h * .42),
+      paintFor(accent, width: 3),
+    );
+    final truck = Path()
+      ..moveTo(w * .5, h * .42)
+      ..lineTo(w * .72, h * .42)
+      ..lineTo(w * .79, h * .54)
+      ..lineTo(w * .5, h * .54)
+      ..close();
+    canvas.drawPath(truck, paintFor(accent.withValues(alpha: .18)));
+    canvas.drawRect(
+      Rect.fromLTWH(w * .54, h * .34, w * .17, h * .2),
+      paintFor(accent),
+    );
+    canvas.drawCircle(Offset(w * .57, h * .58), 8, paintFor(AppColors.navy));
+    canvas.drawCircle(Offset(w * .74, h * .58), 8, paintFor(AppColors.navy));
+    final arrow = paintFor(accent, width: 3, style: PaintingStyle.stroke);
+    canvas.drawLine(Offset(w * .38, h * .75), Offset(w * .72, h * .75), arrow);
+    canvas.drawLine(Offset(w * .65, h * .68), Offset(w * .72, h * .75), arrow);
+    canvas.drawLine(Offset(w * .65, h * .82), Offset(w * .72, h * .75), arrow);
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .78, h * .62, w * .12, h * .16),
+      accent.withValues(alpha: .28),
+      radius: 4,
+    );
+  }
+}
+
+class _FlatPackPainter extends _TheoryPainter {
+  _FlatPackPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .08, h * .3, w * .22, h * .32),
+      accent.withValues(alpha: .18),
+      radius: 8,
+    );
+    canvas.drawLine(
+      Offset(w * .08, h * .3),
+      Offset(w * .19, h * .22),
+      paintFor(accent, width: 3),
+    );
+    canvas.drawLine(
+      Offset(w * .3, h * .3),
+      Offset(w * .19, h * .22),
+      paintFor(accent, width: 3),
+    );
+    canvas.drawLine(
+      Offset(w * .19, h * .22),
+      Offset(w * .19, h * .62),
+      paintFor(accent, width: 3),
+    );
+    final arrow = paintFor(accent, width: 3, style: PaintingStyle.stroke);
+    canvas.drawLine(Offset(w * .37, h * .46), Offset(w * .55, h * .46), arrow);
+    canvas.drawLine(Offset(w * .49, h * .39), Offset(w * .55, h * .46), arrow);
+    canvas.drawLine(Offset(w * .49, h * .53), Offset(w * .55, h * .46), arrow);
+    final chair = paintFor(accent);
+    canvas.drawRect(Rect.fromLTWH(w * .68, h * .28, w * .12, h * .2), chair);
+    canvas.drawRect(Rect.fromLTWH(w * .68, h * .48, w * .2, h * .08), chair);
+    canvas.drawLine(
+      Offset(w * .71, h * .56),
+      Offset(w * .67, h * .75),
+      paintFor(accent, width: 6),
+    );
+    canvas.drawLine(
+      Offset(w * .84, h * .56),
+      Offset(w * .88, h * .75),
+      paintFor(accent, width: 6),
+    );
+    canvas.drawLine(
+      Offset(w * .7, h * .32),
+      Offset(w * .78, h * .32),
+      paintFor(Colors.white, width: 3),
+    );
+  }
+}
+
+class _PosTerminalPainter extends _TheoryPainter {
+  _PosTerminalPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    canvas.drawRect(
+      Rect.fromLTWH(w * .1, h * .62, w * .8, h * .12),
+      paintFor(accent.withValues(alpha: .22)),
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .25, h * .16, w * .5, h * .42),
+      Colors.white,
+      radius: 10,
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .31, h * .22, w * .38, h * .22),
+      accent.withValues(alpha: .18),
+      radius: 5,
+    );
+    canvas.drawLine(
+      Offset(w * .36, h * .3),
+      Offset(w * .64, h * .3),
+      paintFor(accent, width: 4),
+    );
+    canvas.drawLine(
+      Offset(w * .36, h * .36),
+      Offset(w * .56, h * .36),
+      paintFor(accent, width: 4),
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .4, h * .58, w * .2, h * .14),
+      accent,
+      radius: 7,
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .72, h * .52, w * .13, h * .18),
+      accent.withValues(alpha: .3),
+      radius: 4,
+    );
+    canvas.drawCircle(Offset(w * .28, h * .72), 9, paintFor(AppColors.navy));
+    canvas.drawCircle(Offset(w * .72, h * .72), 9, paintFor(AppColors.navy));
+  }
+}
+
+class _GondolaPainter extends _TheoryPainter {
+  _GondolaPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    final shelf = paintFor(accent, width: 7, style: PaintingStyle.stroke);
+    canvas.drawLine(Offset(w * .16, h * .2), Offset(w * .16, h * .8), shelf);
+    canvas.drawLine(Offset(w * .84, h * .2), Offset(w * .84, h * .8), shelf);
+    for (final y in [.3, .46, .62, .78]) {
+      canvas.drawLine(Offset(w * .13, h * y), Offset(w * .87, h * y), shelf);
+    }
+    for (final pair in [(.24, .24), (.4, .4), (.56, .56), (.72, .72)]) {
+      rounded(
+        canvas,
+        Rect.fromLTWH(w * pair.$1, h * (pair.$2 - .09), w * .09, h * .08),
+        accent.withValues(alpha: .25),
+        radius: 3,
+      );
+      rounded(
+        canvas,
+        Rect.fromLTWH(
+          w * (pair.$1 + .12),
+          h * (pair.$2 - .09),
+          w * .1,
+          h * .08,
+        ),
+        accent.withValues(alpha: .42),
+        radius: 3,
+      );
+    }
+    canvas.drawLine(
+      Offset(w * .08, h * .84),
+      Offset(w * .92, h * .84),
+      paintFor(AppColors.navy, width: 4),
+    );
+  }
+}
+
+class _LeatherJacketPainter extends _TheoryPainter {
+  _LeatherJacketPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    final jacket = Path()
+      ..moveTo(w * .38, h * .2)
+      ..lineTo(w * .62, h * .2)
+      ..lineTo(w * .78, h * .4)
+      ..lineTo(w * .68, h * .48)
+      ..lineTo(w * .66, h * .78)
+      ..lineTo(w * .34, h * .78)
+      ..lineTo(w * .32, h * .48)
+      ..lineTo(w * .22, h * .4)
+      ..close();
+    canvas.drawPath(jacket, paintFor(accent.withValues(alpha: .68)));
+    final detail = paintFor(
+      AppColors.navy,
+      width: 4,
+      style: PaintingStyle.stroke,
+    );
+    canvas.drawLine(Offset(w * .5, h * .25), Offset(w * .42, h * .46), detail);
+    canvas.drawLine(Offset(w * .42, h * .46), Offset(w * .62, h * .72), detail);
+    canvas.drawLine(Offset(w * .34, h * .63), Offset(w * .66, h * .63), detail);
+    canvas.drawLine(Offset(w * .38, h * .25), Offset(w * .5, h * .36), detail);
+    canvas.drawLine(Offset(w * .62, h * .25), Offset(w * .5, h * .36), detail);
+    canvas.drawCircle(Offset(w * .55, h * .51), 5, paintFor(Colors.white));
+    canvas.drawCircle(Offset(w * .61, h * .59), 5, paintFor(Colors.white));
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .08, h * .66, w * .18, h * .1),
+      accent.withValues(alpha: .2),
+      radius: 4,
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .74, h * .3, w * .16, h * .1),
+      accent.withValues(alpha: .2),
+      radius: 4,
+    );
+  }
+}
+
+class _ScanCheckoutPainter extends _TheoryPainter {
+  _ScanCheckoutPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    canvas.drawRect(
+      Rect.fromLTWH(w * .08, h * .68, w * .84, h * .12),
+      paintFor(accent.withValues(alpha: .22)),
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .18, h * .25, w * .27, h * .32),
+      Colors.white,
+      radius: 8,
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .23, h * .3, w * .17, h * .15),
+      accent.withValues(alpha: .2),
+      radius: 4,
+    );
+    final scanner = Path()
+      ..moveTo(w * .57, h * .3)
+      ..lineTo(w * .73, h * .3)
+      ..lineTo(w * .69, h * .52)
+      ..lineTo(w * .58, h * .52)
+      ..close();
+    canvas.drawPath(scanner, paintFor(accent));
+    canvas.drawLine(
+      Offset(w * .57, h * .52),
+      Offset(w * .51, h * .68),
+      paintFor(accent, width: 8),
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .76, h * .44, w * .12, h * .18),
+      accent.withValues(alpha: .42),
+      radius: 4,
+    );
+    for (var i = 0; i < 3; i++) {
+      canvas.drawLine(
+        Offset(w * (.78 + i * .025), h * .48),
+        Offset(w * (.78 + i * .025), h * .58),
+        paintFor(AppColors.navy, width: 2),
+      );
+    }
+    final beam = paintFor(AppColors.teal.withValues(alpha: .8), width: 3);
+    canvas.drawLine(Offset(w * .67, h * .53), Offset(w * .81, h * .53), beam);
+  }
+}
+
+class _PaymentPainter extends _TheoryPainter {
+  _PaymentPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .34, h * .18, w * .32, h * .4),
+      Colors.white,
+      radius: 9,
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .4, h * .25, w * .2, h * .15),
+      accent.withValues(alpha: .2),
+      radius: 4,
+    );
+    canvas.drawLine(
+      Offset(w * .43, h * .48),
+      Offset(w * .57, h * .48),
+      paintFor(accent, width: 4),
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .14, h * .58, w * .28, h * .12),
+      accent.withValues(alpha: .35),
+      radius: 5,
+    );
+    canvas.drawCircle(Offset(w * .2, h * .64), 5, paintFor(accent));
+    canvas.drawCircle(Offset(w * .27, h * .64), 5, paintFor(accent));
+    final hand = Path()
+      ..moveTo(w * .7, h * .72)
+      ..quadraticBezierTo(w * .75, h * .54, w * .82, h * .55)
+      ..lineTo(w * .9, h * .67)
+      ..lineTo(w * .83, h * .78)
+      ..close();
+    canvas.drawPath(hand, paintFor(accent.withValues(alpha: .6)));
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .7, h * .42, w * .13, h * .08),
+      accent,
+      radius: 3,
+    );
+    canvas.drawLine(
+      Offset(w * .73, h * .46),
+      Offset(w * .8, h * .46),
+      paintFor(Colors.white, width: 2),
+    );
+  }
+}
+
+class _ReceiptPainter extends _TheoryPainter {
+  _ReceiptPainter(super.accent, super.tint);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width;
+    final h = size.height;
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .16, h * .55, w * .68, h * .18),
+      accent.withValues(alpha: .2),
+      radius: 6,
+    );
+    rounded(
+      canvas,
+      Rect.fromLTWH(w * .3, h * .3, w * .4, h * .4),
+      Colors.white,
+      radius: 5,
+    );
+    final paper = Path()
+      ..moveTo(w * .3, h * .3)
+      ..lineTo(w * .7, h * .3)
+      ..lineTo(w * .7, h * .72)
+      ..lineTo(w * .65, h * .67)
+      ..lineTo(w * .6, h * .72)
+      ..lineTo(w * .55, h * .67)
+      ..lineTo(w * .5, h * .72)
+      ..lineTo(w * .45, h * .67)
+      ..lineTo(w * .4, h * .72)
+      ..lineTo(w * .35, h * .67)
+      ..lineTo(w * .3, h * .72)
+      ..close();
+    canvas.drawPath(paper, paintFor(Colors.white));
+    for (final y in [.39, .47, .55]) {
+      canvas.drawLine(
+        Offset(w * .38, h * y),
+        Offset(w * .62, h * y),
+        paintFor(accent, width: 4),
+      );
+    }
+    canvas.drawLine(
+      Offset(w * .4, h * .62),
+      Offset(w * .55, h * .62),
+      paintFor(AppColors.teal, width: 4),
+    );
+    canvas.drawLine(
+      Offset(w * .68, h * .38),
+      Offset(w * .8, h * .28),
+      paintFor(accent, width: 3),
+    );
+    canvas.drawLine(
+      Offset(w * .74, h * .28),
+      Offset(w * .8, h * .28),
+      paintFor(accent, width: 3),
+    );
+    canvas.drawLine(
+      Offset(w * .8, h * .28),
+      Offset(w * .8, h * .34),
+      paintFor(accent, width: 3),
+    );
+  }
 }
 
 class _PrimaryButton extends StatelessWidget {

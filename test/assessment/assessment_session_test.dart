@@ -27,11 +27,14 @@ void main() {
       type: AssessmentType.pretest,
       questionBank: bank('pre'),
     );
-    controller.selectAnswer(0);
+    final firstQuestionId = controller.state.currentQuestion.id;
+    final firstCorrect = controller.state.currentQuestion.correctOptionIndex;
+    controller.selectAnswer(firstCorrect);
     controller.next();
-    controller.selectAnswer(1);
+    final secondCorrect = controller.state.currentQuestion.correctOptionIndex;
+    controller.selectAnswer(secondCorrect);
     controller.previous();
-    expect(controller.state.answers['pre_1'], 0);
+    expect(controller.state.answers[firstQuestionId], firstCorrect);
     final result = await controller.submit();
     expect(result!.rawScore, 100);
     expect(await controller.submit(), same(result));
@@ -62,4 +65,34 @@ void main() {
     pre.selectAnswer(1);
     expect(post.state.answeredCount, 0);
   });
+
+  test(
+    'new sessions shuffle question order while one session stays stable',
+    () {
+      final first = AssessmentSessionController(
+        moduleId: 'module_1',
+        type: AssessmentType.pretest,
+        questionBank: bank('shuffle'),
+        shuffleSeed: 1,
+      );
+      final second = AssessmentSessionController(
+        moduleId: 'module_1',
+        type: AssessmentType.pretest,
+        questionBank: bank('shuffle'),
+        shuffleSeed: 2,
+      );
+      expect(
+        first.state.questionBank.questions.map((item) => item.id).toList(),
+        isNot(
+          equals(
+            second.state.questionBank.questions.map((item) => item.id).toList(),
+          ),
+        ),
+      );
+      final initialId = first.state.currentQuestion.id;
+      first.next();
+      first.previous();
+      expect(first.state.currentQuestion.id, initialId);
+    },
+  );
 }

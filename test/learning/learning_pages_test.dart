@@ -63,6 +63,7 @@ void main() {
           const TheoryPage(moduleId: 'module_1'),
           size: Size(width, 844),
         );
+        await tester.scrollUntilVisible(find.text('Orientation'), 260);
         expect(find.text('Orientation'), findsOneWidget);
         expect(tester.takeException(), isNull, reason: 'theory width $width');
 
@@ -92,6 +93,37 @@ void main() {
       }
     },
   );
+
+  testWidgets('each theory module has a hero and three custom illustrations', (
+    tester,
+  ) async {
+    for (final moduleId in ['module_1', 'module_2', 'module_3']) {
+      final number = moduleId.split('_').last;
+      await pumpLearningPage(tester, TheoryPage(moduleId: moduleId));
+      expect(find.byKey(Key('module$number-theory-hero')), findsOneWidget);
+      expect(
+        find.byKey(Key('module$number-theory-illustration-1')),
+        findsOneWidget,
+      );
+      await tester.scrollUntilVisible(
+        find.byKey(Key('module$number-theory-illustration-2')),
+        260,
+      );
+      expect(
+        find.byKey(Key('module$number-theory-illustration-2')),
+        findsOneWidget,
+      );
+      await tester.scrollUntilVisible(
+        find.byKey(Key('module$number-theory-illustration-3')),
+        260,
+      );
+      expect(
+        find.byKey(Key('module$number-theory-illustration-3')),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull, reason: '$moduleId visuals');
+    }
+  });
 
   testWidgets(
     'formal glossary opens from a reading and excludes non-formal M2 term',

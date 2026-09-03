@@ -20,6 +20,10 @@ Phase 6 implements the reusable in-memory assessment foundation for Pre-test and
 - Passing threshold: `75` (inclusive).
 - Learning gain: current-attempt `postTestRaw - preTestRaw`; it may be negative.
 
-## Deliberate non-scope
+## Phase 6 boundary retained in Phase 7
 
-This phase does not add interactive Practice UI, Drift persistence, retry/history, or normal production access to a fabricated Final Result. `FinalResultPage` is fixture-capable for isolated UI verification only. Academic JSON, audio/assets, and the read-only prototype remain unchanged.
+Phase 6 established the scoring and assessment-session contracts. Phase 7 now
+consumes those contracts for the native Practice flow and real in-memory Final
+Result handoff. Drift persistence, retry/history, latest/best, and durable
+attempt lifecycle remain deferred to Phase 8/9. Academic JSON, audio/assets,
+and the read-only prototype remain unchanged.

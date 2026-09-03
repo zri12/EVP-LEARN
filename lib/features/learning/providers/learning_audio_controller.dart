@@ -59,17 +59,17 @@ class LearningAudioController extends StateNotifier<LearningAudioState> {
 
   Future<void> toggle(String assetPath) async {
     try {
-      if (state.assetPath == assetPath &&
-          state.status == LearningAudioStatus.playing) {
-        await _player.pause();
-        return;
-      }
       if (state.assetPath != assetPath) {
         state = LearningAudioState(
           status: LearningAudioStatus.loading,
           assetPath: assetPath,
         );
         await _player.setAsset(assetPath);
+      } else {
+        // Repeated taps on the same word always replay from the beginning.
+        // This also handles completed and paused tracks without requiring a
+        // different vocabulary item to be played first.
+        await _player.seek(Duration.zero);
       }
       await _player.play();
     } on Object {

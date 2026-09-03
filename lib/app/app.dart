@@ -30,7 +30,7 @@ class _EvpLearnAppState extends ConsumerState<EvpLearnApp> {
     final locale = ref.watch(localeControllerProvider);
 
     return MaterialApp.router(
-      title: 'EVP Learn',
+      title: 'EVP LEARN',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       routerConfig: _router,

@@ -28,7 +28,7 @@ Future<void> _pumpRootApp(
       child: const EvpLearnApp(),
     ),
   );
-  await tester.pump(const Duration(milliseconds: 950));
+  await tester.pump(const Duration(milliseconds: 5100));
   await tester.pumpAndSettle();
 }
 
@@ -69,6 +69,25 @@ void main() {
     expect(find.text('0 dari 3 Modul Selesai'), findsOneWidget);
     expect(find.byKey(const Key('overall-progress-card')), findsNothing);
   });
+
+  testWidgets(
+    'Home module shortcuts open the selected module overview directly',
+    (tester) async {
+      final preferences = _MemoryLocalePreferences();
+      await _pumpRootApp(tester, preferences: preferences);
+
+      final modulePreview = find.byKey(const Key('home-module-preview-1'));
+      await tester.scrollUntilVisible(modulePreview, 260);
+      await tester.tap(modulePreview);
+      await tester.pumpAndSettle();
+      expect(find.text('Ringkasan Modul'), findsOneWidget);
+      expect(find.text('Narrative Text'), findsAtLeastNWidgets(1));
+
+      await tester.tap(find.byIcon(Icons.arrow_back_rounded));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const Key('home-module-preview-1')), findsOneWidget);
+    },
+  );
 
   testWidgets('Modules shows three unlocked module cards', (tester) async {
     final preferences = _MemoryLocalePreferences();

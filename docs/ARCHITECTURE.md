@@ -158,7 +158,7 @@ Recommended conceptual routes:
  /module/:moduleId/practice
  /module/:moduleId/posttest
  /module/:moduleId/posttest/quiz
- /module/:moduleId/result
+ /module/:moduleId/final
  /module/:moduleId/history
 ```
 

@@ -9,7 +9,7 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appName => 'EVP Learn';
+  String get appName => 'EVP LEARN';
 
   @override
   String get brandDescriptor => 'ENGLISH FOR VOCATIONAL PURPOSES';
@@ -354,4 +354,122 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get needsReview => 'Completed — Perlu Review';
+
+  @override
+  String get activity => 'Activity';
+
+  @override
+  String get ofLabel => 'of';
+
+  @override
+  String get matchSources => 'Sources';
+
+  @override
+  String get matchTargets => 'Targets';
+
+  @override
+  String get selected => 'Selected';
+
+  @override
+  String get unpaired => 'Unpaired';
+
+  @override
+  String get paired => 'Paired';
+
+  @override
+  String get checkAnswers => 'Check answers';
+
+  @override
+  String get resetActivity => 'Reset';
+
+  @override
+  String get nextActivity => 'Next activity';
+
+  @override
+  String get practiceSummary => 'Practice summary';
+
+  @override
+  String get practiceComplete => 'Practice complete';
+
+  @override
+  String get practiceTotal => 'Practice total';
+
+  @override
+  String get continueToPosttest => 'Continue to Post-test';
+
+  @override
+  String get practiceRequiredBeforePosttest =>
+      'Complete all three Practice activities before starting the Post-test.';
+
+  @override
+  String get goToPractice => 'Go to Practice';
+
+  @override
+  String get finalResultUnavailable =>
+      'Final results require a completed Pre-test, Practice, and Post-test for this module.';
+
+  @override
+  String get answerAllQuestions => 'Please answer all questions first.';
+
+  @override
+  String get practiceReadyToCheck => 'All items are ready to check.';
+
+  @override
+  String practiceCompletionStatus(int completed, int total) {
+    return '$completed of $total items completed';
+  }
+
+  @override
+  String get theoryVisualStory => 'Business story';
+
+  @override
+  String get theoryVisualRetail => 'Retail setting';
+
+  @override
+  String get theoryVisualProcess => 'Learning process';
+
+  @override
+  String get theoryVisualFounder => 'Founder story';
+
+  @override
+  String get theoryVisualFurniture => 'Furniture retail';
+
+  @override
+  String get theoryVisualAssembly => 'Flat-pack assembly';
+
+  @override
+  String get theoryVisualPos => 'POS terminal';
+
+  @override
+  String get theoryVisualShelves => 'Gondola shelving';
+
+  @override
+  String get theoryVisualJacket => 'Leather jacket';
+
+  @override
+  String get theoryVisualCheckout => 'Checkout flow';
+
+  @override
+  String get theoryVisualScan => 'Scan items';
+
+  @override
+  String get theoryVisualPayment => 'Payment step';
+
+  @override
+  String get theoryVisualReceipt => 'Receipt process';
+
+  @override
+  String get backToHome => 'Back to Home';
+
+  @override
+  String get scoreOverview => 'Score overview';
+
+  @override
+  String get visualGuide => 'Visual guide';
+
+  @override
+  String get diagnosticResultTitle => 'Diagnostic result';
+
+  @override
+  String get posttestResultTitle => 'Post-test result';
 }

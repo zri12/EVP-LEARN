@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appName.
   ///
   /// In en, this message translates to:
-  /// **'EVP Learn'**
+  /// **'EVP LEARN'**
   String get appName;
 
   /// No description provided for @brandDescriptor.
@@ -763,6 +763,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completed — Perlu Review'**
   String get needsReview;
+
+  /// No description provided for @activity.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get activity;
+
+  /// No description provided for @ofLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'of'**
+  String get ofLabel;
+
+  /// No description provided for @matchSources.
+  ///
+  /// In en, this message translates to:
+  /// **'Sources'**
+  String get matchSources;
+
+  /// No description provided for @matchTargets.
+  ///
+  /// In en, this message translates to:
+  /// **'Targets'**
+  String get matchTargets;
+
+  /// No description provided for @selected.
+  ///
+  /// In en, this message translates to:
+  /// **'Selected'**
+  String get selected;
+
+  /// No description provided for @unpaired.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaired'**
+  String get unpaired;
+
+  /// No description provided for @paired.
+  ///
+  /// In en, this message translates to:
+  /// **'Paired'**
+  String get paired;
+
+  /// No description provided for @checkAnswers.
+  ///
+  /// In en, this message translates to:
+  /// **'Check answers'**
+  String get checkAnswers;
+
+  /// No description provided for @resetActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetActivity;
+
+  /// No description provided for @nextActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Next activity'**
+  String get nextActivity;
+
+  /// No description provided for @practiceSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice summary'**
+  String get practiceSummary;
+
+  /// No description provided for @practiceComplete.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice complete'**
+  String get practiceComplete;
+
+  /// No description provided for @practiceTotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice total'**
+  String get practiceTotal;
+
+  /// No description provided for @continueToPosttest.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to Post-test'**
+  String get continueToPosttest;
+
+  /// No description provided for @practiceRequiredBeforePosttest.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete all three Practice activities before starting the Post-test.'**
+  String get practiceRequiredBeforePosttest;
+
+  /// No description provided for @goToPractice.
+  ///
+  /// In en, this message translates to:
+  /// **'Go to Practice'**
+  String get goToPractice;
+
+  /// No description provided for @finalResultUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Final results require a completed Pre-test, Practice, and Post-test for this module.'**
+  String get finalResultUnavailable;
+
+  /// No description provided for @answerAllQuestions.
+  ///
+  /// In en, this message translates to:
+  /// **'Please answer all questions first.'**
+  String get answerAllQuestions;
+
+  /// No description provided for @practiceReadyToCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'All items are ready to check.'**
+  String get practiceReadyToCheck;
+
+  /// No description provided for @practiceCompletionStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'{completed} of {total} items completed'**
+  String practiceCompletionStatus(int completed, int total);
+
+  /// No description provided for @theoryVisualStory.
+  ///
+  /// In en, this message translates to:
+  /// **'Business story'**
+  String get theoryVisualStory;
+
+  /// No description provided for @theoryVisualRetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Retail setting'**
+  String get theoryVisualRetail;
+
+  /// No description provided for @theoryVisualProcess.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning process'**
+  String get theoryVisualProcess;
+
+  /// No description provided for @theoryVisualFounder.
+  ///
+  /// In en, this message translates to:
+  /// **'Founder story'**
+  String get theoryVisualFounder;
+
+  /// No description provided for @theoryVisualFurniture.
+  ///
+  /// In en, this message translates to:
+  /// **'Furniture retail'**
+  String get theoryVisualFurniture;
+
+  /// No description provided for @theoryVisualAssembly.
+  ///
+  /// In en, this message translates to:
+  /// **'Flat-pack assembly'**
+  String get theoryVisualAssembly;
+
+  /// No description provided for @theoryVisualPos.
+  ///
+  /// In en, this message translates to:
+  /// **'POS terminal'**
+  String get theoryVisualPos;
+
+  /// No description provided for @theoryVisualShelves.
+  ///
+  /// In en, this message translates to:
+  /// **'Gondola shelving'**
+  String get theoryVisualShelves;
+
+  /// No description provided for @theoryVisualJacket.
+  ///
+  /// In en, this message translates to:
+  /// **'Leather jacket'**
+  String get theoryVisualJacket;
+
+  /// No description provided for @theoryVisualCheckout.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout flow'**
+  String get theoryVisualCheckout;
+
+  /// No description provided for @theoryVisualScan.
+  ///
+  /// In en, this message translates to:
+  /// **'Scan items'**
+  String get theoryVisualScan;
+
+  /// No description provided for @theoryVisualPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment step'**
+  String get theoryVisualPayment;
+
+  /// No description provided for @theoryVisualReceipt.
+  ///
+  /// In en, this message translates to:
+  /// **'Receipt process'**
+  String get theoryVisualReceipt;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Home'**
+  String get backToHome;
+
+  /// No description provided for @scoreOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Score overview'**
+  String get scoreOverview;
+
+  /// No description provided for @visualGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'Visual guide'**
+  String get visualGuide;
+
+  /// No description provided for @diagnosticResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Diagnostic result'**
+  String get diagnosticResultTitle;
+
+  /// No description provided for @posttestResultTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Post-test result'**
+  String get posttestResultTitle;
 }
 
 class _AppLocalizationsDelegate

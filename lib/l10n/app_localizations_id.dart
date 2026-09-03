@@ -9,7 +9,7 @@ class AppLocalizationsId extends AppLocalizations {
   AppLocalizationsId([String locale = 'id']) : super(locale);
 
   @override
-  String get appName => 'EVP Learn';
+  String get appName => 'EVP LEARN';
 
   @override
   String get brandDescriptor => 'ENGLISH FOR VOCATIONAL PURPOSES';
@@ -356,4 +356,122 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get needsReview => 'Selesai — Perlu Review';
+
+  @override
+  String get activity => 'Aktivitas';
+
+  @override
+  String get ofLabel => 'dari';
+
+  @override
+  String get matchSources => 'Sumber';
+
+  @override
+  String get matchTargets => 'Pasangan';
+
+  @override
+  String get selected => 'Dipilih';
+
+  @override
+  String get unpaired => 'Belum dipasangkan';
+
+  @override
+  String get paired => 'Sudah dipasangkan';
+
+  @override
+  String get checkAnswers => 'Periksa jawaban';
+
+  @override
+  String get resetActivity => 'Atur ulang';
+
+  @override
+  String get nextActivity => 'Aktivitas berikutnya';
+
+  @override
+  String get practiceSummary => 'Ringkasan latihan';
+
+  @override
+  String get practiceComplete => 'Latihan selesai';
+
+  @override
+  String get practiceTotal => 'Total latihan';
+
+  @override
+  String get continueToPosttest => 'Lanjut ke Post-test';
+
+  @override
+  String get practiceRequiredBeforePosttest =>
+      'Selesaikan ketiga aktivitas latihan sebelum memulai Post-test.';
+
+  @override
+  String get goToPractice => 'Ke latihan';
+
+  @override
+  String get finalResultUnavailable =>
+      'Hasil akhir memerlukan Pre-test, latihan, dan Post-test modul ini yang telah selesai.';
+
+  @override
+  String get answerAllQuestions => 'Jawab semua soal terlebih dahulu.';
+
+  @override
+  String get practiceReadyToCheck => 'Semua item siap diperiksa.';
+
+  @override
+  String practiceCompletionStatus(int completed, int total) {
+    return '$completed dari $total item selesai';
+  }
+
+  @override
+  String get theoryVisualStory => 'Cerita bisnis';
+
+  @override
+  String get theoryVisualRetail => 'Lingkungan retail';
+
+  @override
+  String get theoryVisualProcess => 'Proses belajar';
+
+  @override
+  String get theoryVisualFounder => 'Cerita pendiri';
+
+  @override
+  String get theoryVisualFurniture => 'Retail furnitur';
+
+  @override
+  String get theoryVisualAssembly => 'Perakitan flat-pack';
+
+  @override
+  String get theoryVisualPos => 'Terminal POS';
+
+  @override
+  String get theoryVisualShelves => 'Rak gondola';
+
+  @override
+  String get theoryVisualJacket => 'Jaket kulit';
+
+  @override
+  String get theoryVisualCheckout => 'Alur kasir';
+
+  @override
+  String get theoryVisualScan => 'Memindai barang';
+
+  @override
+  String get theoryVisualPayment => 'Tahap pembayaran';
+
+  @override
+  String get theoryVisualReceipt => 'Proses struk';
+
+  @override
+  String get backToHome => 'Kembali ke Beranda';
+
+  @override
+  String get scoreOverview => 'Ringkasan nilai';
+
+  @override
+  String get visualGuide => 'Panduan visual';
+
+  @override
+  String get diagnosticResultTitle => 'Hasil diagnostik';
+
+  @override
+  String get posttestResultTitle => 'Hasil Post-test';
 }

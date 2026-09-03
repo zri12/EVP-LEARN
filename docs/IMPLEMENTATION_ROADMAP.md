@@ -101,6 +101,10 @@ Exit:
 - retry;
 - resume;
 - latest/best.
+- Persist the exact Pre-test/Post-test question order per attempt, either as
+  ordered question IDs or as a deterministic shuffle seed. A new attempt must
+  receive a new shuffle; resuming the same attempt after process restart must
+  restore the same order.
 
 Exit:
 restart safe.

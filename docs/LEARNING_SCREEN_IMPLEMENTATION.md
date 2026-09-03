@@ -13,12 +13,13 @@ The JSON-backed learning flow is available through these routes:
 → /reading/:readingId
 → /practice
 → /posttest
-→ /result
+→ /final
 ```
 
-Overview, objectives, theory, vocabulary, and reading are implemented in this
-phase. Pre-test, practice, post-test, and result routes are deliberate gateway
-screens only; they create no answer, score, progress, or persistence state.
+Overview, objectives, theory, vocabulary, reading, interactive Practice,
+Post-test, and the in-memory Final Result are now implemented across Phases
+5–7. Assessment and Practice state remain in memory until the Phase 8
+persistence lifecycle is added.
 
 ## Content rendering
 
@@ -46,5 +47,5 @@ terms and keeps non-formal words, including `Genuine`, `Enter`, `Change`, and
 
 - Device speaker output and airplane-mode playback still require physical
   Android QA.
-- Assessment, scoring, practice interaction, and Drift attempt lifecycle are
-  intentionally deferred to later phases.
+- Drift attempt persistence, retry, resume-after-process-death, and
+  latest/best history remain deferred to later phases.
