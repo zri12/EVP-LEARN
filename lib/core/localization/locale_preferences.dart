@@ -20,13 +20,25 @@ final localeControllerProvider = NotifierProvider<LocaleController, Locale>(
 );
 
 class LocaleController extends Notifier<Locale> {
+  var _restoreScheduled = false;
+
   @override
-  Locale build() => defaultAppLocale;
+  Locale build() {
+    if (!_restoreScheduled) {
+      _restoreScheduled = true;
+      Future<void>.microtask(restore);
+    }
+    return defaultAppLocale;
+  }
 
   Future<void> restore() async {
-    final savedLocale = await ref.read(localePreferencesProvider).load();
-    if (savedLocale != null) {
-      state = savedLocale;
+    try {
+      final savedLocale = await ref.read(localePreferencesProvider).load();
+      if (savedLocale != null) {
+        state = savedLocale;
+      }
+    } catch (_) {
+      // A missing preference service must not prevent offline app startup.
     }
   }
 

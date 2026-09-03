@@ -20,6 +20,7 @@ This directory is the implementation baseline for the Flutter APK.
 | `TECH_STACK.md` | Selected Flutter packages/technology policy |
 | `DATA_MODEL.md` | Local persistence schema |
 | `OFFLINE_ASSETS.md` | Images/audio/fonts/content asset policy |
+| `ASSET_MIGRATION_MAP.md` | Prototype-to-Flutter asset copy provenance |
 | `LOCALIZATION.md` | Indonesian/English behavior |
 | `SECURITY_PRIVACY.md` | Privacy and local-only data principles |
 

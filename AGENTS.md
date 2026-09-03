@@ -537,10 +537,14 @@ Never claim PASS if not run/verified.
 For normal code tasks:
 
 ```bash
-dart format .
+dart format lib test
 flutter analyze
 flutter test
 ```
+
+Format only active Flutter/Dart source. If `integration_test/` exists, use
+`dart format lib test integration_test`. Do not format the repository root,
+the read-only prototype, generated `build/` output, `.dart_tool/`, or docs.
 
 For navigation, persistence, audio, assets, database, release, or broad UI work:
 

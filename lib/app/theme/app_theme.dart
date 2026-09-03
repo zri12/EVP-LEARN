@@ -38,6 +38,29 @@ abstract final class AppTheme {
         backgroundColor: AppColors.surface,
         indicatorColor: AppColors.softBlue,
       ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.primary,
+          foregroundColor: Colors.white,
+          minimumSize: const Size.fromHeight(52),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          shape: const RoundedRectangleBorder(borderRadius: AppRadius.button),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+          elevation: 0,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size.fromHeight(48),
+          foregroundColor: AppColors.navy,
+          side: const BorderSide(color: AppColors.border),
+          shape: const RoundedRectangleBorder(borderRadius: AppRadius.button),
+        ),
+      ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.surface,
+        shape: RoundedRectangleBorder(borderRadius: AppRadius.bottomSheet),
+      ),
     );
   }
 }

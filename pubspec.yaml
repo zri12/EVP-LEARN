@@ -73,6 +73,10 @@ flutter:
     - assets/images/
     - assets/images/branding/
     - assets/images/modules/
+    - assets/images/branding/evp-icon.png
+    - assets/images/modules/module-1-narrative.png
+    - assets/images/modules/module-2-descriptive.png
+    - assets/images/modules/module-3-procedure.png
     - assets/images/lessons/
     - assets/images/readings/
     - assets/audio/

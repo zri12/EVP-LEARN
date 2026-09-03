@@ -22,7 +22,7 @@ abstract final class AppTypography {
       fontWeight: FontWeight.w600,
       color: AppColors.navy,
     ),
-    bodyMedium: TextStyle(fontSize: 15, height: 1.6, color: AppColors.navy),
+    bodyMedium: TextStyle(fontSize: 14, height: 1.55, color: AppColors.navy),
     bodySmall: TextStyle(
       fontSize: 13,
       height: 1.5,

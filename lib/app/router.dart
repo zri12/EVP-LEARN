@@ -1,7 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../l10n/app_localizations.dart';
+import '../features/home/presentation/home_page.dart';
+import '../features/modules/presentation/modules_page.dart';
+import '../features/profile/presentation/profile_page.dart';
+import '../features/progress/presentation/progress_page.dart';
+import '../features/root/presentation/root_app_shell.dart';
+import '../features/splash/presentation/splash_page.dart';
+import '../features/support/presentation/support_pages.dart';
 
 abstract final class AppRoutes {
   static const root = '/';
@@ -9,6 +14,8 @@ abstract final class AppRoutes {
   static const modules = '/modules';
   static const progress = '/progress';
   static const profile = '/profile';
+  static const guide = '/guide';
+  static const outcomes = '/outcomes';
 
   static String moduleOverview(int moduleId) => '/module/$moduleId';
   static String objectives(int moduleId) => '/module/$moduleId/objectives';
@@ -23,92 +30,57 @@ abstract final class AppRoutes {
 }
 
 GoRouter createAppRouter() => GoRouter(
-  initialLocation: AppRoutes.home,
+  initialLocation: AppRoutes.root,
   routes: [
-    GoRoute(path: AppRoutes.root, redirect: (context, state) => AppRoutes.home),
     GoRoute(
-      path: AppRoutes.home,
-      builder: (context, state) =>
-          const DevelopmentPlaceholderPage(destination: RootDestination.home),
+      path: AppRoutes.root,
+      builder: (context, state) => const SplashPage(),
+    ),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) =>
+          RootAppShell(navigationShell: navigationShell),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.home,
+              builder: (context, state) => const HomePage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.modules,
+              builder: (context, state) => const ModulesPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.progress,
+              builder: (context, state) => const ProgressPage(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.profile,
+              builder: (context, state) => const ProfilePage(),
+            ),
+          ],
+        ),
+      ],
     ),
     GoRoute(
-      path: AppRoutes.modules,
-      builder: (context, state) => const DevelopmentPlaceholderPage(
-        destination: RootDestination.modules,
-      ),
+      path: AppRoutes.guide,
+      builder: (context, state) => const GuidePage(),
     ),
     GoRoute(
-      path: AppRoutes.progress,
-      builder: (context, state) => const DevelopmentPlaceholderPage(
-        destination: RootDestination.progress,
-      ),
-    ),
-    GoRoute(
-      path: AppRoutes.profile,
-      builder: (context, state) => const DevelopmentPlaceholderPage(
-        destination: RootDestination.profile,
-      ),
+      path: AppRoutes.outcomes,
+      builder: (context, state) => const OutcomesPage(),
     ),
   ],
 );
-
-enum RootDestination { home, modules, progress, profile }
-
-class DevelopmentPlaceholderPage extends StatelessWidget {
-  const DevelopmentPlaceholderPage({required this.destination, super.key});
-
-  final RootDestination destination;
-
-  @override
-  Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context)!;
-    final labels = [
-      localizations.navHome,
-      localizations.navModules,
-      localizations.navProgress,
-      localizations.navProfile,
-    ];
-    final routes = [
-      AppRoutes.home,
-      AppRoutes.modules,
-      AppRoutes.progress,
-      AppRoutes.profile,
-    ];
-
-    return Scaffold(
-      appBar: AppBar(title: Text(localizations.appName)),
-      body: Center(
-        child: Text(
-          labels[destination.index],
-          key: const Key('development-placeholder-title'),
-        ),
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: destination.index,
-        onDestinationSelected: (index) => context.go(routes[index]),
-        destinations: [
-          NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            selectedIcon: const Icon(Icons.home),
-            label: labels[0],
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.layers_outlined),
-            selectedIcon: const Icon(Icons.layers),
-            label: labels[1],
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.bar_chart_outlined),
-            selectedIcon: const Icon(Icons.bar_chart),
-            label: labels[2],
-          ),
-          NavigationDestination(
-            icon: const Icon(Icons.person_outline),
-            selectedIcon: const Icon(Icons.person),
-            label: labels[3],
-          ),
-        ],
-      ),
-    );
-  }
-}

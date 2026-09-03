@@ -47,11 +47,13 @@ Ensure `.gitignore`.
 ## 5. Pre-release Gates
 
 ```bash
-dart format .
+dart format lib test
 flutter analyze
 flutter test
 flutter build apk --release
 ```
+
+If `integration_test/` exists, use `dart format lib test integration_test`.
 
 No release on failure.
 

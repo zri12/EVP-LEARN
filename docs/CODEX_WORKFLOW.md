@@ -150,10 +150,14 @@ Use actual changes for final messages.
 After Dart changes:
 
 ```bash
-dart format .
+dart format lib test
 flutter analyze
 flutter test
 ```
+
+If `integration_test/` exists, use `dart format lib test integration_test`.
+Do not run `dart format .` at this repository root: it includes the read-only
+prototype, documentation, and disposable generated output.
 
 Integration-critical:
 

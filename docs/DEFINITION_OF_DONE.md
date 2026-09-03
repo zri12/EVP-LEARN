@@ -91,7 +91,8 @@ Overview
 
 ## 8. APK Release Done
 
-- [ ] format
+- [ ] format active Flutter source (`dart format lib test`; include
+      `integration_test` when it exists)
 - [ ] analyze
 - [ ] tests
 - [ ] release build
