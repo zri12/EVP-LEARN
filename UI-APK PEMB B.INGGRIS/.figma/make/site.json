@@ -1,0 +1,14 @@
+{
+  "title": "EVP Learn",
+  "description": "Delivers a complete, modern Android app UI/UX with clean, mobile-first design and seamless interactions tailored to detailed project specifications.",
+  "icons": {
+    "icon": "/src/imports/LOGO.png"
+  },
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
