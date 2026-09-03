@@ -20,12 +20,15 @@ void main() {
 
   test('practice rounds each activity independently', () {
     final summary = PracticeScoreSummary([
-      PracticeActivityScore(correctItems: 1, totalItems: 3),
-      PracticeActivityScore(correctItems: 2, totalItems: 3),
-      PracticeActivityScore(correctItems: 1, totalItems: 3),
+      PracticeActivityScore(correctItems: 1, totalItems: 4),
+      PracticeActivityScore(correctItems: 1, totalItems: 4),
+      PracticeActivityScore(correctItems: 1, totalItems: 4),
     ]);
-    expect(summary.activities.map((item) => item.score), [3, 7, 3]);
-    expect(summary.totalScore, 13);
+    expect(summary.activities.map((item) => item.score), [3, 3, 3]);
+    expect(summary.totalScore, 9);
+    // Aggregate rounding would produce round(3 / 12 * 30) = 8; it is not used.
+    expect((3 * 30 / 12).round(), 8);
+    expect(summary.totalScore, isNot((3 * 30 / 12).round()));
   });
 
   test('final score excludes pre-test and applies threshold at 75', () {
