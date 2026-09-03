@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "academicSource": "UI-APK PEMB B.INGGRIS/src/imports/MATERI_AFRIDA.docx",
+  "module": {
+    "metadata": {"id": "module_2", "number": 2, "type": "descriptive_text", "title": "Descriptive Text", "subtitle": "Retail Products & Store Fixtures", "overview": "Descriptive Text is a text that describes a specific object, place, or item in detail. In retail, it is used to describe merchandise specifications, store fixtures, and product selling points.", "contentStatus": "source_final", "subtitleStatus": "source_final"},
+    "objectives": [
+      {"id": "m2_objective_01", "text": "Mengidentifikasi fungsi sosial teks berkaitan retail.", "contentStatus": "prototype_derived"},
+      {"id": "m2_objective_02", "text": "Mengenali struktur generik dan ciri kebahasaan.", "contentStatus": "prototype_derived"},
+      {"id": "m2_objective_03", "text": "Memahami ide pokok dan informasi rinci.", "contentStatus": "prototype_derived"},
+      {"id": "m2_objective_04", "text": "Menggunakan kosakata retail dalam konteks bermakna.", "contentStatus": "prototype_derived"}
+    ],
+    "theory": {
+      "contentStatus": "source_final",
+      "definition": "Descriptive Text is a text that describes a specific object, place, or item in detail. In retail, it is used to describe merchandise specifications, store fixtures, and product selling points.",
+      "genericStructure": [
+        {"id": "m2_structure_identification", "heading": "Identification", "detail": "Introduces the retail product or store fixture being described."},
+        {"id": "m2_structure_description", "heading": "Description", "detail": "Details the physical features, materials, size, colors, durability, and functions of the item."}
+      ],
+      "languageFeatures": [
+        {"id": "m2_feature_simple_present", "heading": "Simple Present Tense", "detail": "e.g., features, includes, measures, contains."},
+        {"id": "m2_feature_adjectives", "heading": "Adjectives of Quality & Appearance", "detail": "e.g., durable, sleek, ergonomic, sturdy."},
+        {"id": "m2_feature_noun_phrases", "heading": "Noun Phrases", "detail": "e.g., heavy-duty shelving, dual-screen terminal."}
+      ]
+    },
+    "vocabulary": [
+      {"id": "m2_vocab_merchandise", "term": "Merchandise", "partOfSpeech": "noun", "meaning": "Barang dagangan.", "audioKey": "m2-1", "contentStatus": "source_final"},
+      {"id": "m2_vocab_durable", "term": "Durable", "partOfSpeech": "adjective", "meaning": "Tahan lama / awet.", "audioKey": "m2-2", "contentStatus": "source_final"},
+      {"id": "m2_vocab_adjustable", "term": "Adjustable", "partOfSpeech": "adjective", "meaning": "Dapat disesuaikan tingginya/ukurannya.", "audioKey": "m2-3", "contentStatus": "source_final"},
+      {"id": "m2_vocab_display", "term": "Display", "partOfSpeech": "noun/verb", "meaning": "Penataan/pajangan barang.", "audioKey": "m2-4", "contentStatus": "source_final"},
+      {"id": "m2_vocab_sleek", "term": "Sleek", "partOfSpeech": "adjective", "meaning": "Halus, modern, dan elegan.", "audioKey": "m2-5", "contentStatus": "source_final"}
+    ],
+    "readings": [
+      {
+        "id": "m2_reading_01", "title": "Modern Touchscreen POS Terminal", "subtitle": "Retail Hardware / POS System", "category": "Electronic Merchandise (Point of Sale Machine)", "imageKey": null, "readingAudioKey": "m2-1", "contentStatus": "source_final",
+        "sections": [{"id": "m2_r1_section_identification_description", "heading": "IDENTIFICATION & DESCRIPTION", "body": "The OmniTouch 500 is a modern touchscreen POS terminal designed for fast-paced retail stores. It features a sleek black casing made of high-impact ABS plastic and a 15.6-inch dual-screen display that allows both cashiers and customers to view transactions simultaneously. At the top of the main unit, there is an integrated thermal receipt printer that operates quietly and at high speed. Supported by a sturdy metallic stand with a rust-resistant finish, this device ensures smooth checkout operations while maintaining an elegant aesthetic on the cashier counter.", "glossaryIds": ["m2_r1_glossary_casing", "m2_r1_glossary_dual_screen_display", "m2_r1_glossary_integrated", "m2_r1_glossary_sturdy", "m2_r1_glossary_finish"]}],
+        "glossary": [
+          {"id": "m2_r1_glossary_casing", "term": "Casing", "partOfSpeech": "noun", "meaning": "Wadah / pelindung luar perangkat.", "audioKey": "casing", "contentStatus": "source_final"},
+          {"id": "m2_r1_glossary_dual_screen_display", "term": "Dual-screen display", "partOfSpeech": "noun phrase", "meaning": "Layar ganda (layar untuk kasir dan layar pembeli).", "audioKey": "dual-screen-display", "contentStatus": "source_final"},
+          {"id": "m2_r1_glossary_integrated", "term": "Integrated", "partOfSpeech": "adjective", "meaning": "Menyatu / terintegrasi menjadi satu unit.", "audioKey": "integrated", "contentStatus": "source_final"},
+          {"id": "m2_r1_glossary_sturdy", "term": "Sturdy", "partOfSpeech": "adjective", "meaning": "Kokoh / kuat / tidak mudah goyah.", "audioKey": "sturdy", "contentStatus": "source_final"},
+          {"id": "m2_r1_glossary_finish", "term": "Finish", "partOfSpeech": "noun", "meaning": "Lapisan akhir permukaan bahan (misal: anti karat/matte).", "audioKey": "finish", "contentStatus": "source_final"}
+        ]
+      },
+      {
+        "id": "m2_reading_02", "title": "Heavy-Duty Supermarket Gondola Shelving", "subtitle": "Store Fixtures & Display", "category": "Supermarket Display Fixture (Store Layout)", "imageKey": null, "readingAudioKey": "m2-2", "contentStatus": "source_final",
+        "sections": [{"id": "m2_r2_section_identification_description", "heading": "IDENTIFICATION & DESCRIPTION", "body": "This heavy-duty gondola shelving unit is built specifically for organizing supermarket merchandise efficiently. Standing 2 meters tall, it consists of five adjustable steel shelves painted in a durable matte white powder coating. Each shelf is engineered to support up to 100 kilograms of goods, making it ideal for heavy food packaging and household cleaning items. Its open-front design provides high product visibility, allowing shoppers to easily locate and reach items while maximizing aisle space.", "glossaryIds": ["m2_r2_glossary_gondola_shelving", "m2_r2_glossary_adjustable", "m2_r2_glossary_durable", "m2_r2_glossary_open_front", "m2_r2_glossary_visibility"]}],
+        "glossary": [
+          {"id": "m2_r2_glossary_gondola_shelving", "term": "Gondola shelving", "partOfSpeech": "noun phrase", "meaning": "Rak display dua sisi/satu sisi yang biasa digunakan di supermarket/minimarket.", "audioKey": "gondola-shelving", "contentStatus": "source_final"},
+          {"id": "m2_r2_glossary_adjustable", "term": "Adjustable", "partOfSpeech": "adjective", "meaning": "Dapat disesuaikan (ketinggian/posisinya).", "audioKey": "adjustable", "contentStatus": "source_final"},
+          {"id": "m2_r2_glossary_durable", "term": "Durable", "partOfSpeech": "adjective", "meaning": "Tahan lama / awet / tidak mudah rusak.", "audioKey": "durable", "contentStatus": "source_final"},
+          {"id": "m2_r2_glossary_open_front", "term": "Open-front", "partOfSpeech": "adjective", "meaning": "Berdesain terbuka bagian depan.", "audioKey": "open-front", "contentStatus": "source_final"},
+          {"id": "m2_r2_glossary_visibility", "term": "Visibility", "partOfSpeech": "noun", "meaning": "Tingkat keterlihatan produk oleh pelanggan.", "audioKey": "visibility", "contentStatus": "source_final"}
+        ]
+      },
+      {
+        "id": "m2_reading_03", "title": "Vintage Leather Biker Jacket", "subtitle": "Fashion & Merchandise Display", "category": "Fashion Retail Merchandise (Apparel Display)", "imageKey": null, "readingAudioKey": "m2-3", "contentStatus": "source_final",
+        "sections": [{"id": "m2_r3_section_identification_description", "heading": "IDENTIFICATION & DESCRIPTION", "body": "The Urban Rider Jacket is a classic black biker-style leather jacket crafted for front-window retail display. Made from premium genuine cowhide leather, it features a smooth texture with a subtle natural shine. The jacket includes asymmetrical silver zippers, a snap-button collar, and an adjustable waist belt for a custom fit. Its bold design and high-quality craftsmanship make it an eye-catching centerpiece that attracts potential fashion shoppers into the store.", "glossaryIds": ["m2_r3_glossary_premium", "m2_r3_glossary_asymmetrical", "m2_r3_glossary_adjustable", "m2_r3_glossary_eye_catching", "m2_r3_glossary_centerpiece"]}],
+        "glossary": [
+          {"id": "m2_r3_glossary_premium", "term": "Premium", "partOfSpeech": "adjective", "meaning": "Berkualitas tinggi / bermutu super.", "audioKey": "premium", "contentStatus": "source_final"},
+          {"id": "m2_r3_glossary_asymmetrical", "term": "Asymmetrical", "partOfSpeech": "adjective", "meaning": "Tidak simetris (desain ritsleting miring khas jaket biker).", "audioKey": "asymmetrical", "contentStatus": "source_final"},
+          {"id": "m2_r3_glossary_adjustable", "term": "Adjustable", "partOfSpeech": "adjective", "meaning": "Dapat diatur (ukuran lingkar pinggangnya).", "audioKey": "adjustable", "contentStatus": "source_final"},
+          {"id": "m2_r3_glossary_eye_catching", "term": "Eye-catching", "partOfSpeech": "adjective", "meaning": "Menarik perhatian / mencolok untuk dilihat.", "audioKey": "eye-catching", "contentStatus": "source_final"},
+          {"id": "m2_r3_glossary_centerpiece", "term": "Centerpiece", "partOfSpeech": "noun", "meaning": "Produk utama yang menjadi pusat perhatian tampilan display window toko.", "audioKey": "centerpiece", "contentStatus": "source_final"}
+        ]
+      }
+    ],
+    "pretest": {"id": "m2_pretest", "contentStatus": "prototype_derived", "questions": [
+      {"id": "m2_pre_q01", "prompt": "What is the primary function of Descriptive Text?", "options": ["To tell a story from the past", "To give step-by-step instructions", "To describe a specific object, place, or item in detail", "To persuade customers to buy a product"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q02", "prompt": "Which part of Descriptive Text introduces the product being described?", "options": ["Description", "Resolution", "Identification", "Orientation"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q03", "prompt": "The 'Description' section of the text usually details...", "options": ["The step-by-step procedure", "The physical features, materials, size, and colors", "The company's history", "The moral value of the product"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q04", "prompt": "What tense is used in Descriptive Text?", "options": ["Simple Past Tense", "Simple Future Tense", "Present Perfect Tense", "Simple Present Tense"], "correctOptionIndex": 3, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q05", "prompt": "Which of the following is an Adjective of Quality & Appearance?", "options": ["Shelving", "Terminal", "Sleek", "Cashier"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q06", "prompt": "What does the word 'Merchandise' mean in Indonesian?", "options": ["Rak toko", "Barang dagangan", "Kasir", "Mesin EDC"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q07", "prompt": "The phrase 'heavy-duty shelving' is an example of...", "options": ["A Verb Phrase", "An Adverb", "A Noun Phrase", "A Preposition"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q08", "prompt": "What does 'Durable' mean?", "options": ["Mudah rusak", "Halus dan elegan", "Tahan lama / awet", "Sangat murah"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q09", "prompt": "Which of the following describes the POS Terminal's casing?", "options": ["Made of wood", "Sleek black casing made of ABS plastic", "Painted in white powder coating", "Made from genuine cowhide leather"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_pre_q10", "prompt": "Which word means 'Penataan/pajangan barang'?", "options": ["Sleek", "Adjustable", "Display", "Merchandise"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"}
+    ]},
+    "posttest": {"id": "m2_posttest", "contentStatus": "prototype_derived", "questions": [
+      {"id": "m2_post_q01", "prompt": "What is the OmniTouch 500 designed for?", "options": ["Making coffee", "Fast-paced retail stores", "Organizing heavy food packaging", "Front-window fashion display"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q02", "prompt": "What allows both cashiers and customers to view transactions on the POS terminal?", "options": ["A thermal receipt printer", "A sturdy metallic stand", "A 15.6-inch dual-screen display", "A sleek black casing"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q03", "prompt": "What does the word 'Integrated' mean in the context of the POS terminal?", "options": ["Menyatu / terintegrasi menjadi satu unit", "Berdesain terbuka bagian depan", "Kokoh / kuat / tidak mudah goyah", "Layar ganda"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q04", "prompt": "How tall is the Heavy-Duty Supermarket Gondola Shelving?", "options": ["1 meter tall", "2 meters tall", "3 meters tall", "5 meters tall"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q05", "prompt": "How much weight is each shelf of the Gondola Shelving engineered to support?", "options": ["Up to 10 kilograms", "Up to 50 kilograms", "Up to 100 kilograms", "Up to 200 kilograms"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q06", "prompt": "What is the benefit of the 'open-front design' of the shelving unit?", "options": ["It hides the products from view", "It provides high product visibility", "It makes the shelf lighter", "It prints thermal receipts quickly"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q07", "prompt": "What material is the Urban Rider Jacket made from?", "options": ["ABS plastic", "Matte white powder coating", "Premium genuine cowhide leather", "Steel shelves"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q08", "prompt": "Which feature of the jacket provides a 'custom fit'?", "options": ["Asymmetrical silver zippers", "Snap-button collar", "Quilted inner lining", "Adjustable waist belt"], "correctOptionIndex": 3, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q09", "prompt": "What does 'Eye-catching' mean in Indonesian?", "options": ["Produk utama", "Menarik perhatian / mencolok untuk dilihat", "Berkualitas tinggi", "Tidak simetris"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m2_post_q10", "prompt": "The phrase 'smooth texture with a subtle natural shine' is an example of...", "options": ["Identification", "Description", "Orientation", "Complication"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"}
+    ]},
+    "practices": [
+      {"id": "m2_practice_01", "kind": "match", "sourceInteraction": "match", "title": "Product Feature Match", "instruction": "Match each feature with the correct retail product.", "contentStatus": "prototype_derived", "sourceItems": [{"id": "m2_p1_source_dual_screen", "label": "Dual-screen display"}, {"id": "m2_p1_source_adjustable_shelves", "label": "Adjustable steel shelves"}, {"id": "m2_p1_source_zippers", "label": "Asymmetrical silver zippers"}], "targetItems": [{"id": "m2_p1_target_jacket", "label": "Vintage Leather Biker Jacket"}, {"id": "m2_p1_target_pos", "label": "Modern Touchscreen POS Terminal"}, {"id": "m2_p1_target_shelving", "label": "Heavy-Duty Gondola Shelving"}], "answerMappings": [{"sourceId": "m2_p1_source_dual_screen", "targetId": "m2_p1_target_pos"}, {"sourceId": "m2_p1_source_adjustable_shelves", "targetId": "m2_p1_target_shelving"}, {"sourceId": "m2_p1_source_zippers", "targetId": "m2_p1_target_jacket"}], "sequenceItems": [], "expectedOrder": []},
+      {"id": "m2_practice_02", "kind": "match", "sourceInteraction": "tap_match", "title": "Descriptive Vocabulary", "instruction": "Match each word with its Indonesian meaning.", "contentStatus": "prototype_derived", "sourceItems": [{"id": "m2_p2_source_durable", "label": "Durable"}, {"id": "m2_p2_source_sturdy", "label": "Sturdy"}, {"id": "m2_p2_source_eye_catching", "label": "Eye-catching"}], "targetItems": [{"id": "m2_p2_target_sturdy", "label": "Kokoh / kuat"}, {"id": "m2_p2_target_durable", "label": "Tahan lama / awet"}, {"id": "m2_p2_target_eye_catching", "label": "Menarik perhatian"}], "answerMappings": [{"sourceId": "m2_p2_source_durable", "targetId": "m2_p2_target_durable"}, {"sourceId": "m2_p2_source_sturdy", "targetId": "m2_p2_target_sturdy"}, {"sourceId": "m2_p2_source_eye_catching", "targetId": "m2_p2_target_eye_catching"}], "sequenceItems": [], "expectedOrder": []},
+      {"id": "m2_practice_03", "kind": "match", "sourceInteraction": "match", "title": "Text Structure Sort", "instruction": "Classify each sentence as Identification or Description.", "contentStatus": "prototype_derived", "sourceItems": [{"id": "m2_p3_source_pos", "label": "The OmniTouch 500 is a modern touchscreen POS terminal."}, {"id": "m2_p3_source_casing", "label": "It features a sleek black casing made of ABS plastic."}, {"id": "m2_p3_source_jacket", "label": "The Urban Rider Jacket is a classic black biker-style leather jacket."}], "targetItems": [{"id": "m2_p3_target_description", "label": "Description — physical features"}, {"id": "m2_p3_target_pos", "label": "Identification — POS"}, {"id": "m2_p3_target_jacket", "label": "Identification — jacket"}], "answerMappings": [{"sourceId": "m2_p3_source_pos", "targetId": "m2_p3_target_pos"}, {"sourceId": "m2_p3_source_casing", "targetId": "m2_p3_target_description"}, {"sourceId": "m2_p3_source_jacket", "targetId": "m2_p3_target_jacket"}], "sequenceItems": [], "expectedOrder": []}
+    ]
+  }
+}

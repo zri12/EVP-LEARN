@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "academicSource": "UI-APK PEMB B.INGGRIS/src/imports/MATERI_AFRIDA.docx",
+  "module": {
+    "metadata": {
+      "id": "module_1",
+      "number": 1,
+      "type": "narrative_text",
+      "title": "Narrative Text",
+      "subtitle": "Inspirational Business Stories",
+      "overview": "Narrative Text is a text that tells a story of connected events. In retail, it focuses on inspirational business origins, retail brand histories, and entrepreneurship challenges to entertain and inspire readers.",
+      "contentStatus": "source_final",
+      "subtitleStatus": "pending_validation"
+    },
+    "objectives": [
+      {"id": "m1_objective_01", "text": "Mengidentifikasi fungsi sosial teks berkaitan retail.", "contentStatus": "prototype_derived"},
+      {"id": "m1_objective_02", "text": "Mengenali struktur generik dan ciri kebahasaan.", "contentStatus": "prototype_derived"},
+      {"id": "m1_objective_03", "text": "Memahami ide pokok dan informasi rinci.", "contentStatus": "prototype_derived"},
+      {"id": "m1_objective_04", "text": "Menggunakan kosakata retail dalam konteks bermakna.", "contentStatus": "prototype_derived"}
+    ],
+    "theory": {
+      "contentStatus": "source_final",
+      "definition": "Narrative Text is a text that tells a story of connected events. In retail, it focuses on inspirational business origins, retail brand histories, and entrepreneurship challenges to entertain and inspire readers.",
+      "genericStructure": [
+        {"id": "m1_structure_orientation", "heading": "Orientation", "detail": "Introduces the business founder, setting, and starting time."},
+        {"id": "m1_structure_complication", "heading": "Complication", "detail": "Describes the main business problem, crisis, or challenge faced."},
+        {"id": "m1_structure_resolution", "heading": "Resolution", "detail": "Explains how the founder solved the problem creatively."},
+        {"id": "m1_structure_reorientation", "heading": "Re-orientation", "detail": "Shows the final success and the moral lesson of the story."}
+      ],
+      "languageFeatures": [
+        {"id": "m1_feature_simple_past", "heading": "Simple Past Tense", "detail": "e.g., founded, struggled, invented, launched."},
+        {"id": "m1_feature_action_verbs", "heading": "Action Verbs", "detail": "e.g., sold, built, shipped, produced."},
+        {"id": "m1_feature_time_connectives", "heading": "Time Connectives", "detail": "e.g., long ago, at first, suddenly, finally."}
+      ]
+    },
+    "vocabulary": [
+      {"id": "m1_vocab_founder", "term": "Founder", "partOfSpeech": "noun", "meaning": "Pendiri bisnis.", "audioKey": "m1-1", "contentStatus": "source_final"},
+      {"id": "m1_vocab_venture", "term": "Venture", "partOfSpeech": "noun", "meaning": "Usaha/bisnis baru berrisiko.", "audioKey": "m1-2", "contentStatus": "source_final"},
+      {"id": "m1_vocab_crisis", "term": "Crisis", "partOfSpeech": "noun", "meaning": "Krisis/masalah besar.", "audioKey": "m1-3", "contentStatus": "source_final"},
+      {"id": "m1_vocab_breakthrough", "term": "Breakthrough", "partOfSpeech": "noun", "meaning": "Inovasi/penemuan penting.", "audioKey": "m1-4", "contentStatus": "source_final"},
+      {"id": "m1_vocab_retailer", "term": "Retailer", "partOfSpeech": "noun", "meaning": "Pengecer.", "audioKey": "m1-5", "contentStatus": "source_final"}
+    ],
+    "readings": [
+      {
+        "id": "m1_reading_01",
+        "title": "THE STORY OF IKEA",
+        "subtitle": "Innovation in Furniture Retail",
+        "category": "Inspirational Business & Brand Stories",
+        "imageKey": null,
+        "readingAudioKey": "m1-1",
+        "contentStatus": "source_final",
+        "sections": [
+          {"id": "m1_r1_section_orientation", "heading": "ORIENTATION", "body": "Long ago in 1943, a 17-year-old boy named Ingvar Kamprad founded a small mail-order business in Sweden. He named it IKEA, using his initials (I.K.) plus the first letters of Elmtaryd and Agunnaryd, the farm and village where he grew up. At first, he sold small household items like pens, wallets, and picture frames.", "glossaryIds": []},
+          {"id": "m1_r1_section_complication", "heading": "COMPLICATION", "body": "As IKEA grew and began selling affordable furniture, local traditional furniture store owners became furious. They pressured suppliers to BOYCOTT Kamprad, preventing him from receiving pre-assembled furniture. Furthermore, shipping large wooden tables and sofas was extremely EXPENSIVE and often resulted in damaged goods during DELIVERY. Kamprad faced a major crisis that threatened to close his growing business.", "glossaryIds": ["m1_glossary_boycott", "m1_glossary_delivery"]},
+          {"id": "m1_r1_section_resolution", "heading": "RESOLUTION", "body": "Instead of giving up, Kamprad and his designer came up with a REVOLUTIONARY idea: \"FLAT-PACKING.\" They decided to disassemble a table by taking off its legs so it could fit into a flat box. Customers would buy the boxed furniture and ASSEMBLE it themselves at home. This innovation drastically reduced shipping costs, saved store warehouse space, and allowed IKEA to sell high-quality furniture at unbelievably low prices.", "glossaryIds": ["m1_glossary_revolutionary", "m1_glossary_flat_packing", "m1_glossary_assemble"]},
+          {"id": "m1_r1_section_reorientation", "heading": "RE-ORIENTATION", "body": "Today, IKEA has grown into the world's largest furniture RETAILER with hundreds of stores worldwide. Ingvar Kamprad proved that facing business challenges with creativity and customer-focused solutions can turn a local struggle into a global success story.", "glossaryIds": ["m1_glossary_retailer"]}
+        ],
+        "glossary": [
+          {"id": "m1_glossary_boycott", "term": "Boycott", "partOfSpeech": "verb", "meaning": "Memboikot / menolak kerja sama", "audioKey": "boycott", "contentStatus": "source_final"},
+          {"id": "m1_glossary_delivery", "term": "Delivery", "partOfSpeech": "noun", "meaning": "Pengiriman barang", "audioKey": "delivery", "contentStatus": "source_final"},
+          {"id": "m1_glossary_revolutionary", "term": "Revolutionary", "partOfSpeech": "adjective", "meaning": "Sangat inovatif / mengubah keadaan", "audioKey": "revolutionary", "contentStatus": "source_final"},
+          {"id": "m1_glossary_flat_packing", "term": "Flat-packing", "partOfSpeech": "noun phrase", "meaning": "Pengemasan barang secara pipih/dUS", "audioKey": "flat-packing", "contentStatus": "pending_validation"},
+          {"id": "m1_glossary_assemble", "term": "Assemble", "partOfSpeech": "verb", "meaning": "Merakit / menyusun bagian produk", "audioKey": "assemble", "contentStatus": "source_final"},
+          {"id": "m1_glossary_retailer", "term": "Retailer", "partOfSpeech": "noun", "meaning": "Pengecer / pengusaha retail", "audioKey": "retailer", "contentStatus": "source_final"}
+        ]
+      }
+    ],
+    "pretest": {
+      "id": "m1_pretest", "contentStatus": "prototype_derived", "questions": [
+        {"id": "m1_pre_q01", "prompt": "What is the main purpose of Narrative Text in retail context?", "options": ["To describe product specifications", "To give step-by-step checkout instructions", "To focus on inspirational business origins and brand histories", "To complain about broken items"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q02", "prompt": "Which part of Narrative Text introduces the founder and setting?", "options": ["Orientation", "Complication", "Resolution", "Re-orientation"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q03", "prompt": "What does the 'Complication' section describe?", "options": ["The final success of the story", "The main business problem, crisis, or challenge", "The time and place of the story", "The step-by-step manual"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q04", "prompt": "What tense is commonly used in Narrative Text?", "options": ["Simple Present Tense", "Simple Future Tense", "Present Continuous Tense", "Simple Past Tense"], "correctOptionIndex": 3, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q05", "prompt": "The word 'founded' is an example of...", "options": ["Noun Phrase", "Simple Past Tense verb", "Time Connective", "Adjective"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q06", "prompt": "What does 'Founder' mean in Indonesian?", "options": ["Pendiri bisnis", "Pengecer", "Pembeli", "Karyawan toko"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q07", "prompt": "Which of the following is a Time Connective?", "options": ["Sold", "Long ago", "Retailer", "Venture"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q08", "prompt": "Where did Ingvar Kamprad grow up?", "options": ["America", "England", "Sweden", "Germany"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q09", "prompt": "What items did IKEA sell at first?", "options": ["Flat-pack sofas", "Large wooden tables", "Computers and phones", "Pens, wallets, and picture frames"], "correctOptionIndex": 3, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_pre_q10", "prompt": "What is the Indonesian meaning of 'Retailer'?", "options": ["Pabrik", "Grosir", "Pengecer", "Distributor"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"}
+      ]
+    },
+    "posttest": {
+      "id": "m1_posttest", "contentStatus": "prototype_derived", "questions": [
+        {"id": "m1_post_q01", "prompt": "According to the reading, when did Ingvar Kamprad found IKEA?", "options": ["1950", "1943", "1956", "1934"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q02", "prompt": "What complication did IKEA face as it began selling affordable furniture?", "options": ["They ran out of materials to make pens", "They could not find any customers in Sweden", "Suppliers were pressured to boycott Kamprad", "Customers did not know how to assemble tables"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q03", "prompt": "Why did Kamprad face a major crisis with shipping?", "options": ["Large tables were expensive to ship and often damaged during delivery", "Customers refused to pay for delivery", "The mail-order system broke down", "He could not find enough delivery drivers"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q04", "prompt": "What revolutionary idea did Kamprad and his designer invent?", "options": ["Online shopping", "Free home delivery", "Flat-packing", "Selling only picture frames"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q05", "prompt": "What did flat-packing allow customers to do?", "options": ["Buy the boxed furniture and assemble it themselves at home", "Order furniture over the telephone", "Pay for furniture in monthly installments", "Design their own furniture online"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q06", "prompt": "What was one major benefit of the flat-packing innovation for IKEA?", "options": ["It made the furniture heavier", "It drastically reduced shipping costs", "It increased the store warehouse space needed", "It made traditional store owners happy"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q07", "prompt": "In the Re-orientation paragraph, what has IKEA become today?", "options": ["A small mail-order business", "A local Swedish grocery store", "The world's largest furniture retailer", "A supplier of wood and paint"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q08", "prompt": "What does the word 'Assemble' mean?", "options": ["Mengirim barang", "Merakit / menyusun bagian produk", "Memboikot kerja sama", "Mengemas barang secara pipih"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q09", "prompt": "Which sentence uses the Simple Past Tense correctly?", "options": ["Ingvar Kamprad finds a small business.", "Ingvar Kamprad founded a small mail-order business.", "Ingvar Kamprad is founding a small business.", "Ingvar Kamprad will found a small business."], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+        {"id": "m1_post_q10", "prompt": "Based on the text, what moral lesson can be learned from the IKEA story?", "options": ["Creativity and customer-focused solutions can turn a struggle into global success", "Never start a business when you are 17 years old", "Always agree with traditional store owners", "Furniture should always be pre-assembled by the seller"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"}
+      ]
+    },
+    "practices": [
+      {
+        "id": "m1_practice_01", "kind": "match", "sourceInteraction": "match", "title": "Structure Match", "instruction": "Match each narrative part with its purpose.", "contentStatus": "prototype_derived",
+        "sourceItems": [{"id": "m1_p1_source_orientation", "label": "Orientation"}, {"id": "m1_p1_source_complication", "label": "Complication"}, {"id": "m1_p1_source_resolution", "label": "Resolution"}, {"id": "m1_p1_source_reorientation", "label": "Re-orientation"}],
+        "targetItems": [{"id": "m1_p1_target_success", "label": "Shows the final success and the moral lesson"}, {"id": "m1_p1_target_introduces", "label": "Introduces the business founder and setting"}, {"id": "m1_p1_target_solution", "label": "Explains how the founder solved the problem creatively"}, {"id": "m1_p1_target_crisis", "label": "Describes the main business problem or crisis"}],
+        "answerMappings": [{"sourceId": "m1_p1_source_orientation", "targetId": "m1_p1_target_introduces"}, {"sourceId": "m1_p1_source_complication", "targetId": "m1_p1_target_crisis"}, {"sourceId": "m1_p1_source_resolution", "targetId": "m1_p1_target_solution"}, {"sourceId": "m1_p1_source_reorientation", "targetId": "m1_p1_target_success"}],
+        "sequenceItems": [], "expectedOrder": []
+      },
+      {
+        "id": "m1_practice_02", "kind": "match", "sourceInteraction": "tap_match", "title": "Vocabulary Match", "instruction": "Match each word with its Indonesian meaning.", "contentStatus": "prototype_derived",
+        "sourceItems": [{"id": "m1_p2_source_boycott", "label": "Boycott"}, {"id": "m1_p2_source_flat_packing", "label": "Flat-packing"}, {"id": "m1_p2_source_assemble", "label": "Assemble"}, {"id": "m1_p2_source_delivery", "label": "Delivery"}],
+        "targetItems": [{"id": "m1_p2_target_assemble", "label": "Merakit / menyusun bagian produk"}, {"id": "m1_p2_target_delivery", "label": "Pengiriman barang"}, {"id": "m1_p2_target_boycott", "label": "Memboikot / menolak kerja sama"}, {"id": "m1_p2_target_flat_packing", "label": "Pengemasan barang secara pipih/dUS"}],
+        "answerMappings": [{"sourceId": "m1_p2_source_boycott", "targetId": "m1_p2_target_boycott"}, {"sourceId": "m1_p2_source_flat_packing", "targetId": "m1_p2_target_flat_packing"}, {"sourceId": "m1_p2_source_assemble", "targetId": "m1_p2_target_assemble"}, {"sourceId": "m1_p2_source_delivery", "targetId": "m1_p2_target_delivery"}],
+        "sequenceItems": [], "expectedOrder": []
+      },
+      {
+        "id": "m1_practice_03", "kind": "sequence", "sourceInteraction": "sequence", "title": "IKEA Event Sequence", "instruction": "Arrange the IKEA story events from first to last.", "contentStatus": "prototype_derived",
+        "sourceItems": [], "targetItems": [], "answerMappings": [],
+        "sequenceItems": [{"id": "m1_p3_item_retailer", "label": "IKEA became the world's largest furniture retailer"}, {"id": "m1_p3_item_furniture", "label": "IKEA began selling affordable furniture"}, {"id": "m1_p3_item_flat_packing", "label": "Flat-packing was invented"}, {"id": "m1_p3_item_founded", "label": "Ingvar Kamprad founded a small mail-order business"}, {"id": "m1_p3_item_boycott", "label": "Suppliers boycotted Kamprad"}],
+        "expectedOrder": ["m1_p3_item_founded", "m1_p3_item_furniture", "m1_p3_item_boycott", "m1_p3_item_flat_packing", "m1_p3_item_retailer"]
+      }
+    ]
+  }
+}

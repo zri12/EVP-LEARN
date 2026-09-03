@@ -30,6 +30,7 @@ This directory is the implementation baseline for the Flutter APK.
 |---|---|
 | `NAVIGATION_FLOW.md` | Screen map, route flow, resume behavior |
 | `CONTENT_SPEC.md` | Academic source mapping and content status |
+| `CONTENT_MIGRATION_MAP.md` | Phase 3 bundled content source, status, ID, and inventory mapping |
 | `SCORING_RULES.md` | Scoring, gain, retry, baseline, attempts |
 
 ## Delivery workflow

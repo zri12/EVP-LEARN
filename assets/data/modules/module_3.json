@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": 1,
+  "academicSource": "UI-APK PEMB B.INGGRIS/src/imports/MATERI_AFRIDA.docx",
+  "module": {
+    "metadata": {"id": "module_3", "number": 3, "type": "procedure_text", "title": "Procedure Text", "subtitle": "Store Standard Operating Procedures", "overview": "Procedure Text is a text that gives step-by-step instructions to achieve a specific goal. In retail, it covers store Standard Operating Procedures (SOPs), cash handling, merchandise display rules, and return processing.", "contentStatus": "source_final", "subtitleStatus": "source_final"},
+    "objectives": [
+      {"id": "m3_objective_01", "text": "Mengidentifikasi fungsi sosial teks berkaitan retail.", "contentStatus": "prototype_derived"},
+      {"id": "m3_objective_02", "text": "Mengenali struktur generik dan ciri kebahasaan.", "contentStatus": "prototype_derived"},
+      {"id": "m3_objective_03", "text": "Memahami ide pokok dan informasi rinci.", "contentStatus": "prototype_derived"},
+      {"id": "m3_objective_04", "text": "Menggunakan kosakata retail dalam konteks bermakna.", "contentStatus": "prototype_derived"}
+    ],
+    "theory": {
+      "contentStatus": "source_final",
+      "definition": "Procedure Text is a text that gives step-by-step instructions to achieve a specific goal. In retail, it covers store Standard Operating Procedures (SOPs), cash handling, merchandise display rules, and return processing.",
+      "genericStructure": [
+        {"id": "m3_structure_goal", "heading": "Goal / Aim", "detail": "States what is going to be achieved or done."},
+        {"id": "m3_structure_materials", "heading": "Materials / Equipment", "detail": "Lists tools or items needed to complete the steps."},
+        {"id": "m3_structure_steps", "heading": "Steps / Methods", "detail": "Sequential instructions on how to do the process."}
+      ],
+      "languageFeatures": [
+        {"id": "m3_feature_imperative", "heading": "Imperative Sentences / Action Verbs", "detail": "e.g., greet, scan, press, verify, print."},
+        {"id": "m3_feature_sequence", "heading": "Sequence Adverbs", "detail": "e.g., First, Next, Then, After that, Finally."},
+        {"id": "m3_feature_directives", "heading": "Clear & Precise Directives", "detail": "e.g., scan the barcode carefully."}
+      ]
+    },
+    "vocabulary": [
+      {"id": "m3_vocab_scan", "term": "Scan", "partOfSpeech": "verb", "meaning": "Memindai (barcode).", "audioKey": "m3-1", "contentStatus": "source_final"},
+      {"id": "m3_vocab_receipt", "term": "Receipt", "partOfSpeech": "noun", "meaning": "Struk belanja/bukti pembayaran.", "audioKey": "m3-2", "contentStatus": "source_final"},
+      {"id": "m3_vocab_checkout", "term": "Checkout", "partOfSpeech": "noun", "meaning": "Area/proses pembayaran kasir.", "audioKey": "m3-3", "contentStatus": "source_final"},
+      {"id": "m3_vocab_verify", "term": "Verify", "partOfSpeech": "verb", "meaning": "Memeriksa/memastikan kebenaran data.", "audioKey": "m3-4", "contentStatus": "source_final"},
+      {"id": "m3_vocab_cash_drawer", "term": "Cash Drawer", "partOfSpeech": "noun", "meaning": "Laci uang kasir.", "audioKey": "m3-5", "contentStatus": "source_final"}
+    ],
+    "readings": [
+      {
+        "id": "m3_reading_01", "title": "HOW TO PROCESS CUSTOMER CHECKOUT USING A POS TERMINAL", "subtitle": "Store Standard Operating Procedure", "category": "Store Standard Operating Procedures (SOP)", "imageKey": null, "readingAudioKey": "m3-1", "contentStatus": "source_final",
+        "sections": [
+          {"id": "m3_r1_section_goal", "heading": "GOAL / AIM", "body": "To complete a retail sales transaction efficiently and accurately using a Point of Sale (POS) terminal.", "glossaryIds": []},
+          {"id": "m3_r1_section_materials", "heading": "MATERIALS / EQUIPMENT", "body": "1. POS Terminal & Cash Drawer\n2. Barcode Scanner\n3. Thermal Receipt Paper\n4. Customer’s Merchandise", "glossaryIds": []},
+          {"id": "m3_r1_section_steps", "heading": "STEPS / PROCEDURES", "body": "1. FIRST, GREET the customer warmly and ask if they found everything they needed.\n\n2. NEXT, SCAN each item’s barcode using the hand-held scanner. Ensure the scanner BEEPS to confirm the item is registered on the system screen.\n\n3. THEN, VERIFY the quantity and price of the merchandise displayed on the dual-screen monitor.\n\n4. AFTER THAT, ASK the customer for their preferred PAYMENT METHOD (cash, credit card, or QRIS digital payment).\n\n5. IF paying cash, INSERT the money into the cash drawer and ENTER the amount into the terminal to calculate change automatically.\n\n6. FINALLY, PRINT the receipt, ATTACH it to the shopping bag, and HAND over the items with a warm closing phrase like \"Thank you for shopping with us!\"", "glossaryIds": ["m3_glossary_greet", "m3_glossary_scan", "m3_glossary_verify", "m3_glossary_payment_method", "m3_glossary_insert", "m3_glossary_attach"]}
+        ],
+        "glossary": [
+          {"id": "m3_glossary_greet", "term": "Greet", "partOfSpeech": "verb (imperative)", "meaning": "Menyapa", "audioKey": "greet", "contentStatus": "source_final"},
+          {"id": "m3_glossary_scan", "term": "Scan", "partOfSpeech": "verb (imperative)", "meaning": "Memindai (barcode)", "audioKey": "scan", "contentStatus": "source_final"},
+          {"id": "m3_glossary_verify", "term": "Verify", "partOfSpeech": "verb (imperative)", "meaning": "Memeriksa / memverifikasi", "audioKey": "verify", "contentStatus": "source_final"},
+          {"id": "m3_glossary_payment_method", "term": "Payment method", "partOfSpeech": "noun phrase", "meaning": "Metode / cara pembayaran", "audioKey": "payment-method", "contentStatus": "source_final"},
+          {"id": "m3_glossary_insert", "term": "Insert", "partOfSpeech": "verb (imperative)", "meaning": "Memasukkan", "audioKey": "insert", "contentStatus": "source_final"},
+          {"id": "m3_glossary_attach", "term": "Attach", "partOfSpeech": "verb (imperative)", "meaning": "Melampirkan / menempelkan", "audioKey": "attach", "contentStatus": "source_final"}
+        ]
+      }
+    ],
+    "pretest": {"id": "m3_pretest", "contentStatus": "prototype_derived", "questions": [
+      {"id": "m3_pre_q01", "prompt": "What is a Procedure Text?", "options": ["A text that tells a fictional story", "A text that gives step-by-step instructions to achieve a goal", "A text that describes a product's physical features", "A text that debates an issue"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q02", "prompt": "Which section lists the tools needed to complete the steps?", "options": ["Goal / Aim", "Steps / Methods", "Materials / Equipment", "Orientation"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q03", "prompt": "Which of the following is a Sequence Adverb?", "options": ["Finally", "Scan", "Receipt", "Cash Drawer"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q04", "prompt": "An Imperative Sentence usually begins with...", "options": ["A Noun", "An Adjective", "An Action Verb", "A Sequence Adverb"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q05", "prompt": "What does 'Verify' mean?", "options": ["Menyapa", "Memindai (barcode)", "Melampirkan", "Memeriksa/memastikan kebenaran data"], "correctOptionIndex": 3, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q06", "prompt": "What is the Indonesian term for 'Receipt'?", "options": ["Laci uang", "Area kasir", "Struk belanja/bukti pembayaran", "Memindai barcode"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q07", "prompt": "Which is an example of a clear and precise directive?", "options": ["Scan the barcode carefully", "It is very durable", "Long ago in 1943", "The jacket is black"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q08", "prompt": "Where does a procedure text usually state what is going to be achieved?", "options": ["In the Steps section", "In the Goal/Aim section", "In the Materials section", "At the very end of the text"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q09", "prompt": "What is a 'Cash Drawer'?", "options": ["Kertas termal", "Pemindai kode", "Laci uang kasir", "Keranjang belanja"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_pre_q10", "prompt": "Which of the following is NOT part of the Generic Structure of a Procedure Text?", "options": ["Goal / Aim", "Complication", "Materials / Equipment", "Steps / Methods"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"}
+    ]},
+    "posttest": {"id": "m3_posttest", "contentStatus": "prototype_derived", "questions": [
+      {"id": "m3_post_q01", "prompt": "What is the Goal/Aim of the provided procedure text?", "options": ["To assemble flat-packing furniture at home", "To complete a retail sales transaction efficiently and accurately using a POS terminal", "To display vintage leather jackets in the front window", "To organize supermarket merchandise efficiently"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q02", "prompt": "Which of the following is NOT listed as Materials/Equipment in the text?", "options": ["POS Terminal & Cash Drawer", "Barcode Scanner", "Shopping Trolley", "Thermal Receipt Paper"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q03", "prompt": "According to the procedure, what should the cashier do FIRST?", "options": ["Scan the barcode", "Greet the customer warmly", "Verify the quantity and price", "Ask for the payment method"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q04", "prompt": "How does the cashier ensure the item is registered on the system screen after scanning?", "options": ["By printing the receipt", "By inserting the money", "By ensuring the scanner BEEPS", "By greeting the customer"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q05", "prompt": "What must the cashier do THEN, after scanning the barcodes?", "options": ["Verify the quantity and price of the merchandise displayed", "Attach the receipt to the shopping bag", "Calculate the change automatically", "Ask if they found everything they needed"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q06", "prompt": "Which payment methods can the cashier ask the customer for?", "options": ["Cash, credit card, or QRIS digital payment", "Only cash", "Only credit card", "Gold and silver"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q07", "prompt": "What happens IF the customer is paying with cash?", "options": ["The cashier inserts the money into the cash drawer and enters the amount into the terminal", "The terminal prints the receipt immediately", "The cashier asks them to use a credit card instead", "The cashier taps the cash on the EDC machine"], "correctOptionIndex": 0, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q08", "prompt": "What is the Indonesian meaning of the imperative verb 'Attach'?", "options": ["Menyapa", "Memasukkan", "Melampirkan / menempelkan", "Memeriksa"], "correctOptionIndex": 2, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q09", "prompt": "What is the FINALLY step in the checkout procedure?", "options": ["Ask if they found everything they needed", "Print the receipt, attach it to the shopping bag, and hand over the items", "Verify the quantity and price on the dual-screen monitor", "Ensure the scanner beeps"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"},
+      {"id": "m3_post_q10", "prompt": "What warm closing phrase is suggested when handing over the items?", "options": ["Please come back tomorrow!", "Thank you for shopping with us!", "Don't forget your receipt!", "Have a nice flight!"], "correctOptionIndex": 1, "imageKey": null, "feedback": null, "contentStatus": "prototype_derived"}
+    ]},
+    "practices": [
+      {"id": "m3_practice_01", "kind": "sequence", "sourceInteraction": "sequence", "title": "Checkout Sequencing", "instruction": "Arrange the checkout steps in the correct order.", "contentStatus": "prototype_derived", "sourceItems": [], "targetItems": [], "answerMappings": [], "sequenceItems": [{"id": "m3_p1_item_print", "label": "Print the receipt and attach it to the bag"}, {"id": "m3_p1_item_verify", "label": "Verify the quantity and price"}, {"id": "m3_p1_item_scan", "label": "Scan each item's barcode"}, {"id": "m3_p1_item_greet", "label": "Greet the customer warmly"}, {"id": "m3_p1_item_payment", "label": "Ask for the preferred payment method"}, {"id": "m3_p1_item_cash", "label": "Insert money and enter the amount"}], "expectedOrder": ["m3_p1_item_greet", "m3_p1_item_scan", "m3_p1_item_verify", "m3_p1_item_payment", "m3_p1_item_cash", "m3_p1_item_print"]},
+      {"id": "m3_practice_02", "kind": "match", "sourceInteraction": "match", "title": "Equipment Match", "instruction": "Match each retail tool with its use.", "contentStatus": "prototype_derived", "sourceItems": [{"id": "m3_p2_source_scanner", "label": "Barcode Scanner"}, {"id": "m3_p2_source_receipt", "label": "Thermal Receipt Paper"}, {"id": "m3_p2_source_pos", "label": "POS Terminal"}], "targetItems": [{"id": "m3_p2_target_transaction", "label": "To calculate transactions"}, {"id": "m3_p2_target_scan", "label": "To scan items"}, {"id": "m3_p2_target_receipt", "label": "To print proof of payment"}], "answerMappings": [{"sourceId": "m3_p2_source_scanner", "targetId": "m3_p2_target_scan"}, {"sourceId": "m3_p2_source_receipt", "targetId": "m3_p2_target_receipt"}, {"sourceId": "m3_p2_source_pos", "targetId": "m3_p2_target_transaction"}], "sequenceItems": [], "expectedOrder": []},
+      {"id": "m3_practice_03", "kind": "match", "sourceInteraction": "tap_match", "title": "Sequence Connector Match", "instruction": "Match each connector with its Indonesian meaning.", "contentStatus": "prototype_derived", "sourceItems": [{"id": "m3_p3_source_first", "label": "First"}, {"id": "m3_p3_source_next", "label": "Next"}, {"id": "m3_p3_source_then", "label": "Then"}, {"id": "m3_p3_source_after_that", "label": "After that"}, {"id": "m3_p3_source_finally", "label": "Finally"}], "targetItems": [{"id": "m3_p3_target_then", "label": "Kemudian"}, {"id": "m3_p3_target_after_that", "label": "Setelah itu"}, {"id": "m3_p3_target_finally", "label": "Terakhir"}, {"id": "m3_p3_target_next", "label": "Berikutnya"}, {"id": "m3_p3_target_first", "label": "Pertama"}], "answerMappings": [{"sourceId": "m3_p3_source_first", "targetId": "m3_p3_target_first"}, {"sourceId": "m3_p3_source_next", "targetId": "m3_p3_target_next"}, {"sourceId": "m3_p3_source_then", "targetId": "m3_p3_target_then"}, {"sourceId": "m3_p3_source_after_that", "targetId": "m3_p3_target_after_that"}, {"sourceId": "m3_p3_source_finally", "targetId": "m3_p3_target_finally"}], "sequenceItems": [], "expectedOrder": []}
+    ]
+  }
+}
