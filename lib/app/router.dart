@@ -111,13 +111,6 @@ GoRouter createAppRouter() => GoRouter(
             ),
           ],
         ),
-        GoRoute(
-          path: 'result',
-          builder: (context, state) => LearningGatewayPage(
-            moduleId: state.pathParameters['moduleId']!,
-            stage: LearningGatewayStage.result,
-          ),
-        ),
       ],
     ),
     StatefulShellRoute.indexedStack(
