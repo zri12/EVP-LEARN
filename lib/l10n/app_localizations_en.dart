@@ -30,7 +30,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navProfile => 'Profile';
 
   @override
-  String get languageTitle => 'Bahasa / Language';
+  String get languageTitle => 'Language';
 
   @override
   String get languageIndonesian => 'Bahasa Indonesia';
@@ -278,6 +278,58 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contentUnavailable => 'Content unavailable. Return to modules.';
 
   @override
+  String progressValue(Object percent) {
+    return 'Progress $percent%';
+  }
+
+  @override
+  String playPronunciation(Object term) {
+    return 'Play pronunciation for $term';
+  }
+
+  @override
+  String replayPronunciation(Object term) {
+    return 'Replay pronunciation for $term';
+  }
+
+  @override
+  String pausePronunciation(Object term) {
+    return 'Pause pronunciation for $term';
+  }
+
+  @override
+  String get playReadingAudio => 'Play reading audio';
+
+  @override
+  String get replayReadingAudio => 'Replay reading audio';
+
+  @override
+  String get pauseReadingAudio => 'Pause reading audio';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get backToObjectives => 'Back to Learning Objectives';
+
+  @override
+  String get dragSourceHint => 'Drag to match';
+
+  @override
+  String get dropTargetHint => 'Tap or drop an item here to match';
+
+  @override
+  String get reorderHint => 'Drag to reorder';
+
+  @override
+  String glossaryHint(Object term) {
+    return 'Open definition for $term';
+  }
+
+  @override
+  String get notAvailable => 'Not available';
+
+  @override
   String get pretest => 'Pre-test';
 
   @override
@@ -350,10 +402,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get learningGain => 'Learning gain';
 
   @override
-  String get tuntas => 'Completed — Tuntas';
+  String get tuntas => 'Completed — Passed';
 
   @override
-  String get needsReview => 'Completed — Perlu Review';
+  String get needsReview => 'Completed — Needs Review';
 
   @override
   String get activity => 'Activity';

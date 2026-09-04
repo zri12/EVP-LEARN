@@ -143,7 +143,7 @@ abstract class AppLocalizations {
   /// No description provided for @languageTitle.
   ///
   /// In en, this message translates to:
-  /// **'Bahasa / Language'**
+  /// **'Language'**
   String get languageTitle;
 
   /// No description provided for @languageIndonesian.
@@ -614,6 +614,90 @@ abstract class AppLocalizations {
   /// **'Content unavailable. Return to modules.'**
   String get contentUnavailable;
 
+  /// No description provided for @progressValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress {percent}%'**
+  String progressValue(Object percent);
+
+  /// No description provided for @playPronunciation.
+  ///
+  /// In en, this message translates to:
+  /// **'Play pronunciation for {term}'**
+  String playPronunciation(Object term);
+
+  /// No description provided for @replayPronunciation.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay pronunciation for {term}'**
+  String replayPronunciation(Object term);
+
+  /// No description provided for @pausePronunciation.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause pronunciation for {term}'**
+  String pausePronunciation(Object term);
+
+  /// No description provided for @playReadingAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Play reading audio'**
+  String get playReadingAudio;
+
+  /// No description provided for @replayReadingAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay reading audio'**
+  String get replayReadingAudio;
+
+  /// No description provided for @pauseReadingAudio.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause reading audio'**
+  String get pauseReadingAudio;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @backToObjectives.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Learning Objectives'**
+  String get backToObjectives;
+
+  /// No description provided for @dragSourceHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to match'**
+  String get dragSourceHint;
+
+  /// No description provided for @dropTargetHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap or drop an item here to match'**
+  String get dropTargetHint;
+
+  /// No description provided for @reorderHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to reorder'**
+  String get reorderHint;
+
+  /// No description provided for @glossaryHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Open definition for {term}'**
+  String glossaryHint(Object term);
+
+  /// No description provided for @notAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Not available'**
+  String get notAvailable;
+
   /// No description provided for @pretest.
   ///
   /// In en, this message translates to:
@@ -755,13 +839,13 @@ abstract class AppLocalizations {
   /// No description provided for @tuntas.
   ///
   /// In en, this message translates to:
-  /// **'Completed — Tuntas'**
+  /// **'Completed — Passed'**
   String get tuntas;
 
   /// No description provided for @needsReview.
   ///
   /// In en, this message translates to:
-  /// **'Completed — Perlu Review'**
+  /// **'Completed — Needs Review'**
   String get needsReview;
 
   /// No description provided for @activity.

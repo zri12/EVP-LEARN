@@ -68,6 +68,7 @@ class ModuleCard extends StatelessWidget {
     final cta = moduleCtaLabel(l10n, progress.status);
 
     return Semantics(
+      button: true,
       label: '${l10n.moduleLabel(module.id)}. ${module.title}. $status.',
       child: InkWell(
         onTap: () => context.push(AppRoutes.moduleOverview(module.id)),

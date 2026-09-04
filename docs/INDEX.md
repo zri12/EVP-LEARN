@@ -22,6 +22,7 @@ This directory is the implementation baseline for the Flutter APK.
 | `OFFLINE_ASSETS.md` | Images/audio/fonts/content asset policy |
 | `ASSET_MIGRATION_MAP.md` | Prototype-to-Flutter asset copy provenance |
 | `LOCALIZATION.md` | Indonesian/English behavior |
+| `LOCALIZATION_ACCESSIBILITY_POLISH.md` | Phase 10 localization, semantics, responsive and analyzer audit |
 | `SECURITY_PRIVACY.md` | Privacy and local-only data principles |
 
 ## Product logic

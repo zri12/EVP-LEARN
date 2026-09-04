@@ -138,6 +138,10 @@ Localize:
 - selected state;
 - progress semantics.
 
+Phase 10 also localizes play/replay/pause pronunciation and reading-audio
+actions, glossary definition hints, drag/drop and reorder hints, unavailable
+states, and the progress percentage announcement.
+
 ## 12. Validation
 
 Tests:

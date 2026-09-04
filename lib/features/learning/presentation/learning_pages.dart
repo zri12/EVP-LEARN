@@ -43,7 +43,9 @@ class ModuleOverviewPage extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'MODULE ${module.metadata.number.toString().padLeft(2, '0')}',
+                  AppLocalizations.of(
+                    context,
+                  )!.moduleLabel(module.metadata.number).toUpperCase(),
                   style: TextStyle(
                     color: visual.accent,
                     fontWeight: FontWeight.w800,
@@ -117,36 +119,38 @@ class LearningObjectivesPage extends StatelessWidget {
   const LearningObjectivesPage({required this.moduleId, super.key});
   final String moduleId;
   @override
-  Widget build(BuildContext context) => _ModulePage(
-    moduleId: moduleId,
-    builder: (context, module) => LearningPageScaffold(
-      module: module,
-      title: AppLocalizations.of(context)!.learningObjectives,
-      children: [
-        Text(
-          AppLocalizations.of(context)!.learningObjectivesIntro,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const SizedBox(height: AppSpacing.lg),
-        ...module.objectives.indexed.expand(
-          (entry) => [
-            _NumberedCard(
-              number: entry.$1 + 1,
-              text: entry.$2.text,
-              color: moduleVisualFor(module.metadata.number).accent,
-            ),
-            const SizedBox(height: AppSpacing.sm),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.xl),
-        _PrimaryButton(
-          label: AppLocalizations.of(context)!.continueToPretest,
-          onPressed: () =>
-              context.push(AppRoutes.pretest(module.metadata.number)),
-        ),
-      ],
-    ),
-  );
+  Widget build(BuildContext context) {
+    return _ModulePage(
+      moduleId: moduleId,
+      builder: (context, module) => LearningPageScaffold(
+        module: module,
+        title: AppLocalizations.of(context)!.learningObjectives,
+        children: [
+          Text(
+            AppLocalizations.of(context)!.learningObjectivesIntro,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          const SizedBox(height: AppSpacing.lg),
+          ...module.objectives.indexed.expand(
+            (entry) => [
+              _NumberedCard(
+                number: entry.$1 + 1,
+                text: entry.$2.text,
+                color: moduleVisualFor(module.metadata.number).accent,
+              ),
+              const SizedBox(height: AppSpacing.sm),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.xl),
+          _PrimaryButton(
+            label: AppLocalizations.of(context)!.continueToPretest,
+            onPressed: () =>
+                context.push(AppRoutes.pretest(module.metadata.number)),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class TheoryPage extends StatelessWidget {
@@ -314,37 +318,40 @@ class LearningGatewayPage extends StatelessWidget {
   final String moduleId;
   final LearningGatewayStage stage;
   @override
-  Widget build(BuildContext context) => _ModulePage(
-    moduleId: moduleId,
-    builder: (context, module) => LearningPageScaffold(
-      module: module,
-      title: switch (stage) {
-        LearningGatewayStage.pretest => 'Pre-test',
-        LearningGatewayStage.practice => 'Interactive Practice',
-        LearningGatewayStage.posttest => 'Post-test',
-        LearningGatewayStage.result => 'Final Result',
-      },
-      children: [
-        _SectionCard(
-          title: stage == LearningGatewayStage.pretest
-              ? 'Pre-test'
-              : AppLocalizations.of(context)!.interactivePractice,
-          child: Text(
-            stage == LearningGatewayStage.pretest
-                ? AppLocalizations.of(context)!.pretestGatewayDescription
-                : AppLocalizations.of(context)!.nextLearningActivity,
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return _ModulePage(
+      moduleId: moduleId,
+      builder: (context, module) => LearningPageScaffold(
+        module: module,
+        title: switch (stage) {
+          LearningGatewayStage.pretest => l10n.pretest,
+          LearningGatewayStage.practice => l10n.interactivePractice,
+          LearningGatewayStage.posttest => l10n.posttest,
+          LearningGatewayStage.result => l10n.finalScore,
+        },
+        children: [
+          _SectionCard(
+            title: stage == LearningGatewayStage.pretest
+                ? l10n.pretest
+                : l10n.interactivePractice,
+            child: Text(
+              stage == LearningGatewayStage.pretest
+                  ? l10n.pretestGatewayDescription
+                  : l10n.nextLearningActivity,
+            ),
           ),
-        ),
-        if (stage == LearningGatewayStage.pretest) ...[
-          const SizedBox(height: AppSpacing.xl),
-          _PrimaryButton(
-            label: 'Back to Objectives',
-            onPressed: () => context.pop(),
-          ),
+          if (stage == LearningGatewayStage.pretest) ...[
+            const SizedBox(height: AppSpacing.xl),
+            _PrimaryButton(
+              label: l10n.backToObjectives,
+              onPressed: () => context.pop(),
+            ),
+          ],
         ],
-      ],
-    ),
-  );
+      ),
+    );
+  }
 }
 
 class LearningPageScaffold extends ConsumerWidget {
@@ -1206,46 +1213,67 @@ class _VocabularyCard extends StatelessWidget {
   const _VocabularyCard({required this.word});
   final VocabularyItem word;
   @override
-  Widget build(BuildContext context) => _SectionCard(
-    title: word.term,
-    child: Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                word.partOfSpeech,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              const SizedBox(height: 4),
-              Text(word.meaning),
-            ],
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return _SectionCard(
+      title: word.term,
+      child: Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  word.partOfSpeech,
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(height: 4),
+                Text(word.meaning),
+              ],
+            ),
           ),
-        ),
-        _AudioButton(
-          assetPath: const AudioAssetResolver().resolveVocabulary(
-            word.audioKey,
+          _AudioButton(
+            assetPath: const AudioAssetResolver().resolveVocabulary(
+              word.audioKey,
+            ),
+            playLabel: l10n.playPronunciation(word.term),
+            replayLabel: l10n.replayPronunciation(word.term),
+            pauseLabel: l10n.pausePronunciation(word.term),
           ),
-          label: 'Play pronunciation for ${word.term}',
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
 }
 
 class _AudioButton extends ConsumerWidget {
-  const _AudioButton({required this.assetPath, required this.label});
+  const _AudioButton({
+    required this.assetPath,
+    required this.playLabel,
+    required this.replayLabel,
+    required this.pauseLabel,
+  });
   final String assetPath;
-  final String label;
+  final String playLabel;
+  final String replayLabel;
+  final String pauseLabel;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final audio = ref.watch(learningAudioProvider);
     final isPlaying =
         audio.assetPath == assetPath &&
         audio.status == LearningAudioStatus.playing;
+    final isReplay =
+        audio.assetPath == assetPath &&
+        (audio.status == LearningAudioStatus.completed ||
+            audio.status == LearningAudioStatus.paused);
+    final actionLabel = isPlaying
+        ? pauseLabel
+        : isReplay
+        ? replayLabel
+        : playLabel;
     return Semantics(
-      label: label,
+      label: actionLabel,
       button: true,
       child: IconButton(
         icon: Icon(
@@ -1255,6 +1283,7 @@ class _AudioButton extends ConsumerWidget {
         ),
         color: AppColors.primary,
         iconSize: 32,
+        tooltip: actionLabel,
         onPressed: () =>
             ref.read(learningAudioProvider.notifier).toggle(assetPath),
       ),
@@ -1266,15 +1295,23 @@ class _ReadingAudioCard extends StatelessWidget {
   const _ReadingAudioCard({required this.assetPath});
   final String assetPath;
   @override
-  Widget build(BuildContext context) => _SectionCard(
-    title: AppLocalizations.of(context)!.listenToReading,
-    child: Row(
-      children: [
-        Expanded(child: Text(AppLocalizations.of(context)!.localAudio)),
-        _AudioButton(assetPath: assetPath, label: 'Play reading audio'),
-      ],
-    ),
-  );
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return _SectionCard(
+      title: l10n.listenToReading,
+      child: Row(
+        children: [
+          Expanded(child: Text(l10n.localAudio)),
+          _AudioButton(
+            assetPath: assetPath,
+            playLabel: l10n.playReadingAudio,
+            replayLabel: l10n.replayReadingAudio,
+            pauseLabel: l10n.pauseReadingAudio,
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _ReadingSelector extends StatelessWidget {
@@ -1322,20 +1359,24 @@ class _GlossaryText extends StatelessWidget {
         WidgetSpan(
           alignment: PlaceholderAlignment.baseline,
           baseline: TextBaseline.alphabetic,
-          child: InkWell(
-            key: Key('glossary-${item.id}'),
-            onTap: () => showModalBottomSheet<void>(
-              context: context,
-              isScrollControlled: true,
-              useSafeArea: true,
-              builder: (_) => _GlossarySheet(item: item),
-            ),
-            child: Text(
-              match.group(0)!,
-              style: const TextStyle(
-                color: AppColors.primary,
-                fontWeight: FontWeight.w700,
-                decoration: TextDecoration.underline,
+          child: Semantics(
+            button: true,
+            label: AppLocalizations.of(context)!.glossaryHint(item.term),
+            child: InkWell(
+              key: Key('glossary-${item.id}'),
+              onTap: () => showModalBottomSheet<void>(
+                context: context,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (_) => _GlossarySheet(item: item),
+              ),
+              child: Text(
+                match.group(0)!,
+                style: const TextStyle(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w700,
+                  decoration: TextDecoration.underline,
+                ),
               ),
             ),
           ),
@@ -1390,6 +1431,7 @@ class _GlossarySheet extends StatelessWidget {
             IconButton(
               onPressed: () => Navigator.pop(context),
               icon: const Icon(Icons.close_rounded),
+              tooltip: AppLocalizations.of(context)!.close,
             ),
           ],
         ),
@@ -1397,7 +1439,13 @@ class _GlossarySheet extends StatelessWidget {
         const SizedBox(height: AppSpacing.md),
         _AudioButton(
           assetPath: const AudioAssetResolver().resolveGlossary(item.audioKey),
-          label: 'Play pronunciation for ${item.term}',
+          playLabel: AppLocalizations.of(context)!.playPronunciation(item.term),
+          replayLabel: AppLocalizations.of(
+            context,
+          )!.replayPronunciation(item.term),
+          pauseLabel: AppLocalizations.of(
+            context,
+          )!.pausePronunciation(item.term),
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(item.meaning),

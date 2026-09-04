@@ -42,7 +42,7 @@ class HomePage extends ConsumerWidget {
           _ContinueLearningCard(
             moduleId: dashboard.resume!.moduleId,
             progress: dashboard.resume!.percent,
-            stageLabel: dashboard.resume!.stageLabel,
+            stageLabel: _resumeStageLabel(l10n, dashboard.resume!.stageLabel),
             onTap: () => context.go(
               _resumeRoute(
                 dashboard.resume!.moduleId,
@@ -455,3 +455,17 @@ String _resumeRoute(int moduleId, String stage) {
     _ => AppRoutes.moduleOverview(moduleId),
   };
 }
+
+String _resumeStageLabel(AppLocalizations l10n, String stage) =>
+    switch (stage) {
+      'objectives' => l10n.learningObjectives,
+      'pretest' => l10n.pretest,
+      'pretest_result' => l10n.pretestResult,
+      'theory' => l10n.theory,
+      'vocabulary' => l10n.vocabularyPreview,
+      'reading' => l10n.reading,
+      'practice' => l10n.interactivePractice,
+      'posttest' => l10n.posttest,
+      'result' => l10n.finalScore,
+      _ => l10n.moduleOverview,
+    };

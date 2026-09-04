@@ -38,10 +38,19 @@ class AssessmentPage extends ConsumerWidget {
         .when(
           loading: () =>
               const Scaffold(body: Center(child: CircularProgressIndicator())),
-          error: (_, __) =>
-              const Scaffold(body: Center(child: Text('Content unavailable'))),
+          error: (_, _) => Scaffold(
+            body: Center(
+              child: Text(AppLocalizations.of(context)!.contentUnavailable),
+            ),
+          ),
           data: (module) => module == null
-              ? const Scaffold(body: Center(child: Text('Content unavailable')))
+              ? Scaffold(
+                  body: Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.contentUnavailable,
+                    ),
+                  ),
+                )
               : _AssessmentBody(
                   module: module,
                   type: type,
@@ -98,9 +107,14 @@ class _AssessmentBody extends ConsumerWidget {
     final question = state.currentQuestion;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => context.pop(),
+        leading: Semantics(
+          button: true,
+          label: l10n.back,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back_rounded),
+            tooltip: l10n.back,
+            onPressed: () => context.pop(),
+          ),
         ),
         title: Text(
           type == AssessmentType.pretest ? l10n.pretest : l10n.posttest,
@@ -134,16 +148,27 @@ class _AssessmentBody extends ConsumerWidget {
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  ...question.options.indexed.map(
-                    (entry) => RadioListTile<int>(
-                      key: Key('assessment-option-${question.id}-${entry.$1}'),
-                      value: entry.$1,
-                      groupValue: state.answers[question.id],
-                      onChanged: state.isComplete
-                          ? null
-                          : (value) => controller.selectAnswer(value!),
-                      title: Text(entry.$2),
-                      contentPadding: EdgeInsets.zero,
+                  RadioGroup<int>(
+                    groupValue: state.answers[question.id],
+                    onChanged: state.isComplete
+                        ? (_) {}
+                        : (value) {
+                            if (value != null) controller.selectAnswer(value);
+                          },
+                    child: Column(
+                      children: [
+                        ...question.options.indexed.map(
+                          (entry) => RadioListTile<int>(
+                            key: Key(
+                              'assessment-option-${question.id}-${entry.$1}',
+                            ),
+                            value: entry.$1,
+                            enabled: !state.isComplete,
+                            title: Text(entry.$2),
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -316,13 +341,19 @@ class AssessmentResultPage extends ConsumerWidget {
         .when(
           loading: () =>
               const Scaffold(body: Center(child: CircularProgressIndicator())),
-          error: (_, __) =>
-              const Scaffold(body: Center(child: Text('Content unavailable'))),
+          error: (_, _) => Scaffold(
+            body: Center(
+              child: Text(AppLocalizations.of(context)!.contentUnavailable),
+            ),
+          ),
           data: (module) {
-            if (module == null)
-              return const Scaffold(
-                body: Center(child: Text('Content unavailable')),
+            if (module == null) {
+              return Scaffold(
+                body: Center(
+                  child: Text(AppLocalizations.of(context)!.contentUnavailable),
+                ),
               );
+            }
             final bank = type == AssessmentType.pretest
                 ? module.pretest
                 : module.posttest;
@@ -332,8 +363,9 @@ class AssessmentResultPage extends ConsumerWidget {
               questionBank: bank,
             );
             final result = ref.watch(assessmentSessionProvider(key)).result;
-            if (result == null)
+            if (result == null) {
               return AssessmentPage(moduleId: moduleId, type: type);
+            }
             final l10n = AppLocalizations.of(context)!;
             return Scaffold(
               appBar: AppBar(

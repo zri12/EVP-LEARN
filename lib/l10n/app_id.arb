@@ -7,7 +7,7 @@
   "navModules": "Modul",
   "navProgress": "Progres",
   "navProfile": "Profil",
-  "languageTitle": "Bahasa / Language",
+  "languageTitle": "Bahasa",
   "languageIndonesian": "Bahasa Indonesia",
   "languageEnglish": "English",
   "apply": "Terapkan",
@@ -89,6 +89,20 @@
   "pretestGatewayDescription": "Siapkan diri untuk memeriksa pemahaman sebelum mempelajari materi.",
   "nextLearningActivity": "Aktivitas belajar berikutnya akan tersedia di sini.",
   "contentUnavailable": "Konten tidak tersedia. Kembali ke modul."
+  ,"progressValue": "Progres {percent}%"
+  ,"playPronunciation": "Putar pengucapan {term}"
+  ,"replayPronunciation": "Putar ulang pengucapan {term}"
+  ,"pausePronunciation": "Jeda pengucapan {term}"
+  ,"playReadingAudio": "Putar audio bacaan"
+  ,"replayReadingAudio": "Putar ulang audio bacaan"
+  ,"pauseReadingAudio": "Jeda audio bacaan"
+  ,"close": "Tutup"
+  ,"backToObjectives": "Kembali ke Tujuan Pembelajaran"
+  ,"dragSourceHint": "Geser untuk memasangkan"
+  ,"dropTargetHint": "Ketuk atau lepaskan item di sini untuk memasangkan"
+  ,"reorderHint": "Geser untuk mengubah urutan"
+  ,"glossaryHint": "Buka definisi {term}"
+  ,"notAvailable": "Tidak tersedia"
   ,"pretest": "Pre-test",
   "posttest": "Post-test",
   "question": "Soal",

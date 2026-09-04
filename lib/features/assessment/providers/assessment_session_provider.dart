@@ -217,8 +217,9 @@ class AssessmentSessionController
   void selectAnswer(int optionIndex) {
     if (state.isComplete ||
         optionIndex < 0 ||
-        optionIndex >= state.currentQuestion.options.length)
+        optionIndex >= state.currentQuestion.options.length) {
       return;
+    }
     final answers = Map<String, int>.from(state.answers)
       ..[state.currentQuestion.id] = optionIndex;
     state = state.copyWith(answers: Map.unmodifiable(answers));

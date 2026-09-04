@@ -28,10 +28,19 @@ class PracticePage extends ConsumerWidget {
         .when(
           loading: () =>
               const Scaffold(body: Center(child: CircularProgressIndicator())),
-          error: (error, stackTrace) =>
-              const Scaffold(body: Center(child: Text('Content unavailable'))),
+          error: (_, _) => Scaffold(
+            body: Center(
+              child: Text(AppLocalizations.of(context)!.contentUnavailable),
+            ),
+          ),
           data: (module) => module == null
-              ? const Scaffold(body: Center(child: Text('Content unavailable')))
+              ? Scaffold(
+                  body: Center(
+                    child: Text(
+                      AppLocalizations.of(context)!.contentUnavailable,
+                    ),
+                  ),
+                )
               : _PracticeBody(module: module),
         );
   }
@@ -63,15 +72,21 @@ class _PracticeBody extends ConsumerWidget {
       }());
     }
     final l10n = AppLocalizations.of(context)!;
-    if (state.summaryVisible)
+    if (state.summaryVisible) {
       return _PracticeSummary(module: module, state: state);
+    }
     final activity = state.currentActivity;
     final result = state.currentResult;
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => context.pop(),
+        leading: Semantics(
+          button: true,
+          label: l10n.back,
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back_rounded),
+            tooltip: l10n.back,
+            onPressed: () => context.pop(),
+          ),
         ),
         title: Text(l10n.interactivePractice),
       ),
@@ -207,7 +222,7 @@ class _MatchingActivity extends StatelessWidget {
                       ? l10n.selected
                       : pairedTarget == null
                       ? l10n.unpaired
-                      : l10n.paired}',
+                      : l10n.paired}. ${l10n.dragSourceHint}',
               button: true,
               child: LongPressDraggable<String>(
                 data: item.id,
@@ -256,21 +271,26 @@ class _MatchingActivity extends StatelessWidget {
               : pairedEntries.first.key;
           return Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-            child: DragTarget<String>(
-              key: Key('practice-target-${item.id}'),
-              onWillAcceptWithDetails: (details) =>
-                  state.currentResult == null && details.data != item.id,
-              onAcceptWithDetails: (details) =>
-                  controller.pair(details.data, item.id),
-              builder: (context, candidates, rejected) => InkWell(
-                onTap: state.selectedSourceId == null
-                    ? null
-                    : () => controller.pair(state.selectedSourceId!, item.id),
-                child: _MatchCard(
-                  label: item.label,
-                  selected: candidates.isNotEmpty,
-                  paired: pairedSource != null,
-                  icon: Icons.input_rounded,
+            child: Semantics(
+              button: true,
+              label:
+                  '${item.label}. ${pairedSource == null ? l10n.unpaired : l10n.paired}. ${l10n.dropTargetHint}',
+              child: DragTarget<String>(
+                key: Key('practice-target-${item.id}'),
+                onWillAcceptWithDetails: (details) =>
+                    state.currentResult == null && details.data != item.id,
+                onAcceptWithDetails: (details) =>
+                    controller.pair(details.data, item.id),
+                builder: (context, candidates, rejected) => InkWell(
+                  onTap: state.selectedSourceId == null
+                      ? null
+                      : () => controller.pair(state.selectedSourceId!, item.id),
+                  child: _MatchCard(
+                    label: item.label,
+                    selected: candidates.isNotEmpty,
+                    paired: pairedSource != null,
+                    icon: Icons.input_rounded,
+                  ),
                 ),
               ),
             ),
@@ -389,9 +409,14 @@ class _SequenceActivity extends StatelessWidget {
         for (final id in state.sequenceOrder)
           Card(
             key: ValueKey(id),
-            child: ListTile(
-              leading: const Icon(Icons.drag_handle_rounded),
-              title: Text(items[id]!.label),
+            child: Semantics(
+              button: true,
+              label:
+                  '${items[id]!.label}. ${AppLocalizations.of(context)!.reorderHint}',
+              child: ListTile(
+                leading: const Icon(Icons.drag_handle_rounded),
+                title: Text(items[id]!.label),
+              ),
             ),
           ),
       ],

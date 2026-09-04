@@ -26,8 +26,9 @@ class CurrentAttemptState {
     if (pre == null ||
         practice == null ||
         post == null ||
-        post.weightedScore == null)
+        post.weightedScore == null) {
       return null;
+    }
     return FinalScoreCalculation(
       moduleId: moduleId,
       preTestRaw: pre.rawScore,
@@ -100,8 +101,9 @@ class CurrentAttemptController extends StateNotifier<CurrentAttemptState> {
 
   void setPretest(AssessmentResult result) {
     _guard(result);
-    if (result.type != AssessmentType.pretest)
+    if (result.type != AssessmentType.pretest) {
       throw ArgumentError('Expected a Pre-test result');
+    }
     state = CurrentAttemptState(
       moduleId: state.moduleId,
       attemptId: state.attemptId,
@@ -121,10 +123,12 @@ class CurrentAttemptController extends StateNotifier<CurrentAttemptState> {
 
   void setPosttest(AssessmentResult result) {
     _guard(result);
-    if (result.type != AssessmentType.posttest)
+    if (result.type != AssessmentType.posttest) {
       throw ArgumentError('Expected a Post-test result');
-    if (!state.hasCompletePractice)
+    }
+    if (!state.hasCompletePractice) {
       throw StateError('Practice must be complete before Post-test');
+    }
     state = CurrentAttemptState(
       moduleId: state.moduleId,
       attemptId: state.attemptId,
@@ -135,8 +139,9 @@ class CurrentAttemptController extends StateNotifier<CurrentAttemptState> {
   }
 
   void _guard(AssessmentResult result) {
-    if (result.moduleId != state.moduleId)
+    if (result.moduleId != state.moduleId) {
       throw ArgumentError('Assessment module does not match current attempt');
+    }
   }
 }
 

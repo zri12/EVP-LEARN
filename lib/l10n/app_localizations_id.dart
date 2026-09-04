@@ -30,7 +30,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get navProfile => 'Profil';
 
   @override
-  String get languageTitle => 'Bahasa / Language';
+  String get languageTitle => 'Bahasa';
 
   @override
   String get languageIndonesian => 'Bahasa Indonesia';
@@ -278,6 +278,59 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get contentUnavailable => 'Konten tidak tersedia. Kembali ke modul.';
+
+  @override
+  String progressValue(Object percent) {
+    return 'Progres $percent%';
+  }
+
+  @override
+  String playPronunciation(Object term) {
+    return 'Putar pengucapan $term';
+  }
+
+  @override
+  String replayPronunciation(Object term) {
+    return 'Putar ulang pengucapan $term';
+  }
+
+  @override
+  String pausePronunciation(Object term) {
+    return 'Jeda pengucapan $term';
+  }
+
+  @override
+  String get playReadingAudio => 'Putar audio bacaan';
+
+  @override
+  String get replayReadingAudio => 'Putar ulang audio bacaan';
+
+  @override
+  String get pauseReadingAudio => 'Jeda audio bacaan';
+
+  @override
+  String get close => 'Tutup';
+
+  @override
+  String get backToObjectives => 'Kembali ke Tujuan Pembelajaran';
+
+  @override
+  String get dragSourceHint => 'Geser untuk memasangkan';
+
+  @override
+  String get dropTargetHint =>
+      'Ketuk atau lepaskan item di sini untuk memasangkan';
+
+  @override
+  String get reorderHint => 'Geser untuk mengubah urutan';
+
+  @override
+  String glossaryHint(Object term) {
+    return 'Buka definisi $term';
+  }
+
+  @override
+  String get notAvailable => 'Tidak tersedia';
 
   @override
   String get pretest => 'Pre-test';

@@ -73,7 +73,9 @@ class RootDashboardNotifier extends StateNotifier<RootDashboardState> {
           ? null
           : RootResumeState(
               moduleId: active.moduleId,
-              stageLabel: active.currentStage ?? 'Continue learning',
+              // Keep this as a stable route/stage key. The Home presentation
+              // layer localizes it for the learner.
+              stageLabel: active.currentStage ?? 'overview',
               percent: active.progressPercent,
             ),
     );

@@ -157,7 +157,7 @@ void main() {
         ),
       ),
     );
-    expect(find.text('Completed — Tuntas'), findsOneWidget);
+    expect(find.text('Completed — Passed'), findsOneWidget);
     expect(find.textContaining('70/70'), findsOneWidget);
     await pumpAssessment(
       tester,
@@ -171,7 +171,7 @@ void main() {
         ),
       ),
     );
-    expect(find.text('Completed — Perlu Review'), findsOneWidget);
+    expect(find.text('Completed — Needs Review'), findsOneWidget);
   });
 
   testWidgets('final result remains responsive at supported phone widths', (

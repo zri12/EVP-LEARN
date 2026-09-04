@@ -219,7 +219,7 @@ void main() {
     expect(find.textContaining('80/100'), findsNWidgets(2));
     expect(find.textContaining('56/70'), findsOneWidget);
     expect(find.textContaining('24/30'), findsOneWidget);
-    expect(find.text('Completed — Tuntas'), findsOneWidget);
+    expect(find.text('Completed — Passed'), findsOneWidget);
   });
 
   testWidgets('final result does not fabricate incomplete attempt values', (

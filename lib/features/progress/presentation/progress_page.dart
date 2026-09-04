@@ -232,14 +232,15 @@ class ModuleProgressDetailPage extends ConsumerWidget {
     final id = int.tryParse(moduleId);
     final module = id == null ? null : _moduleFor(id);
     final l10n = AppLocalizations.of(context)!;
-    if (module == null || id == null)
+    if (module == null || id == null) {
       return _UnavailablePage(title: l10n.progressUnavailable);
+    }
     final snapshot = ref.watch(moduleProgressSnapshotProvider(id));
     return Scaffold(
       appBar: AppBar(title: Text(module.title)),
       body: snapshot.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => _UnavailablePage(title: l10n.progressUnavailable),
+        error: (_, _) => _UnavailablePage(title: l10n.progressUnavailable),
         data: (data) => _DetailBody(module: module, snapshot: data),
       ),
     );
@@ -406,7 +407,7 @@ class _HistoryCard extends StatelessWidget {
     return Semantics(
       button: true,
       label:
-          '${l10n.attemptLabel(attempt.attemptNumber)} ${_score(attempt.finalScore)}. $status',
+          '${l10n.attemptLabel(attempt.attemptNumber)} ${_score(l10n, attempt.finalScore)}. $status',
       child: InkWell(
         key: Key('history-attempt-${attempt.id}'),
         onTap: () =>
@@ -430,7 +431,7 @@ class _HistoryCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    _score(attempt.finalScore),
+                    _score(l10n, attempt.finalScore),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                 ],
@@ -458,7 +459,7 @@ class _HistoryCard extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.sm),
               Text(
-                '${l10n.pretestRawLabel}: ${_score(attempt.pretestRaw)} · ${l10n.practiceRawLabel}: ${attempt.practiceTotal.round()}/30 · ${l10n.posttestRawLabel}: ${_score(attempt.posttestRaw)} · ${l10n.learningGainLabel}: ${_gain(attempt.learningGain)}',
+                '${l10n.pretestRawLabel}: ${_score(l10n, attempt.pretestRaw)} · ${l10n.practiceRawLabel}: ${attempt.practiceTotal.round()}/30 · ${l10n.posttestRawLabel}: ${_score(l10n, attempt.posttestRaw)} · ${l10n.learningGainLabel}: ${_gain(l10n, attempt.learningGain)}',
                 style: const TextStyle(
                   fontSize: 12,
                   color: AppColors.secondaryText,
@@ -527,14 +528,15 @@ class AttemptDetailPage extends ConsumerWidget {
     final id = int.tryParse(moduleId);
     final module = id == null ? null : _moduleFor(id);
     final l10n = AppLocalizations.of(context)!;
-    if (module == null)
+    if (module == null) {
       return _UnavailablePage(title: l10n.progressUnavailable);
+    }
     final state = ref.watch(attemptDetailProvider(attemptId));
     return Scaffold(
       appBar: AppBar(title: Text(l10n.resultDetails)),
       body: state.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (_, __) => _UnavailablePage(title: l10n.progressUnavailable),
+        error: (_, _) => _UnavailablePage(title: l10n.progressUnavailable),
         data: (attempt) {
           if (attempt == null ||
               attempt.moduleId != id ||
@@ -545,8 +547,9 @@ class AttemptDetailPage extends ConsumerWidget {
               attempt.posttestWeighted == null ||
               attempt.finalScore == null ||
               attempt.learningGain == null ||
-              attempt.passed == null)
+              attempt.passed == null) {
             return _UnavailablePage(title: l10n.progressUnavailable);
+          }
           return _AttemptBody(attempt: attempt, module: module);
         },
       ),
@@ -587,7 +590,7 @@ class _AttemptBody extends StatelessWidget {
               ),
               const SizedBox(height: 4),
               Text(
-                _score(attempt.finalScore),
+                _score(l10n, attempt.finalScore),
                 style: const TextStyle(
                   fontSize: 34,
                   fontWeight: FontWeight.w800,
@@ -600,14 +603,17 @@ class _AttemptBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
-        _Metric(label: l10n.pretestRawLabel, value: _score(attempt.pretestRaw)),
+        _Metric(
+          label: l10n.pretestRawLabel,
+          value: _score(l10n, attempt.pretestRaw),
+        ),
         _Metric(
           label: l10n.practiceRawLabel,
           value: '${attempt.practiceTotal.round()}/30',
         ),
         _Metric(
           label: l10n.posttestRawLabel,
-          value: _score(attempt.posttestRaw),
+          value: _score(l10n, attempt.posttestRaw),
         ),
         _Metric(
           label: l10n.posttestWeightedLabel,
@@ -615,7 +621,7 @@ class _AttemptBody extends StatelessWidget {
         ),
         _Metric(
           label: l10n.learningGainLabel,
-          value: _gain(attempt.learningGain),
+          value: _gain(l10n, attempt.learningGain),
         ),
         const SizedBox(height: AppSpacing.md),
         Text(
@@ -657,9 +663,10 @@ class _UnavailablePage extends StatelessWidget {
 
 RootModule? _moduleFor(int id) =>
     rootModules.where((module) => module.id == id).firstOrNull;
-String _score(double? value) => value == null ? 'N/A' : '${value.round()}/100';
-String _gain(double? value) => value == null
-    ? 'N/A'
+String _score(AppLocalizations l10n, double? value) =>
+    value == null ? l10n.notAvailable : '${value.round()}/100';
+String _gain(AppLocalizations l10n, double? value) => value == null
+    ? l10n.notAvailable
     : (value > 0 ? '+${value.round()}' : value.round().toString());
 String _formatDate(DateTime date, Locale locale) =>
     DateFormat.yMMMd(locale.toString()).format(date);

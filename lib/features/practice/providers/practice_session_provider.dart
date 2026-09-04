@@ -124,12 +124,13 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
            activities: List.unmodifiable(activities),
          ),
        ) {
-    if (activities.length != 3)
+    if (activities.length != 3) {
       throw ArgumentError.value(
         activities.length,
         'activities',
         'exactly 3 activities are required',
       );
+    }
     _initializeCurrentActivity();
   }
 
@@ -194,8 +195,11 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
   Future<void> _persistDraft() async {
     final repository = _repository;
     final attemptId = _attemptId;
-    if (repository == null || attemptId == null || state.currentResult != null)
+    if (repository == null ||
+        attemptId == null ||
+        state.currentResult != null) {
       return;
+    }
     await repository.savePracticeDraft(
       attemptId: attemptId,
       activityIndex: state.currentActivityIndex,
@@ -207,8 +211,9 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
 
   void selectSource(String sourceId) {
     if (state.currentResult != null ||
-        !state.currentActivity.sourceItems.any((item) => item.id == sourceId))
+        !state.currentActivity.sourceItems.any((item) => item.id == sourceId)) {
       return;
+    }
     state = state.copyWith(selectedSourceId: sourceId);
   }
 
@@ -216,8 +221,9 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
     final activity = state.currentActivity;
     if (state.currentResult != null ||
         !activity.sourceItems.any((item) => item.id == sourceId) ||
-        !activity.targetItems.any((item) => item.id == targetId))
+        !activity.targetItems.any((item) => item.id == targetId)) {
       return;
+    }
     final pairings = Map<String, String>.from(state.pairings)
       ..removeWhere(
         (source, target) => source == sourceId || target == targetId,
@@ -232,8 +238,9 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
 
   void reorder(int oldIndex, int newIndex) {
     if (state.currentResult != null ||
-        state.currentActivity.kind != PracticeKind.sequence)
+        state.currentActivity.kind != PracticeKind.sequence) {
       return;
+    }
     if (oldIndex < 0 || oldIndex >= state.sequenceOrder.length) return;
     if (newIndex > oldIndex) newIndex--;
     final order = List<String>.from(state.sequenceOrder);

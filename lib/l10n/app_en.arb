@@ -7,7 +7,7 @@
   "navModules": "Modules",
   "navProgress": "Progress",
   "navProfile": "Profile",
-  "languageTitle": "Bahasa / Language",
+  "languageTitle": "Language",
   "languageIndonesian": "Bahasa Indonesia",
   "languageEnglish": "English",
   "apply": "Apply",
@@ -89,6 +89,20 @@
   "pretestGatewayDescription": "Prepare to check your understanding before studying the material.",
   "nextLearningActivity": "Your next learning activity will be available here.",
   "contentUnavailable": "Content unavailable. Return to modules."
+  ,"progressValue": "Progress {percent}%"
+  ,"playPronunciation": "Play pronunciation for {term}"
+  ,"replayPronunciation": "Replay pronunciation for {term}"
+  ,"pausePronunciation": "Pause pronunciation for {term}"
+  ,"playReadingAudio": "Play reading audio"
+  ,"replayReadingAudio": "Replay reading audio"
+  ,"pauseReadingAudio": "Pause reading audio"
+  ,"close": "Close"
+  ,"backToObjectives": "Back to Learning Objectives"
+  ,"dragSourceHint": "Drag to match"
+  ,"dropTargetHint": "Tap or drop an item here to match"
+  ,"reorderHint": "Drag to reorder"
+  ,"glossaryHint": "Open definition for {term}"
+  ,"notAvailable": "Not available"
   ,"pretest": "Pre-test",
   "posttest": "Post-test",
   "question": "Question",
@@ -113,8 +127,8 @@
   "finalScore": "Final result",
   "practiceScore": "Practice",
   "learningGain": "Learning gain",
-  "tuntas": "Completed — Tuntas",
-  "needsReview": "Completed — Perlu Review",
+  "tuntas": "Completed — Passed",
+  "needsReview": "Completed — Needs Review",
   "activity": "Activity",
   "ofLabel": "of",
   "matchSources": "Sources",

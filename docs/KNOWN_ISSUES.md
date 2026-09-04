@@ -44,9 +44,10 @@ Older web manifest omitted them.
 Flutter must include both.
 
 ## KI-008 — Attempt History UI
-Prototype stores history conceptually but full history is not prominently rendered.
+Status: resolved in Phase 9.
 
-Final APK should expose history from Progress.
+The final APK exposes completed evaluation history from Progress, including
+read-only attempt detail.
 
 ## KI-009 — Mobile Drag
 Browser reference has narrow-layout constraints.
@@ -72,3 +73,11 @@ Confirm before production release.
 Customer indicated possible academic material adjustment after supervision.
 
 Keep content separate from logic.
+
+## KI-014 — Phase 11 Physical QA
+Status: intentionally deferred.
+
+Before release, verify the full learning flow on an Android device/emulator,
+including native drag/reorder, local audio playback, airplane mode, system
+back, launcher icon rendering, release APK size, application ID, signing, and
+the factual researcher profile spelling.

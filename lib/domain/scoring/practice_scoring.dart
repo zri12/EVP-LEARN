@@ -26,8 +26,9 @@ class PracticeActivityScore {
   }
 
   static int _calculate(int correct, int total) {
-    if (total <= 0)
+    if (total <= 0) {
       throw ArgumentError.value(total, 'totalItems', 'must be positive');
+    }
     if (correct < 0 || correct > total) {
       throw ArgumentError.value(
         correct,
