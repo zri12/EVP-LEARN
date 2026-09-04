@@ -16,6 +16,7 @@ import '../../../domain/scoring/practice_scoring.dart';
 import '../../learning/providers/learning_providers.dart';
 import '../../learning/providers/current_attempt_provider.dart';
 import '../../modules/presentation/widgets/module_card.dart';
+import '../../root/providers/root_dashboard_provider.dart';
 import '../../../l10n/app_localizations.dart';
 import '../providers/assessment_session_provider.dart';
 
@@ -473,6 +474,7 @@ class _AssessmentResultView extends ConsumerWidget {
                   // incomplete attempt; it must not erase its draft.
                 }
               }
+              await ref.read(rootDashboardProvider.notifier).refresh();
             }
             if (context.mounted) {
               context.go(

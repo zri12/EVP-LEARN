@@ -474,4 +474,94 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get posttestResultTitle => 'Hasil Post-test';
+
+  @override
+  String get progressTitle => 'Progres Belajar';
+
+  @override
+  String get modulesCompletedLabel => 'Modul Selesai';
+
+  @override
+  String get currentAttemptTitle => 'Percobaan Aktif';
+
+  @override
+  String get evaluationHistory => 'Riwayat Evaluasi';
+
+  @override
+  String get noEvaluationResults => 'Belum ada hasil evaluasi';
+
+  @override
+  String get resultDetails => 'Detail Hasil';
+
+  @override
+  String attemptLabel(int number) {
+    return 'Percobaan $number';
+  }
+
+  @override
+  String get completedOn => 'Selesai pada';
+
+  @override
+  String get startedOn => 'Dimulai pada';
+
+  @override
+  String get continueLearningAction => 'Lanjutkan Belajar';
+
+  @override
+  String get retryAction => 'Coba Lagi';
+
+  @override
+  String get retryConfirmationTitle => 'Mulai percobaan baru?';
+
+  @override
+  String get retryConfirmationMessage =>
+      'Hasil sebelumnya tetap tersimpan. Percobaan baru akan dimulai dari awal.';
+
+  @override
+  String get cancel => 'Batal';
+
+  @override
+  String get confirm => 'Konfirmasi';
+
+  @override
+  String get activeStage => 'Tahap saat ini';
+
+  @override
+  String get latestBadge => 'Terbaru';
+
+  @override
+  String get bestBadge => 'Terbaik';
+
+  @override
+  String get passedStatus => 'Tuntas';
+
+  @override
+  String get needsReviewStatus => 'Perlu Review';
+
+  @override
+  String get completedAttemptsLabel => 'Percobaan selesai';
+
+  @override
+  String get progressUnavailable => 'Detail progres tidak tersedia.';
+
+  @override
+  String get backToProgress => 'Kembali ke Progres';
+
+  @override
+  String get pretestRawLabel => 'Pre-test';
+
+  @override
+  String get practiceRawLabel => 'Latihan';
+
+  @override
+  String get posttestRawLabel => 'Post-test mentah';
+
+  @override
+  String get posttestWeightedLabel => 'Post-test berbobot';
+
+  @override
+  String get finalScoreLabel => 'Nilai akhir';
+
+  @override
+  String get learningGainLabel => 'Peningkatan belajar';
 }

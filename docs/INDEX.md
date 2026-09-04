@@ -35,6 +35,7 @@ This directory is the implementation baseline for the Flutter APK.
 | `ASSESSMENT_ENGINE_IMPLEMENTATION.md` | Phase 6 assessment session, Pre/Post UI, and scoring foundation |
 | `PRACTICE_ENGINE_IMPLEMENTATION.md` | Phase 7 matching, sequence, in-memory flow, and persistence boundary |
 | `PERSISTENCE_ATTEMPT_IMPLEMENTATION.md` | Phase 8 Drift persistence, attempt lifecycle, resume, retry, and finalization |
+| `PROGRESS_HISTORY_IMPLEMENTATION.md` | Phase 9 progress root, completed evaluation history, and read-only attempt detail |
 | `SCORING_RULES.md` | Scoring, gain, retry, baseline, attempts |
 
 ## Delivery workflow

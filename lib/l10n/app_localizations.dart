@@ -991,6 +991,180 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Post-test result'**
   String get posttestResultTitle;
+
+  /// No description provided for @progressTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Progress'**
+  String get progressTitle;
+
+  /// No description provided for @modulesCompletedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Modules Completed'**
+  String get modulesCompletedLabel;
+
+  /// No description provided for @currentAttemptTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Current attempt'**
+  String get currentAttemptTitle;
+
+  /// No description provided for @evaluationHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Evaluation History'**
+  String get evaluationHistory;
+
+  /// No description provided for @noEvaluationResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No evaluation results yet'**
+  String get noEvaluationResults;
+
+  /// No description provided for @resultDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Result Details'**
+  String get resultDetails;
+
+  /// No description provided for @attemptLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Attempt {number}'**
+  String attemptLabel(int number);
+
+  /// No description provided for @completedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed on'**
+  String get completedOn;
+
+  /// No description provided for @startedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Started on'**
+  String get startedOn;
+
+  /// No description provided for @continueLearningAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue Learning'**
+  String get continueLearningAction;
+
+  /// No description provided for @retryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Try Again'**
+  String get retryAction;
+
+  /// No description provided for @retryConfirmationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Start a new attempt?'**
+  String get retryConfirmationTitle;
+
+  /// No description provided for @retryConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your previous results will be kept. A new attempt will start from the beginning.'**
+  String get retryConfirmationMessage;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm'**
+  String get confirm;
+
+  /// No description provided for @activeStage.
+  ///
+  /// In en, this message translates to:
+  /// **'Current stage'**
+  String get activeStage;
+
+  /// No description provided for @latestBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest'**
+  String get latestBadge;
+
+  /// No description provided for @bestBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Best'**
+  String get bestBadge;
+
+  /// No description provided for @passedStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Passed'**
+  String get passedStatus;
+
+  /// No description provided for @needsReviewStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs Review'**
+  String get needsReviewStatus;
+
+  /// No description provided for @completedAttemptsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed attempts'**
+  String get completedAttemptsLabel;
+
+  /// No description provided for @progressUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress details are unavailable.'**
+  String get progressUnavailable;
+
+  /// No description provided for @backToProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Progress'**
+  String get backToProgress;
+
+  /// No description provided for @pretestRawLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-test'**
+  String get pretestRawLabel;
+
+  /// No description provided for @practiceRawLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Practice'**
+  String get practiceRawLabel;
+
+  /// No description provided for @posttestRawLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Post-test raw'**
+  String get posttestRawLabel;
+
+  /// No description provided for @posttestWeightedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Post-test weighted'**
+  String get posttestWeightedLabel;
+
+  /// No description provided for @finalScoreLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Final score'**
+  String get finalScoreLabel;
+
+  /// No description provided for @learningGainLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Learning gain'**
+  String get learningGainLabel;
 }
 
 class _AppLocalizationsDelegate

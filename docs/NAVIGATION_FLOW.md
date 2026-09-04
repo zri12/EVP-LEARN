@@ -188,6 +188,18 @@ Retry:
 Recommended from Progress:
 - module → History/detail.
 
+Flutter progress routes are:
+
+```text
+/progress/:moduleId
+/progress/:moduleId/attempt/:attemptId
+```
+
+The module detail lists completed attempts newest-first; an active attempt is
+shown separately and resumes through its persisted learning route. Attempt
+detail is read-only and unavailable when the ID is missing, belongs to another
+module, or is not completed.
+
 List completed attempts newest first.
 
 No edit/delete in normal student UX.

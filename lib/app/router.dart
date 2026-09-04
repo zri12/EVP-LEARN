@@ -20,6 +20,9 @@ abstract final class AppRoutes {
   static const profile = '/profile';
   static const guide = '/guide';
   static const outcomes = '/outcomes';
+  static String progressModule(int moduleId) => '/progress/$moduleId';
+  static String attemptDetail(int moduleId, String attemptId) =>
+      '/progress/$moduleId/attempt/$attemptId';
 
   static String moduleOverview(int moduleId) => '/module/$moduleId';
   static String objectives(int moduleId) => '/module/$moduleId/objectives';
@@ -144,6 +147,23 @@ GoRouter createAppRouter() => GoRouter(
             GoRoute(
               path: AppRoutes.progress,
               builder: (context, state) => const ProgressPage(),
+              routes: [
+                GoRoute(
+                  path: ':moduleId',
+                  builder: (context, state) => ModuleProgressDetailPage(
+                    moduleId: state.pathParameters['moduleId']!,
+                  ),
+                  routes: [
+                    GoRoute(
+                      path: 'attempt/:attemptId',
+                      builder: (context, state) => AttemptDetailPage(
+                        moduleId: state.pathParameters['moduleId']!,
+                        attemptId: state.pathParameters['attemptId']!,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

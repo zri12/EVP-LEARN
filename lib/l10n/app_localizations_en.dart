@@ -472,4 +472,94 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get posttestResultTitle => 'Post-test result';
+
+  @override
+  String get progressTitle => 'Learning Progress';
+
+  @override
+  String get modulesCompletedLabel => 'Modules Completed';
+
+  @override
+  String get currentAttemptTitle => 'Current attempt';
+
+  @override
+  String get evaluationHistory => 'Evaluation History';
+
+  @override
+  String get noEvaluationResults => 'No evaluation results yet';
+
+  @override
+  String get resultDetails => 'Result Details';
+
+  @override
+  String attemptLabel(int number) {
+    return 'Attempt $number';
+  }
+
+  @override
+  String get completedOn => 'Completed on';
+
+  @override
+  String get startedOn => 'Started on';
+
+  @override
+  String get continueLearningAction => 'Continue Learning';
+
+  @override
+  String get retryAction => 'Try Again';
+
+  @override
+  String get retryConfirmationTitle => 'Start a new attempt?';
+
+  @override
+  String get retryConfirmationMessage =>
+      'Your previous results will be kept. A new attempt will start from the beginning.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get confirm => 'Confirm';
+
+  @override
+  String get activeStage => 'Current stage';
+
+  @override
+  String get latestBadge => 'Latest';
+
+  @override
+  String get bestBadge => 'Best';
+
+  @override
+  String get passedStatus => 'Passed';
+
+  @override
+  String get needsReviewStatus => 'Needs Review';
+
+  @override
+  String get completedAttemptsLabel => 'Completed attempts';
+
+  @override
+  String get progressUnavailable => 'Progress details are unavailable.';
+
+  @override
+  String get backToProgress => 'Back to Progress';
+
+  @override
+  String get pretestRawLabel => 'Pre-test';
+
+  @override
+  String get practiceRawLabel => 'Practice';
+
+  @override
+  String get posttestRawLabel => 'Post-test raw';
+
+  @override
+  String get posttestWeightedLabel => 'Post-test weighted';
+
+  @override
+  String get finalScoreLabel => 'Final score';
+
+  @override
+  String get learningGainLabel => 'Learning gain';
 }
