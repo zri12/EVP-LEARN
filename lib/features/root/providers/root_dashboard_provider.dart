@@ -77,6 +77,7 @@ class RootDashboardNotifier extends StateNotifier<RootDashboardState> {
               // layer localizes it for the learner.
               stageLabel: active.currentStage ?? 'overview',
               percent: active.progressPercent,
+              lastRouteKey: active.lastRouteKey,
             ),
     );
   }

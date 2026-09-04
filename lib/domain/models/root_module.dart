@@ -41,11 +41,15 @@ class RootResumeState {
     required this.moduleId,
     required this.stageLabel,
     required this.percent,
+    this.lastRouteKey,
   });
 
   final int moduleId;
   final String stageLabel;
   final int percent;
+
+  /// Last persisted learning route, when available, for exact resume.
+  final String? lastRouteKey;
 }
 
 class RootDashboardState {

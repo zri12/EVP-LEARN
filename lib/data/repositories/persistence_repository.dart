@@ -292,8 +292,25 @@ class AttemptRepository {
     final attempt = await getAttempt(attemptId);
     if (attempt == null) throw StateError('Attempt not found');
     if (attempt.isCompleted) return;
+    // Route widgets from the previous page can finish an asynchronous
+    // location write after a forward navigation has already persisted the
+    // newer stage. Keep the furthest valid learning stage so that this race
+    // cannot move Continue Learning backwards (for example, Pre-test to
+    // Objectives during a process restart).
+    if (_stageRank(stage) < _stageRank(attempt.currentStage)) {
+      return;
+    }
     final now = DateTime.now();
     await db.transaction(() async {
+      // Re-read inside the transaction so two asynchronous page callbacks
+      // cannot both pass the pre-check and let an older stage overwrite the
+      // newer one.
+      final current = await getAttempt(attemptId);
+      if (current == null ||
+          current.isCompleted ||
+          _stageRank(stage) < _stageRank(current.currentStage)) {
+        return;
+      }
       await (db.update(
         db.learningAttempts,
       )..where((a) => a.id.equals(attemptId))).write(
@@ -306,10 +323,10 @@ class AttemptRepository {
       );
       final existing = await (db.select(
         db.moduleProgress,
-      )..where((p) => p.moduleId.equals(attempt.moduleId))).getSingleOrNull();
+      )..where((p) => p.moduleId.equals(current.moduleId))).getSingleOrNull();
       final percent = progressPercent ?? _progressForStage(stage);
       await _upsertProgress(
-        attempt.moduleId,
+        current.moduleId,
         currentAttemptId: attemptId,
         currentStage: stage,
         currentSubIndex: subIndex,
@@ -860,6 +877,21 @@ class AttemptRepository {
     PersistedLearningStage.practice => 65,
     PersistedLearningStage.posttest => 80,
     PersistedLearningStage.result => 100,
+    _ => 0,
+  };
+
+  /// Semantic ordering is distinct from displayed progress: Reading and
+  /// Practice both display 65%, but a stale Reading callback must not regress
+  /// an attempt that has already entered Practice.
+  static int _stageRank(String stage) => switch (stage) {
+    PersistedLearningStage.objectives => 1,
+    PersistedLearningStage.pretest || PersistedLearningStage.pretestResult => 2,
+    PersistedLearningStage.theory => 3,
+    PersistedLearningStage.vocabulary => 4,
+    PersistedLearningStage.reading => 5,
+    PersistedLearningStage.practice => 6,
+    PersistedLearningStage.posttest => 7,
+    PersistedLearningStage.result => 8,
     _ => 0,
   };
 

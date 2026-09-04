@@ -52,7 +52,8 @@ read-only attempt detail.
 ## KI-009 — Mobile Drag
 Browser reference has narrow-layout constraints.
 
-Flutter must use native touch DnD and be tested physically.
+Flutter uses native touch DnD; human long-press drag, drop, re-pair, and
+scrolling were accepted on the Galaxy A15 during Phase 11D.
 
 ## KI-010 — Old Reference Markdown
 Reference contains stale docs/instructions.
@@ -74,10 +75,12 @@ Customer indicated possible academic material adjustment after supervision.
 
 Keep content separate from logic.
 
-## KI-014 — Phase 11 Physical QA
-Status: intentionally deferred.
+## KI-014 — Phase 11D Physical QA
+Status: resolved for the submitted human acceptance run (2026-09-04).
 
-Before release, verify the full learning flow on an Android device/emulator,
-including native drag/reorder, local audio playback, airplane mode, system
-back, launcher icon rendering, release APK size, application ID, signing, and
-the factual researcher profile spelling.
+The final debug APK was tested offline on Samsung Galaxy A15 (SM-A155F,
+Android 16/API 36, `RR8X204QF0J`). Human acceptance reported PASS for the
+launcher, splash, all 46 audio clips and replay/lifecycle checks, matching and
+sequence gestures, Activity 3 → Summary → Post-test, full Module 1–3 flows,
+resume, retry/history, Progress, Android Back, and offline operation. No
+unresolved blocker or major was reported. See `docs/ANDROID_DEVICE_QA.md`.

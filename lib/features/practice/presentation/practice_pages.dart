@@ -10,6 +10,7 @@ import '../../../app/theme/app_radius.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/widgets/app_page.dart';
 import '../../../data/providers/database_providers.dart';
+import '../../../data/repositories/persistence_repository.dart';
 import '../../../domain/models/module_content.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../learning/providers/current_attempt_provider.dart';
@@ -68,6 +69,13 @@ class _PracticeBody extends ConsumerWidget {
             ref.read(attemptRepositoryProvider),
             active.id,
           );
+          await ref
+              .read(attemptRepositoryProvider)
+              .updateStage(
+                active.id,
+                PersistedLearningStage.practice,
+                routeKey: AppRoutes.practice(module.metadata.number),
+              );
         }
       }());
     }
@@ -298,7 +306,7 @@ class _MatchingActivity extends StatelessWidget {
         }),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          '${l10n.paired}: ${state.pairings.length}/${activity.sourceItems.length}',
+          '${l10n.paired}: ${state.completedPairCount}/${activity.sourceItems.length}',
           textAlign: TextAlign.center,
         ),
       ],
@@ -330,7 +338,7 @@ class _PracticeCompletionHint extends StatelessWidget {
             state.isReadyForCheck
                 ? l10n.practiceReadyToCheck
                 : l10n.practiceCompletionStatus(
-                    state.currentItemCount,
+                    state.completedPairCount,
                     state.currentTotalItems,
                   ),
           ),

@@ -87,6 +87,16 @@ GoRouter createAppRouter() => GoRouter(
               VocabularyPage(moduleId: state.pathParameters['moduleId']!),
         ),
         GoRoute(
+          path: 'reading',
+          builder: (context, state) {
+            final moduleId = state.pathParameters['moduleId']!;
+            return ReadingPage(
+              moduleId: moduleId,
+              readingId: 'm${moduleId}_reading_01',
+            );
+          },
+        ),
+        GoRoute(
           path: 'reading/:readingId',
           builder: (context, state) => ReadingPage(
             moduleId: state.pathParameters['moduleId']!,

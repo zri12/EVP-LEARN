@@ -85,7 +85,7 @@ class LearningAudioController extends StateNotifier<LearningAudioState> {
 
   Future<void> stop() async {
     await _player.stop();
-    state = const LearningAudioState();
+    if (mounted) state = const LearningAudioState();
   }
 
   @override

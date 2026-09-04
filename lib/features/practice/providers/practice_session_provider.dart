@@ -57,18 +57,45 @@ class PracticeSessionState {
   final bool summaryVisible;
   PracticeDefinition get currentActivity => activities[currentActivityIndex];
   PracticeActivityResult? get currentResult => results[currentActivity.id];
+  int get completedPairCount {
+    if (currentActivity.kind != PracticeKind.match) return sequenceOrder.length;
+    final sourceIds = currentActivity.sourceItems
+        .map((item) => item.id)
+        .toSet();
+    final targetIds = currentActivity.targetItems
+        .map((item) => item.id)
+        .toSet();
+    final usedTargets = <String>{};
+    return pairings.entries.where((entry) {
+      if (!sourceIds.contains(entry.key) ||
+          !targetIds.contains(entry.value) ||
+          !usedTargets.add(entry.value)) {
+        return false;
+      }
+      return true;
+    }).length;
+  }
+
   int get currentItemCount => currentActivity.kind == PracticeKind.match
-      ? pairings.length
+      ? completedPairCount
       : sequenceOrder.length;
   int get currentTotalItems => currentActivity.kind == PracticeKind.match
       ? currentActivity.sourceItems.length
       : currentActivity.sequenceItems.length;
   bool get isReadyForCheck {
     if (currentActivity.kind == PracticeKind.match) {
-      return pairings.length == currentActivity.sourceItems.length &&
-          currentActivity.sourceItems.every(
-            (item) => pairings.containsKey(item.id),
-          );
+      final expectedSources = currentActivity.sourceItems
+          .map((item) => item.id)
+          .toSet();
+      final expectedTargets = currentActivity.targetItems
+          .map((item) => item.id)
+          .toSet();
+      return pairings.length == expectedSources.length &&
+          pairings.keys.toSet().containsAll(expectedSources) &&
+          pairings.keys.toSet().length == expectedSources.length &&
+          pairings.values.toSet().length == expectedTargets.length &&
+          pairings.values.toSet().containsAll(expectedTargets) &&
+          completedPairCount == expectedSources.length;
     }
     final expected = currentActivity.expectedOrder.toSet();
     return sequenceOrder.length == currentActivity.sequenceItems.length &&
@@ -186,8 +213,10 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
       state.currentActivityIndex,
     );
     if (draft == null || state.currentResult != null) return;
+    final activity = state.currentActivity;
+    final pairings = _normalizePairings(activity, draft.pairings);
     state = state.copyWith(
-      pairings: Map.unmodifiable(draft.pairings),
+      pairings: Map.unmodifiable(pairings),
       sequenceOrder: List.unmodifiable(draft.sequenceOrder),
     );
   }
@@ -348,6 +377,26 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
   bool _sameOrder(List<String> first, List<String> second) =>
       first.length == second.length &&
       first.indexed.every((entry) => entry.$2 == second[entry.$1]);
+
+  Map<String, String> _normalizePairings(
+    PracticeDefinition activity,
+    Map<String, String> candidate,
+  ) {
+    final sourceIds = activity.sourceItems.map((item) => item.id).toSet();
+    final targetIds = activity.targetItems.map((item) => item.id).toSet();
+    final normalized = <String, String>{};
+    final usedTargets = <String>{};
+    for (final entry in candidate.entries) {
+      if (!sourceIds.contains(entry.key) ||
+          !targetIds.contains(entry.value) ||
+          normalized.containsKey(entry.key) ||
+          !usedTargets.add(entry.value)) {
+        continue;
+      }
+      normalized[entry.key] = entry.value;
+    }
+    return normalized;
+  }
 }
 
 final practiceSessionProvider =

@@ -10,6 +10,7 @@ import '../../../app/theme/app_radius.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/widgets/app_page.dart';
 import '../../../data/providers/database_providers.dart';
+import '../../../data/repositories/persistence_repository.dart';
 import '../../../domain/models/assessment_result.dart';
 import '../../../domain/models/module_content.dart';
 import '../../../domain/scoring/practice_scoring.dart';
@@ -83,6 +84,12 @@ class _AssessmentBody extends ConsumerWidget {
     final state = ref.watch(assessmentSessionProvider(key));
     final controller = ref.read(assessmentSessionProvider(key).notifier);
     if (!controller.isPersistenceAttached) {
+      String? assessmentRoute;
+      try {
+        assessmentRoute = GoRouterState.of(context).uri.path;
+      } catch (_) {
+        assessmentRoute = null;
+      }
       unawaited(() async {
         final active = await ref
             .read(attemptRepositoryProvider)
@@ -92,6 +99,19 @@ class _AssessmentBody extends ConsumerWidget {
             ref.read(attemptRepositoryProvider),
             active.id,
           );
+          // Keep Continue Learning pointed at the in-progress assessment,
+          // including its draft question position, after a process restart.
+          // Isolated widget tests do not provide a GoRouter ancestor, so the
+          // route update is best-effort in that environment.
+          await ref
+              .read(attemptRepositoryProvider)
+              .updateStage(
+                active.id,
+                type == AssessmentType.pretest
+                    ? PersistedLearningStage.pretest
+                    : PersistedLearningStage.posttest,
+                routeKey: assessmentRoute,
+              );
           await controller.restoreDraft();
         }
       }());

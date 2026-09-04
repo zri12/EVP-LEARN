@@ -115,11 +115,11 @@ class ModuleOverviewPage extends ConsumerWidget {
   );
 }
 
-class LearningObjectivesPage extends StatelessWidget {
+class LearningObjectivesPage extends ConsumerWidget {
   const LearningObjectivesPage({required this.moduleId, super.key});
   final String moduleId;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return _ModulePage(
       moduleId: moduleId,
       builder: (context, module) => LearningPageScaffold(
@@ -144,8 +144,22 @@ class LearningObjectivesPage extends StatelessWidget {
           const SizedBox(height: AppSpacing.xl),
           _PrimaryButton(
             label: AppLocalizations.of(context)!.continueToPretest,
-            onPressed: () =>
-                context.push(AppRoutes.pretest(module.metadata.number)),
+            onPressed: () async {
+              final repository = ref.read(attemptRepositoryProvider);
+              final active = await repository.getCurrentAttempt(
+                module.metadata.number,
+              );
+              if (active != null) {
+                await repository.updateStage(
+                  active.id,
+                  PersistedLearningStage.pretest,
+                  routeKey: AppRoutes.pretest(module.metadata.number),
+                );
+              }
+              if (context.mounted) {
+                context.push(AppRoutes.pretest(module.metadata.number));
+              }
+            },
           ),
         ],
       ),
@@ -241,7 +255,7 @@ class VocabularyPage extends StatelessWidget {
   );
 }
 
-class ReadingPage extends StatelessWidget {
+class ReadingPage extends ConsumerStatefulWidget {
   const ReadingPage({
     required this.moduleId,
     required this.readingId,
@@ -251,11 +265,38 @@ class ReadingPage extends StatelessWidget {
   final String readingId;
 
   @override
+  ConsumerState<ReadingPage> createState() => _ReadingPageState();
+}
+
+class _ReadingPageState extends ConsumerState<ReadingPage> {
+  late final LearningAudioController _audioController;
+
+  @override
+  void initState() {
+    super.initState();
+    _audioController = ref.read(learningAudioProvider.notifier);
+  }
+
+  @override
+  void didUpdateWidget(covariant ReadingPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.readingId != widget.readingId) {
+      unawaited(_audioController.stop());
+    }
+  }
+
+  @override
+  void dispose() {
+    unawaited(_audioController.stop());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => _ModulePage(
-    moduleId: moduleId,
+    moduleId: widget.moduleId,
     builder: (context, module) {
       final reading = module.readings.firstWhere(
-        (item) => item.id == readingId,
+        (item) => item.id == widget.readingId,
         orElse: () => module.readings.first,
       );
       final index = module.readings.indexOf(reading);
@@ -264,7 +305,16 @@ class ReadingPage extends StatelessWidget {
         title: AppLocalizations.of(context)!.reading,
         children: [
           if (module.readings.length > 1)
-            _ReadingSelector(module: module, selected: reading),
+            _ReadingSelector(
+              module: module,
+              selected: reading,
+              onSelected: (readingId) {
+                unawaited(_audioController.stop());
+                context.pushReplacement(
+                  AppRoutes.reading(module.metadata.number, readingId),
+                );
+              },
+            ),
           Text(reading.title, style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: AppSpacing.xs),
           Text(reading.subtitle, style: Theme.of(context).textTheme.bodySmall),
@@ -293,18 +343,31 @@ class ReadingPage extends StatelessWidget {
                 ? AppLocalizations.of(context)!.nextReading
                 : AppLocalizations.of(context)!.interactivePractice,
             onPressed: () => index + 1 < module.readings.length
-                ? context.pushReplacement(
-                    AppRoutes.reading(
-                      module.metadata.number,
-                      module.readings[index + 1].id,
-                    ),
+                ? _leaveReadingToNext(
+                    context,
+                    module.metadata.number,
+                    module.readings[index + 1].id,
                   )
-                : context.push(AppRoutes.practice(module.metadata.number)),
+                : _leaveReadingToPractice(context, module.metadata.number),
           ),
         ],
       );
     },
   );
+
+  void _leaveReadingToPractice(BuildContext context, int moduleId) {
+    unawaited(_audioController.stop());
+    context.push(AppRoutes.practice(moduleId));
+  }
+
+  void _leaveReadingToNext(
+    BuildContext context,
+    int moduleId,
+    String readingId,
+  ) {
+    unawaited(_audioController.stop());
+    context.pushReplacement(AppRoutes.reading(moduleId, readingId));
+  }
 }
 
 enum LearningGatewayStage { pretest, practice, posttest, result }
@@ -1315,9 +1378,14 @@ class _ReadingAudioCard extends StatelessWidget {
 }
 
 class _ReadingSelector extends StatelessWidget {
-  const _ReadingSelector({required this.module, required this.selected});
+  const _ReadingSelector({
+    required this.module,
+    required this.selected,
+    required this.onSelected,
+  });
   final LearningModuleContent module;
   final ReadingContent selected;
+  final ValueChanged<String> onSelected;
   @override
   Widget build(BuildContext context) => Wrap(
     spacing: 8,
@@ -1328,9 +1396,7 @@ class _ReadingSelector extends StatelessWidget {
               '${AppLocalizations.of(context)!.reading} ${entry.$1 + 1}',
             ),
             selected: entry.$2.id == selected.id,
-            onSelected: (_) => context.pushReplacement(
-              AppRoutes.reading(module.metadata.number, entry.$2.id),
-            ),
+            onSelected: (_) => onSelected(entry.$2.id),
           ),
         )
         .toList(),

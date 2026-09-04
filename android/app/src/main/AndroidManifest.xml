@@ -2,7 +2,7 @@
     <application
         android:label="EVP LEARN"
         android:name="${applicationName}"
-            android:icon="@drawable/ic_evp_launcher">
+            android:icon="@mipmap/ic_evp_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"

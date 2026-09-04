@@ -48,6 +48,7 @@ This directory is the implementation baseline for the Flutter APK.
 | `IMPLEMENTATION_ROADMAP.md` | Recommended development phases |
 | `CODEX_WORKFLOW.md` | Codex-in-VS-Code task workflow |
 | `QA_TEST_PLAN.md` | Automated and device test matrix |
+| `ANDROID_DEVICE_QA.md` | Phase 11B/11C/11D physical Android and offline QA evidence |
 | `DEFINITION_OF_DONE.md` | Completion gates |
 | `RELEASE.md` | APK build/sign/release procedure |
 | `KNOWN_ISSUES.md` | Items intentionally pending confirmation |

@@ -99,18 +99,6 @@ class _SplashPageState extends State<SplashPage>
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   Text(
-                    'EVP\nLEARN',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 52,
-                      height: .9,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -2,
-                    ),
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  Text(
                     l10n.splashRetail,
                     style: const TextStyle(
                       color: Color(0xFFDBEAFE),

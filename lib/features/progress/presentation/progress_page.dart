@@ -678,7 +678,10 @@ String _resumeRoute(int moduleId, LearningAttemptRecord attempt) {
     PersistedLearningStage.pretest => AppRoutes.pretest(moduleId),
     PersistedLearningStage.theory => AppRoutes.theory(moduleId),
     PersistedLearningStage.vocabulary => AppRoutes.vocabulary(moduleId),
-    PersistedLearningStage.reading => AppRoutes.reading(moduleId),
+    PersistedLearningStage.reading => AppRoutes.reading(
+      moduleId,
+      'm${moduleId}_reading_01',
+    ),
     PersistedLearningStage.practice => AppRoutes.practice(moduleId),
     PersistedLearningStage.posttest => AppRoutes.posttest(moduleId),
     _ => AppRoutes.moduleOverview(moduleId),

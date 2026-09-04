@@ -108,6 +108,59 @@ void main() {
   );
 
   test(
+    'matching completion count is bounded and readiness requires one-to-one pairs',
+    () async {
+      final content = await module('module_2');
+      final activity = content.practices.first;
+      final sources = activity.sourceItems;
+      final targets = activity.targetItems;
+
+      PracticeSessionState stateWith(Map<String, String> pairings) =>
+          PracticeSessionState(
+            moduleId: content.metadata.id,
+            activities: content.practices,
+            pairings: pairings,
+          );
+
+      expect(stateWith(const {}).completedPairCount, 0);
+      expect(stateWith({sources[0].id: targets[0].id}).completedPairCount, 1);
+      expect(
+        stateWith({
+          sources[0].id: targets[0].id,
+          sources[1].id: targets[1].id,
+        }).completedPairCount,
+        2,
+      );
+      final complete = stateWith({
+        sources[0].id: targets[0].id,
+        sources[1].id: targets[1].id,
+        sources[2].id: targets[2].id,
+      });
+      expect(complete.completedPairCount, 3);
+      expect(complete.isReadyForCheck, isTrue);
+      expect(
+        stateWith({
+          sources[0].id: targets[0].id,
+          sources[1].id: targets[0].id,
+          sources[2].id: targets[1].id,
+          'stale-source': 'stale-target',
+          'another-stale-source': targets[2].id,
+          'third-stale-source': targets[1].id,
+        }).completedPairCount,
+        lessThanOrEqualTo(3),
+      );
+      expect(
+        stateWith({
+          sources[0].id: targets[0].id,
+          sources[1].id: targets[0].id,
+          sources[2].id: targets[1].id,
+        }).isReadyForCheck,
+        isFalse,
+      );
+    },
+  );
+
+  test(
     'sequence uses expectedOrder IDs and native reorder reaches full score',
     () async {
       final content = await module('module_1');

@@ -47,6 +47,7 @@ class HomePage extends ConsumerWidget {
               _resumeRoute(
                 dashboard.resume!.moduleId,
                 dashboard.resume!.stageLabel,
+                dashboard.resume!.lastRouteKey,
               ),
             ),
           ),
@@ -441,14 +442,17 @@ class _ContinueLearningCard extends StatelessWidget {
   }
 }
 
-String _resumeRoute(int moduleId, String stage) {
+String _resumeRoute(int moduleId, String stage, String? lastRouteKey) {
+  if (lastRouteKey != null && lastRouteKey.startsWith('/module/$moduleId/')) {
+    return lastRouteKey;
+  }
   return switch (stage) {
     'objectives' => AppRoutes.objectives(moduleId),
     'pretest' => AppRoutes.pretest(moduleId),
     'pretest_result' => AppRoutes.pretestResult(moduleId),
     'theory' => AppRoutes.theory(moduleId),
     'vocabulary' => AppRoutes.vocabulary(moduleId),
-    'reading' => AppRoutes.reading(moduleId),
+    'reading' => AppRoutes.reading(moduleId, 'm${moduleId}_reading_01'),
     'practice' => AppRoutes.practice(moduleId),
     'posttest' => AppRoutes.posttest(moduleId),
     'result' => AppRoutes.finalResult(moduleId),
