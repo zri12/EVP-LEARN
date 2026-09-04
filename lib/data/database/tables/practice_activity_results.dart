@@ -9,6 +9,7 @@ class PracticeActivityResults extends Table {
   IntColumn get totalItems => integer()();
   IntColumn get score => integer()();
   BoolColumn get completed => boolean()();
+  TextColumn get draftJson => text().withDefault(const Constant('{}'))();
   DateTimeColumn get updatedAt => dateTime()();
 
   @override

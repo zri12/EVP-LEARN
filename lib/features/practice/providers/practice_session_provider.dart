@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../domain/models/module_content.dart';
 import '../../../domain/scoring/practice_scoring.dart';
+import '../../../data/repositories/persistence_repository.dart';
 
 class PracticeSessionKey {
   const PracticeSessionKey({required this.moduleId, required this.activities});
@@ -130,6 +133,78 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
     _initializeCurrentActivity();
   }
 
+  AttemptRepository? _repository;
+  String? _attemptId;
+  bool get isPersistenceAttached => _repository != null && _attemptId != null;
+
+  void attachPersistence(AttemptRepository repository, String attemptId) {
+    _repository = repository;
+    _attemptId = attemptId;
+    unawaited(restoreSession());
+  }
+
+  Future<void> restoreSession() async {
+    final repository = _repository;
+    final attemptId = _attemptId;
+    if (repository == null || attemptId == null) return;
+    final rows = await repository.getPracticeResults(attemptId);
+    if (!mounted) return;
+    final restored = <String, PracticeActivityResult>{};
+    for (final row in rows.where((row) => row.completed)) {
+      if (row.activityIndex < 0 ||
+          row.activityIndex >= state.activities.length) {
+        continue;
+      }
+      restored[state.activities[row.activityIndex].id] = PracticeActivityResult(
+        activityId: state.activities[row.activityIndex].id,
+        correctItems: row.correctItems,
+        totalItems: row.totalItems,
+        score: row.score,
+      );
+    }
+    final nextIndex = state.activities.indexed
+        .firstWhere(
+          (entry) => !restored.containsKey(entry.$2.id),
+          orElse: () => (state.activities.length - 1, state.activities.last),
+        )
+        .$1;
+    state = state.copyWith(
+      currentActivityIndex: nextIndex,
+      results: Map.unmodifiable(restored),
+    );
+    _initializeCurrentActivity();
+    await restoreCurrentDraft();
+  }
+
+  Future<void> restoreCurrentDraft() async {
+    final repository = _repository;
+    final attemptId = _attemptId;
+    if (repository == null || attemptId == null) return;
+    final draft = await repository.getPracticeDraft(
+      attemptId,
+      state.currentActivityIndex,
+    );
+    if (draft == null || state.currentResult != null) return;
+    state = state.copyWith(
+      pairings: Map.unmodifiable(draft.pairings),
+      sequenceOrder: List.unmodifiable(draft.sequenceOrder),
+    );
+  }
+
+  Future<void> _persistDraft() async {
+    final repository = _repository;
+    final attemptId = _attemptId;
+    if (repository == null || attemptId == null || state.currentResult != null)
+      return;
+    await repository.savePracticeDraft(
+      attemptId: attemptId,
+      activityIndex: state.currentActivityIndex,
+      activityType: state.currentActivity.kind.name,
+      pairings: state.pairings,
+      sequenceOrder: state.sequenceOrder,
+    );
+  }
+
   void selectSource(String sourceId) {
     if (state.currentResult != null ||
         !state.currentActivity.sourceItems.any((item) => item.id == sourceId))
@@ -152,6 +227,7 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
       pairings: Map.unmodifiable(pairings),
       clearSelectedSource: true,
     );
+    unawaited(_persistDraft());
   }
 
   void reorder(int oldIndex, int newIndex) {
@@ -164,6 +240,7 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
     final item = order.removeAt(oldIndex);
     order.insert(newIndex, item);
     state = state.copyWith(sequenceOrder: List.unmodifiable(order));
+    unawaited(_persistDraft());
   }
 
   PracticeActivityResult checkCurrentActivity() {
@@ -203,13 +280,28 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
     final results = Map<String, PracticeActivityResult>.from(state.results)
       ..[activity.id] = result;
     state = state.copyWith(results: Map.unmodifiable(results));
+    final repository = _repository;
+    final attemptId = _attemptId;
+    if (repository != null && attemptId != null) {
+      unawaited(
+        repository.savePracticeResult(
+          attemptId: attemptId,
+          activityIndex: state.currentActivityIndex,
+          activityType: activity.kind.name,
+          correctItems: correct,
+          totalItems: total,
+          score: score.score,
+        ),
+      );
+    }
     return result;
   }
 
   bool nextActivity() {
     if (state.currentResult == null ||
-        state.currentActivityIndex >= state.activities.length - 1)
+        state.currentActivityIndex >= state.activities.length - 1) {
       return false;
+    }
     state = state.copyWith(
       currentActivityIndex: state.currentActivityIndex + 1,
       pairings: const {},
@@ -217,6 +309,7 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
       clearSelectedSource: true,
     );
     _initializeCurrentActivity();
+    unawaited(restoreCurrentDraft());
     return true;
   }
 
@@ -232,6 +325,7 @@ class PracticeSessionController extends StateNotifier<PracticeSessionState> {
       clearSelectedSource: true,
     );
     _initializeCurrentActivity();
+    unawaited(_persistDraft());
   }
 
   void _initializeCurrentActivity() {

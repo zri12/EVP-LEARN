@@ -31,7 +31,7 @@ Support:
 Start explicit:
 
 ```text
-schemaVersion = 1
+schemaVersion = 2
 ```
 
 Increment only on schema change.
@@ -74,6 +74,11 @@ id                     TEXT PRIMARY KEY
 module_id              INTEGER NOT NULL
 attempt_number         INTEGER NOT NULL
 status                 TEXT NOT NULL
+content_version        INTEGER NOT NULL DEFAULT 1
+current_stage          TEXT NOT NULL DEFAULT 'overview'
+current_sub_index      INTEGER NULL
+current_reading_id     TEXT NULL
+last_route_key         TEXT NULL
 started_at             DATETIME NOT NULL
 completed_at           DATETIME NULL
 
@@ -110,6 +115,7 @@ correct_items          INTEGER NOT NULL
 total_items            INTEGER NOT NULL
 score                  INTEGER NOT NULL
 completed              BOOLEAN NOT NULL
+draft_json             TEXT NOT NULL DEFAULT '{}'
 updated_at             DATETIME NOT NULL
 ```
 
@@ -134,6 +140,8 @@ correct_count          INTEGER NULL
 incorrect_count        INTEGER NULL
 started_at             DATETIME NOT NULL
 submitted_at           DATETIME NULL
+question_order_json    TEXT NOT NULL DEFAULT '[]'
+current_question_index INTEGER NOT NULL DEFAULT 0
 ```
 
 Assessment type:

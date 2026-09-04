@@ -22,6 +22,7 @@ class RootModuleProgress {
     required this.status,
     this.latestScore,
     this.bestScore,
+    this.hasCompletedAttempt = false,
   });
 
   final int moduleId;
@@ -29,6 +30,10 @@ class RootModuleProgress {
   final ModuleStatus status;
   final int? latestScore;
   final int? bestScore;
+
+  /// True when the learner has at least one completed attempt, even if a new
+  /// retry is currently active for the module.
+  final bool hasCompletedAttempt;
 }
 
 class RootResumeState {
@@ -69,6 +74,10 @@ class RootDashboardState {
   }
 
   int get completedModules => moduleProgress.values
-      .where((progress) => progress.status == ModuleStatus.completed)
+      .where(
+        (progress) =>
+            progress.status == ModuleStatus.completed ||
+            progress.hasCompletedAttempt,
+      )
       .length;
 }

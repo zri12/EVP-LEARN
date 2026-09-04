@@ -634,6 +634,63 @@ class $LearningAttemptsTable extends LearningAttempts
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _contentVersionMeta = const VerificationMeta(
+    'contentVersion',
+  );
+  @override
+  late final GeneratedColumn<int> contentVersion = GeneratedColumn<int>(
+    'content_version',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
+  static const VerificationMeta _currentStageMeta = const VerificationMeta(
+    'currentStage',
+  );
+  @override
+  late final GeneratedColumn<String> currentStage = GeneratedColumn<String>(
+    'current_stage',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('overview'),
+  );
+  static const VerificationMeta _currentSubIndexMeta = const VerificationMeta(
+    'currentSubIndex',
+  );
+  @override
+  late final GeneratedColumn<int> currentSubIndex = GeneratedColumn<int>(
+    'current_sub_index',
+    aliasedName,
+    true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _currentReadingIdMeta = const VerificationMeta(
+    'currentReadingId',
+  );
+  @override
+  late final GeneratedColumn<String> currentReadingId = GeneratedColumn<String>(
+    'current_reading_id',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _lastRouteKeyMeta = const VerificationMeta(
+    'lastRouteKey',
+  );
+  @override
+  late final GeneratedColumn<String> lastRouteKey = GeneratedColumn<String>(
+    'last_route_key',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _startedAtMeta = const VerificationMeta(
     'startedAt',
   );
@@ -785,6 +842,11 @@ class $LearningAttemptsTable extends LearningAttempts
     moduleId,
     attemptNumber,
     status,
+    contentVersion,
+    currentStage,
+    currentSubIndex,
+    currentReadingId,
+    lastRouteKey,
     startedAt,
     completedAt,
     pretestRaw,
@@ -842,6 +904,51 @@ class $LearningAttemptsTable extends LearningAttempts
       );
     } else if (isInserting) {
       context.missing(_statusMeta);
+    }
+    if (data.containsKey('content_version')) {
+      context.handle(
+        _contentVersionMeta,
+        contentVersion.isAcceptableOrUnknown(
+          data['content_version']!,
+          _contentVersionMeta,
+        ),
+      );
+    }
+    if (data.containsKey('current_stage')) {
+      context.handle(
+        _currentStageMeta,
+        currentStage.isAcceptableOrUnknown(
+          data['current_stage']!,
+          _currentStageMeta,
+        ),
+      );
+    }
+    if (data.containsKey('current_sub_index')) {
+      context.handle(
+        _currentSubIndexMeta,
+        currentSubIndex.isAcceptableOrUnknown(
+          data['current_sub_index']!,
+          _currentSubIndexMeta,
+        ),
+      );
+    }
+    if (data.containsKey('current_reading_id')) {
+      context.handle(
+        _currentReadingIdMeta,
+        currentReadingId.isAcceptableOrUnknown(
+          data['current_reading_id']!,
+          _currentReadingIdMeta,
+        ),
+      );
+    }
+    if (data.containsKey('last_route_key')) {
+      context.handle(
+        _lastRouteKeyMeta,
+        lastRouteKey.isAcceptableOrUnknown(
+          data['last_route_key']!,
+          _lastRouteKeyMeta,
+        ),
+      );
     }
     if (data.containsKey('started_at')) {
       context.handle(
@@ -975,6 +1082,26 @@ class $LearningAttemptsTable extends LearningAttempts
         DriftSqlType.string,
         data['${effectivePrefix}status'],
       )!,
+      contentVersion: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}content_version'],
+      )!,
+      currentStage: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}current_stage'],
+      )!,
+      currentSubIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}current_sub_index'],
+      ),
+      currentReadingId: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}current_reading_id'],
+      ),
+      lastRouteKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}last_route_key'],
+      ),
       startedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}started_at'],
@@ -1041,6 +1168,11 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
   final int moduleId;
   final int attemptNumber;
   final String status;
+  final int contentVersion;
+  final String currentStage;
+  final int? currentSubIndex;
+  final String? currentReadingId;
+  final String? lastRouteKey;
   final DateTime startedAt;
   final DateTime? completedAt;
   final double? pretestRaw;
@@ -1059,6 +1191,11 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
     required this.moduleId,
     required this.attemptNumber,
     required this.status,
+    required this.contentVersion,
+    required this.currentStage,
+    this.currentSubIndex,
+    this.currentReadingId,
+    this.lastRouteKey,
     required this.startedAt,
     this.completedAt,
     this.pretestRaw,
@@ -1080,6 +1217,17 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
     map['module_id'] = Variable<int>(moduleId);
     map['attempt_number'] = Variable<int>(attemptNumber);
     map['status'] = Variable<String>(status);
+    map['content_version'] = Variable<int>(contentVersion);
+    map['current_stage'] = Variable<String>(currentStage);
+    if (!nullToAbsent || currentSubIndex != null) {
+      map['current_sub_index'] = Variable<int>(currentSubIndex);
+    }
+    if (!nullToAbsent || currentReadingId != null) {
+      map['current_reading_id'] = Variable<String>(currentReadingId);
+    }
+    if (!nullToAbsent || lastRouteKey != null) {
+      map['last_route_key'] = Variable<String>(lastRouteKey);
+    }
     map['started_at'] = Variable<DateTime>(startedAt);
     if (!nullToAbsent || completedAt != null) {
       map['completed_at'] = Variable<DateTime>(completedAt);
@@ -1124,6 +1272,17 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
       moduleId: Value(moduleId),
       attemptNumber: Value(attemptNumber),
       status: Value(status),
+      contentVersion: Value(contentVersion),
+      currentStage: Value(currentStage),
+      currentSubIndex: currentSubIndex == null && nullToAbsent
+          ? const Value.absent()
+          : Value(currentSubIndex),
+      currentReadingId: currentReadingId == null && nullToAbsent
+          ? const Value.absent()
+          : Value(currentReadingId),
+      lastRouteKey: lastRouteKey == null && nullToAbsent
+          ? const Value.absent()
+          : Value(lastRouteKey),
       startedAt: Value(startedAt),
       completedAt: completedAt == null && nullToAbsent
           ? const Value.absent()
@@ -1172,6 +1331,11 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
       moduleId: serializer.fromJson<int>(json['moduleId']),
       attemptNumber: serializer.fromJson<int>(json['attemptNumber']),
       status: serializer.fromJson<String>(json['status']),
+      contentVersion: serializer.fromJson<int>(json['contentVersion']),
+      currentStage: serializer.fromJson<String>(json['currentStage']),
+      currentSubIndex: serializer.fromJson<int?>(json['currentSubIndex']),
+      currentReadingId: serializer.fromJson<String?>(json['currentReadingId']),
+      lastRouteKey: serializer.fromJson<String?>(json['lastRouteKey']),
       startedAt: serializer.fromJson<DateTime>(json['startedAt']),
       completedAt: serializer.fromJson<DateTime?>(json['completedAt']),
       pretestRaw: serializer.fromJson<double?>(json['pretestRaw']),
@@ -1195,6 +1359,11 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
       'moduleId': serializer.toJson<int>(moduleId),
       'attemptNumber': serializer.toJson<int>(attemptNumber),
       'status': serializer.toJson<String>(status),
+      'contentVersion': serializer.toJson<int>(contentVersion),
+      'currentStage': serializer.toJson<String>(currentStage),
+      'currentSubIndex': serializer.toJson<int?>(currentSubIndex),
+      'currentReadingId': serializer.toJson<String?>(currentReadingId),
+      'lastRouteKey': serializer.toJson<String?>(lastRouteKey),
       'startedAt': serializer.toJson<DateTime>(startedAt),
       'completedAt': serializer.toJson<DateTime?>(completedAt),
       'pretestRaw': serializer.toJson<double?>(pretestRaw),
@@ -1216,6 +1385,11 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
     int? moduleId,
     int? attemptNumber,
     String? status,
+    int? contentVersion,
+    String? currentStage,
+    Value<int?> currentSubIndex = const Value.absent(),
+    Value<String?> currentReadingId = const Value.absent(),
+    Value<String?> lastRouteKey = const Value.absent(),
     DateTime? startedAt,
     Value<DateTime?> completedAt = const Value.absent(),
     Value<double?> pretestRaw = const Value.absent(),
@@ -1234,6 +1408,15 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
     moduleId: moduleId ?? this.moduleId,
     attemptNumber: attemptNumber ?? this.attemptNumber,
     status: status ?? this.status,
+    contentVersion: contentVersion ?? this.contentVersion,
+    currentStage: currentStage ?? this.currentStage,
+    currentSubIndex: currentSubIndex.present
+        ? currentSubIndex.value
+        : this.currentSubIndex,
+    currentReadingId: currentReadingId.present
+        ? currentReadingId.value
+        : this.currentReadingId,
+    lastRouteKey: lastRouteKey.present ? lastRouteKey.value : this.lastRouteKey,
     startedAt: startedAt ?? this.startedAt,
     completedAt: completedAt.present ? completedAt.value : this.completedAt,
     pretestRaw: pretestRaw.present ? pretestRaw.value : this.pretestRaw,
@@ -1266,6 +1449,21 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
           ? data.attemptNumber.value
           : this.attemptNumber,
       status: data.status.present ? data.status.value : this.status,
+      contentVersion: data.contentVersion.present
+          ? data.contentVersion.value
+          : this.contentVersion,
+      currentStage: data.currentStage.present
+          ? data.currentStage.value
+          : this.currentStage,
+      currentSubIndex: data.currentSubIndex.present
+          ? data.currentSubIndex.value
+          : this.currentSubIndex,
+      currentReadingId: data.currentReadingId.present
+          ? data.currentReadingId.value
+          : this.currentReadingId,
+      lastRouteKey: data.lastRouteKey.present
+          ? data.lastRouteKey.value
+          : this.lastRouteKey,
       startedAt: data.startedAt.present ? data.startedAt.value : this.startedAt,
       completedAt: data.completedAt.present
           ? data.completedAt.value
@@ -1311,6 +1509,11 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
           ..write('moduleId: $moduleId, ')
           ..write('attemptNumber: $attemptNumber, ')
           ..write('status: $status, ')
+          ..write('contentVersion: $contentVersion, ')
+          ..write('currentStage: $currentStage, ')
+          ..write('currentSubIndex: $currentSubIndex, ')
+          ..write('currentReadingId: $currentReadingId, ')
+          ..write('lastRouteKey: $lastRouteKey, ')
           ..write('startedAt: $startedAt, ')
           ..write('completedAt: $completedAt, ')
           ..write('pretestRaw: $pretestRaw, ')
@@ -1329,11 +1532,16 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
   }
 
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     id,
     moduleId,
     attemptNumber,
     status,
+    contentVersion,
+    currentStage,
+    currentSubIndex,
+    currentReadingId,
+    lastRouteKey,
     startedAt,
     completedAt,
     pretestRaw,
@@ -1347,7 +1555,7 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
     finalScore,
     learningGain,
     passed,
-  );
+  ]);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1356,6 +1564,11 @@ class LearningAttempt extends DataClass implements Insertable<LearningAttempt> {
           other.moduleId == this.moduleId &&
           other.attemptNumber == this.attemptNumber &&
           other.status == this.status &&
+          other.contentVersion == this.contentVersion &&
+          other.currentStage == this.currentStage &&
+          other.currentSubIndex == this.currentSubIndex &&
+          other.currentReadingId == this.currentReadingId &&
+          other.lastRouteKey == this.lastRouteKey &&
           other.startedAt == this.startedAt &&
           other.completedAt == this.completedAt &&
           other.pretestRaw == this.pretestRaw &&
@@ -1376,6 +1589,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
   final Value<int> moduleId;
   final Value<int> attemptNumber;
   final Value<String> status;
+  final Value<int> contentVersion;
+  final Value<String> currentStage;
+  final Value<int?> currentSubIndex;
+  final Value<String?> currentReadingId;
+  final Value<String?> lastRouteKey;
   final Value<DateTime> startedAt;
   final Value<DateTime?> completedAt;
   final Value<double?> pretestRaw;
@@ -1395,6 +1613,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
     this.moduleId = const Value.absent(),
     this.attemptNumber = const Value.absent(),
     this.status = const Value.absent(),
+    this.contentVersion = const Value.absent(),
+    this.currentStage = const Value.absent(),
+    this.currentSubIndex = const Value.absent(),
+    this.currentReadingId = const Value.absent(),
+    this.lastRouteKey = const Value.absent(),
     this.startedAt = const Value.absent(),
     this.completedAt = const Value.absent(),
     this.pretestRaw = const Value.absent(),
@@ -1415,6 +1638,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
     required int moduleId,
     required int attemptNumber,
     required String status,
+    this.contentVersion = const Value.absent(),
+    this.currentStage = const Value.absent(),
+    this.currentSubIndex = const Value.absent(),
+    this.currentReadingId = const Value.absent(),
+    this.lastRouteKey = const Value.absent(),
     required DateTime startedAt,
     this.completedAt = const Value.absent(),
     this.pretestRaw = const Value.absent(),
@@ -1439,6 +1667,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
     Expression<int>? moduleId,
     Expression<int>? attemptNumber,
     Expression<String>? status,
+    Expression<int>? contentVersion,
+    Expression<String>? currentStage,
+    Expression<int>? currentSubIndex,
+    Expression<String>? currentReadingId,
+    Expression<String>? lastRouteKey,
     Expression<DateTime>? startedAt,
     Expression<DateTime>? completedAt,
     Expression<double>? pretestRaw,
@@ -1459,6 +1692,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
       if (moduleId != null) 'module_id': moduleId,
       if (attemptNumber != null) 'attempt_number': attemptNumber,
       if (status != null) 'status': status,
+      if (contentVersion != null) 'content_version': contentVersion,
+      if (currentStage != null) 'current_stage': currentStage,
+      if (currentSubIndex != null) 'current_sub_index': currentSubIndex,
+      if (currentReadingId != null) 'current_reading_id': currentReadingId,
+      if (lastRouteKey != null) 'last_route_key': lastRouteKey,
       if (startedAt != null) 'started_at': startedAt,
       if (completedAt != null) 'completed_at': completedAt,
       if (pretestRaw != null) 'pretest_raw': pretestRaw,
@@ -1481,6 +1719,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
     Value<int>? moduleId,
     Value<int>? attemptNumber,
     Value<String>? status,
+    Value<int>? contentVersion,
+    Value<String>? currentStage,
+    Value<int?>? currentSubIndex,
+    Value<String?>? currentReadingId,
+    Value<String?>? lastRouteKey,
     Value<DateTime>? startedAt,
     Value<DateTime?>? completedAt,
     Value<double?>? pretestRaw,
@@ -1501,6 +1744,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
       moduleId: moduleId ?? this.moduleId,
       attemptNumber: attemptNumber ?? this.attemptNumber,
       status: status ?? this.status,
+      contentVersion: contentVersion ?? this.contentVersion,
+      currentStage: currentStage ?? this.currentStage,
+      currentSubIndex: currentSubIndex ?? this.currentSubIndex,
+      currentReadingId: currentReadingId ?? this.currentReadingId,
+      lastRouteKey: lastRouteKey ?? this.lastRouteKey,
       startedAt: startedAt ?? this.startedAt,
       completedAt: completedAt ?? this.completedAt,
       pretestRaw: pretestRaw ?? this.pretestRaw,
@@ -1532,6 +1780,21 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
     }
     if (status.present) {
       map['status'] = Variable<String>(status.value);
+    }
+    if (contentVersion.present) {
+      map['content_version'] = Variable<int>(contentVersion.value);
+    }
+    if (currentStage.present) {
+      map['current_stage'] = Variable<String>(currentStage.value);
+    }
+    if (currentSubIndex.present) {
+      map['current_sub_index'] = Variable<int>(currentSubIndex.value);
+    }
+    if (currentReadingId.present) {
+      map['current_reading_id'] = Variable<String>(currentReadingId.value);
+    }
+    if (lastRouteKey.present) {
+      map['last_route_key'] = Variable<String>(lastRouteKey.value);
     }
     if (startedAt.present) {
       map['started_at'] = Variable<DateTime>(startedAt.value);
@@ -1585,6 +1848,11 @@ class LearningAttemptsCompanion extends UpdateCompanion<LearningAttempt> {
           ..write('moduleId: $moduleId, ')
           ..write('attemptNumber: $attemptNumber, ')
           ..write('status: $status, ')
+          ..write('contentVersion: $contentVersion, ')
+          ..write('currentStage: $currentStage, ')
+          ..write('currentSubIndex: $currentSubIndex, ')
+          ..write('currentReadingId: $currentReadingId, ')
+          ..write('lastRouteKey: $lastRouteKey, ')
           ..write('startedAt: $startedAt, ')
           ..write('completedAt: $completedAt, ')
           ..write('pretestRaw: $pretestRaw, ')
@@ -1701,6 +1969,18 @@ class $PracticeActivityResultsTable extends PracticeActivityResults
       'CHECK ("completed" IN (0, 1))',
     ),
   );
+  static const VerificationMeta _draftJsonMeta = const VerificationMeta(
+    'draftJson',
+  );
+  @override
+  late final GeneratedColumn<String> draftJson = GeneratedColumn<String>(
+    'draft_json',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: const Constant('{}'),
+  );
   static const VerificationMeta _updatedAtMeta = const VerificationMeta(
     'updatedAt',
   );
@@ -1722,6 +2002,7 @@ class $PracticeActivityResultsTable extends PracticeActivityResults
     totalItems,
     score,
     completed,
+    draftJson,
     updatedAt,
   ];
   @override
@@ -1804,6 +2085,12 @@ class $PracticeActivityResultsTable extends PracticeActivityResults
     } else if (isInserting) {
       context.missing(_completedMeta);
     }
+    if (data.containsKey('draft_json')) {
+      context.handle(
+        _draftJsonMeta,
+        draftJson.isAcceptableOrUnknown(data['draft_json']!, _draftJsonMeta),
+      );
+    }
     if (data.containsKey('updated_at')) {
       context.handle(
         _updatedAtMeta,
@@ -1857,6 +2144,10 @@ class $PracticeActivityResultsTable extends PracticeActivityResults
         DriftSqlType.bool,
         data['${effectivePrefix}completed'],
       )!,
+      draftJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}draft_json'],
+      )!,
       updatedAt: attachedDatabase.typeMapping.read(
         DriftSqlType.dateTime,
         data['${effectivePrefix}updated_at'],
@@ -1880,6 +2171,7 @@ class PracticeActivityResult extends DataClass
   final int totalItems;
   final int score;
   final bool completed;
+  final String draftJson;
   final DateTime updatedAt;
   const PracticeActivityResult({
     required this.id,
@@ -1890,6 +2182,7 @@ class PracticeActivityResult extends DataClass
     required this.totalItems,
     required this.score,
     required this.completed,
+    required this.draftJson,
     required this.updatedAt,
   });
   @override
@@ -1903,6 +2196,7 @@ class PracticeActivityResult extends DataClass
     map['total_items'] = Variable<int>(totalItems);
     map['score'] = Variable<int>(score);
     map['completed'] = Variable<bool>(completed);
+    map['draft_json'] = Variable<String>(draftJson);
     map['updated_at'] = Variable<DateTime>(updatedAt);
     return map;
   }
@@ -1917,6 +2211,7 @@ class PracticeActivityResult extends DataClass
       totalItems: Value(totalItems),
       score: Value(score),
       completed: Value(completed),
+      draftJson: Value(draftJson),
       updatedAt: Value(updatedAt),
     );
   }
@@ -1935,6 +2230,7 @@ class PracticeActivityResult extends DataClass
       totalItems: serializer.fromJson<int>(json['totalItems']),
       score: serializer.fromJson<int>(json['score']),
       completed: serializer.fromJson<bool>(json['completed']),
+      draftJson: serializer.fromJson<String>(json['draftJson']),
       updatedAt: serializer.fromJson<DateTime>(json['updatedAt']),
     );
   }
@@ -1950,6 +2246,7 @@ class PracticeActivityResult extends DataClass
       'totalItems': serializer.toJson<int>(totalItems),
       'score': serializer.toJson<int>(score),
       'completed': serializer.toJson<bool>(completed),
+      'draftJson': serializer.toJson<String>(draftJson),
       'updatedAt': serializer.toJson<DateTime>(updatedAt),
     };
   }
@@ -1963,6 +2260,7 @@ class PracticeActivityResult extends DataClass
     int? totalItems,
     int? score,
     bool? completed,
+    String? draftJson,
     DateTime? updatedAt,
   }) => PracticeActivityResult(
     id: id ?? this.id,
@@ -1973,6 +2271,7 @@ class PracticeActivityResult extends DataClass
     totalItems: totalItems ?? this.totalItems,
     score: score ?? this.score,
     completed: completed ?? this.completed,
+    draftJson: draftJson ?? this.draftJson,
     updatedAt: updatedAt ?? this.updatedAt,
   );
   PracticeActivityResult copyWithCompanion(
@@ -1995,6 +2294,7 @@ class PracticeActivityResult extends DataClass
           : this.totalItems,
       score: data.score.present ? data.score.value : this.score,
       completed: data.completed.present ? data.completed.value : this.completed,
+      draftJson: data.draftJson.present ? data.draftJson.value : this.draftJson,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
     );
   }
@@ -2010,6 +2310,7 @@ class PracticeActivityResult extends DataClass
           ..write('totalItems: $totalItems, ')
           ..write('score: $score, ')
           ..write('completed: $completed, ')
+          ..write('draftJson: $draftJson, ')
           ..write('updatedAt: $updatedAt')
           ..write(')'))
         .toString();
@@ -2025,6 +2326,7 @@ class PracticeActivityResult extends DataClass
     totalItems,
     score,
     completed,
+    draftJson,
     updatedAt,
   );
   @override
@@ -2039,6 +2341,7 @@ class PracticeActivityResult extends DataClass
           other.totalItems == this.totalItems &&
           other.score == this.score &&
           other.completed == this.completed &&
+          other.draftJson == this.draftJson &&
           other.updatedAt == this.updatedAt);
 }
 
@@ -2052,6 +2355,7 @@ class PracticeActivityResultsCompanion
   final Value<int> totalItems;
   final Value<int> score;
   final Value<bool> completed;
+  final Value<String> draftJson;
   final Value<DateTime> updatedAt;
   const PracticeActivityResultsCompanion({
     this.id = const Value.absent(),
@@ -2062,6 +2366,7 @@ class PracticeActivityResultsCompanion
     this.totalItems = const Value.absent(),
     this.score = const Value.absent(),
     this.completed = const Value.absent(),
+    this.draftJson = const Value.absent(),
     this.updatedAt = const Value.absent(),
   });
   PracticeActivityResultsCompanion.insert({
@@ -2073,6 +2378,7 @@ class PracticeActivityResultsCompanion
     required int totalItems,
     required int score,
     required bool completed,
+    this.draftJson = const Value.absent(),
     required DateTime updatedAt,
   }) : attemptId = Value(attemptId),
        activityIndex = Value(activityIndex),
@@ -2091,6 +2397,7 @@ class PracticeActivityResultsCompanion
     Expression<int>? totalItems,
     Expression<int>? score,
     Expression<bool>? completed,
+    Expression<String>? draftJson,
     Expression<DateTime>? updatedAt,
   }) {
     return RawValuesInsertable({
@@ -2102,6 +2409,7 @@ class PracticeActivityResultsCompanion
       if (totalItems != null) 'total_items': totalItems,
       if (score != null) 'score': score,
       if (completed != null) 'completed': completed,
+      if (draftJson != null) 'draft_json': draftJson,
       if (updatedAt != null) 'updated_at': updatedAt,
     });
   }
@@ -2115,6 +2423,7 @@ class PracticeActivityResultsCompanion
     Value<int>? totalItems,
     Value<int>? score,
     Value<bool>? completed,
+    Value<String>? draftJson,
     Value<DateTime>? updatedAt,
   }) {
     return PracticeActivityResultsCompanion(
@@ -2126,6 +2435,7 @@ class PracticeActivityResultsCompanion
       totalItems: totalItems ?? this.totalItems,
       score: score ?? this.score,
       completed: completed ?? this.completed,
+      draftJson: draftJson ?? this.draftJson,
       updatedAt: updatedAt ?? this.updatedAt,
     );
   }
@@ -2157,6 +2467,9 @@ class PracticeActivityResultsCompanion
     if (completed.present) {
       map['completed'] = Variable<bool>(completed.value);
     }
+    if (draftJson.present) {
+      map['draft_json'] = Variable<String>(draftJson.value);
+    }
     if (updatedAt.present) {
       map['updated_at'] = Variable<DateTime>(updatedAt.value);
     }
@@ -2174,6 +2487,7 @@ class PracticeActivityResultsCompanion
           ..write('totalItems: $totalItems, ')
           ..write('score: $score, ')
           ..write('completed: $completed, ')
+          ..write('draftJson: $draftJson, ')
           ..write('updatedAt: $updatedAt')
           ..write(')'))
         .toString();
@@ -2227,6 +2541,30 @@ class $AssessmentSessionsTable extends AssessmentSessions
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
+  );
+  static const VerificationMeta _questionOrderJsonMeta = const VerificationMeta(
+    'questionOrderJson',
+  );
+  @override
+  late final GeneratedColumn<String> questionOrderJson =
+      GeneratedColumn<String>(
+        'question_order_json',
+        aliasedName,
+        false,
+        type: DriftSqlType.string,
+        requiredDuringInsert: false,
+        defaultValue: const Constant('[]'),
+      );
+  static const VerificationMeta _currentQuestionIndexMeta =
+      const VerificationMeta('currentQuestionIndex');
+  @override
+  late final GeneratedColumn<int> currentQuestionIndex = GeneratedColumn<int>(
+    'current_question_index',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
   );
   static const VerificationMeta _submittedMeta = const VerificationMeta(
     'submitted',
@@ -2315,6 +2653,8 @@ class $AssessmentSessionsTable extends AssessmentSessions
     attemptId,
     assessmentType,
     answersJson,
+    questionOrderJson,
+    currentQuestionIndex,
     submitted,
     rawScore,
     weightedScore,
@@ -2369,6 +2709,24 @@ class $AssessmentSessionsTable extends AssessmentSessions
       );
     } else if (isInserting) {
       context.missing(_answersJsonMeta);
+    }
+    if (data.containsKey('question_order_json')) {
+      context.handle(
+        _questionOrderJsonMeta,
+        questionOrderJson.isAcceptableOrUnknown(
+          data['question_order_json']!,
+          _questionOrderJsonMeta,
+        ),
+      );
+    }
+    if (data.containsKey('current_question_index')) {
+      context.handle(
+        _currentQuestionIndexMeta,
+        currentQuestionIndex.isAcceptableOrUnknown(
+          data['current_question_index']!,
+          _currentQuestionIndexMeta,
+        ),
+      );
     }
     if (data.containsKey('submitted')) {
       context.handle(
@@ -2451,6 +2809,14 @@ class $AssessmentSessionsTable extends AssessmentSessions
         DriftSqlType.string,
         data['${effectivePrefix}answers_json'],
       )!,
+      questionOrderJson: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}question_order_json'],
+      )!,
+      currentQuestionIndex: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}current_question_index'],
+      )!,
       submitted: attachedDatabase.typeMapping.read(
         DriftSqlType.bool,
         data['${effectivePrefix}submitted'],
@@ -2494,6 +2860,8 @@ class AssessmentSession extends DataClass
   final String attemptId;
   final String assessmentType;
   final String answersJson;
+  final String questionOrderJson;
+  final int currentQuestionIndex;
   final bool submitted;
   final double? rawScore;
   final double? weightedScore;
@@ -2506,6 +2874,8 @@ class AssessmentSession extends DataClass
     required this.attemptId,
     required this.assessmentType,
     required this.answersJson,
+    required this.questionOrderJson,
+    required this.currentQuestionIndex,
     required this.submitted,
     this.rawScore,
     this.weightedScore,
@@ -2521,6 +2891,8 @@ class AssessmentSession extends DataClass
     map['attempt_id'] = Variable<String>(attemptId);
     map['assessment_type'] = Variable<String>(assessmentType);
     map['answers_json'] = Variable<String>(answersJson);
+    map['question_order_json'] = Variable<String>(questionOrderJson);
+    map['current_question_index'] = Variable<int>(currentQuestionIndex);
     map['submitted'] = Variable<bool>(submitted);
     if (!nullToAbsent || rawScore != null) {
       map['raw_score'] = Variable<double>(rawScore);
@@ -2547,6 +2919,8 @@ class AssessmentSession extends DataClass
       attemptId: Value(attemptId),
       assessmentType: Value(assessmentType),
       answersJson: Value(answersJson),
+      questionOrderJson: Value(questionOrderJson),
+      currentQuestionIndex: Value(currentQuestionIndex),
       submitted: Value(submitted),
       rawScore: rawScore == null && nullToAbsent
           ? const Value.absent()
@@ -2577,6 +2951,10 @@ class AssessmentSession extends DataClass
       attemptId: serializer.fromJson<String>(json['attemptId']),
       assessmentType: serializer.fromJson<String>(json['assessmentType']),
       answersJson: serializer.fromJson<String>(json['answersJson']),
+      questionOrderJson: serializer.fromJson<String>(json['questionOrderJson']),
+      currentQuestionIndex: serializer.fromJson<int>(
+        json['currentQuestionIndex'],
+      ),
       submitted: serializer.fromJson<bool>(json['submitted']),
       rawScore: serializer.fromJson<double?>(json['rawScore']),
       weightedScore: serializer.fromJson<double?>(json['weightedScore']),
@@ -2594,6 +2972,8 @@ class AssessmentSession extends DataClass
       'attemptId': serializer.toJson<String>(attemptId),
       'assessmentType': serializer.toJson<String>(assessmentType),
       'answersJson': serializer.toJson<String>(answersJson),
+      'questionOrderJson': serializer.toJson<String>(questionOrderJson),
+      'currentQuestionIndex': serializer.toJson<int>(currentQuestionIndex),
       'submitted': serializer.toJson<bool>(submitted),
       'rawScore': serializer.toJson<double?>(rawScore),
       'weightedScore': serializer.toJson<double?>(weightedScore),
@@ -2609,6 +2989,8 @@ class AssessmentSession extends DataClass
     String? attemptId,
     String? assessmentType,
     String? answersJson,
+    String? questionOrderJson,
+    int? currentQuestionIndex,
     bool? submitted,
     Value<double?> rawScore = const Value.absent(),
     Value<double?> weightedScore = const Value.absent(),
@@ -2621,6 +3003,8 @@ class AssessmentSession extends DataClass
     attemptId: attemptId ?? this.attemptId,
     assessmentType: assessmentType ?? this.assessmentType,
     answersJson: answersJson ?? this.answersJson,
+    questionOrderJson: questionOrderJson ?? this.questionOrderJson,
+    currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
     submitted: submitted ?? this.submitted,
     rawScore: rawScore.present ? rawScore.value : this.rawScore,
     weightedScore: weightedScore.present
@@ -2643,6 +3027,12 @@ class AssessmentSession extends DataClass
       answersJson: data.answersJson.present
           ? data.answersJson.value
           : this.answersJson,
+      questionOrderJson: data.questionOrderJson.present
+          ? data.questionOrderJson.value
+          : this.questionOrderJson,
+      currentQuestionIndex: data.currentQuestionIndex.present
+          ? data.currentQuestionIndex.value
+          : this.currentQuestionIndex,
       submitted: data.submitted.present ? data.submitted.value : this.submitted,
       rawScore: data.rawScore.present ? data.rawScore.value : this.rawScore,
       weightedScore: data.weightedScore.present
@@ -2668,6 +3058,8 @@ class AssessmentSession extends DataClass
           ..write('attemptId: $attemptId, ')
           ..write('assessmentType: $assessmentType, ')
           ..write('answersJson: $answersJson, ')
+          ..write('questionOrderJson: $questionOrderJson, ')
+          ..write('currentQuestionIndex: $currentQuestionIndex, ')
           ..write('submitted: $submitted, ')
           ..write('rawScore: $rawScore, ')
           ..write('weightedScore: $weightedScore, ')
@@ -2685,6 +3077,8 @@ class AssessmentSession extends DataClass
     attemptId,
     assessmentType,
     answersJson,
+    questionOrderJson,
+    currentQuestionIndex,
     submitted,
     rawScore,
     weightedScore,
@@ -2701,6 +3095,8 @@ class AssessmentSession extends DataClass
           other.attemptId == this.attemptId &&
           other.assessmentType == this.assessmentType &&
           other.answersJson == this.answersJson &&
+          other.questionOrderJson == this.questionOrderJson &&
+          other.currentQuestionIndex == this.currentQuestionIndex &&
           other.submitted == this.submitted &&
           other.rawScore == this.rawScore &&
           other.weightedScore == this.weightedScore &&
@@ -2715,6 +3111,8 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
   final Value<String> attemptId;
   final Value<String> assessmentType;
   final Value<String> answersJson;
+  final Value<String> questionOrderJson;
+  final Value<int> currentQuestionIndex;
   final Value<bool> submitted;
   final Value<double?> rawScore;
   final Value<double?> weightedScore;
@@ -2728,6 +3126,8 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
     this.attemptId = const Value.absent(),
     this.assessmentType = const Value.absent(),
     this.answersJson = const Value.absent(),
+    this.questionOrderJson = const Value.absent(),
+    this.currentQuestionIndex = const Value.absent(),
     this.submitted = const Value.absent(),
     this.rawScore = const Value.absent(),
     this.weightedScore = const Value.absent(),
@@ -2742,6 +3142,8 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
     required String attemptId,
     required String assessmentType,
     required String answersJson,
+    this.questionOrderJson = const Value.absent(),
+    this.currentQuestionIndex = const Value.absent(),
     this.submitted = const Value.absent(),
     this.rawScore = const Value.absent(),
     this.weightedScore = const Value.absent(),
@@ -2760,6 +3162,8 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
     Expression<String>? attemptId,
     Expression<String>? assessmentType,
     Expression<String>? answersJson,
+    Expression<String>? questionOrderJson,
+    Expression<int>? currentQuestionIndex,
     Expression<bool>? submitted,
     Expression<double>? rawScore,
     Expression<double>? weightedScore,
@@ -2774,6 +3178,9 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
       if (attemptId != null) 'attempt_id': attemptId,
       if (assessmentType != null) 'assessment_type': assessmentType,
       if (answersJson != null) 'answers_json': answersJson,
+      if (questionOrderJson != null) 'question_order_json': questionOrderJson,
+      if (currentQuestionIndex != null)
+        'current_question_index': currentQuestionIndex,
       if (submitted != null) 'submitted': submitted,
       if (rawScore != null) 'raw_score': rawScore,
       if (weightedScore != null) 'weighted_score': weightedScore,
@@ -2790,6 +3197,8 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
     Value<String>? attemptId,
     Value<String>? assessmentType,
     Value<String>? answersJson,
+    Value<String>? questionOrderJson,
+    Value<int>? currentQuestionIndex,
     Value<bool>? submitted,
     Value<double?>? rawScore,
     Value<double?>? weightedScore,
@@ -2804,6 +3213,8 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
       attemptId: attemptId ?? this.attemptId,
       assessmentType: assessmentType ?? this.assessmentType,
       answersJson: answersJson ?? this.answersJson,
+      questionOrderJson: questionOrderJson ?? this.questionOrderJson,
+      currentQuestionIndex: currentQuestionIndex ?? this.currentQuestionIndex,
       submitted: submitted ?? this.submitted,
       rawScore: rawScore ?? this.rawScore,
       weightedScore: weightedScore ?? this.weightedScore,
@@ -2829,6 +3240,12 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
     }
     if (answersJson.present) {
       map['answers_json'] = Variable<String>(answersJson.value);
+    }
+    if (questionOrderJson.present) {
+      map['question_order_json'] = Variable<String>(questionOrderJson.value);
+    }
+    if (currentQuestionIndex.present) {
+      map['current_question_index'] = Variable<int>(currentQuestionIndex.value);
     }
     if (submitted.present) {
       map['submitted'] = Variable<bool>(submitted.value);
@@ -2864,6 +3281,8 @@ class AssessmentSessionsCompanion extends UpdateCompanion<AssessmentSession> {
           ..write('attemptId: $attemptId, ')
           ..write('assessmentType: $assessmentType, ')
           ..write('answersJson: $answersJson, ')
+          ..write('questionOrderJson: $questionOrderJson, ')
+          ..write('currentQuestionIndex: $currentQuestionIndex, ')
           ..write('submitted: $submitted, ')
           ..write('rawScore: $rawScore, ')
           ..write('weightedScore: $weightedScore, ')
@@ -3621,6 +4040,11 @@ typedef $$LearningAttemptsTableCreateCompanionBuilder =
       required int moduleId,
       required int attemptNumber,
       required String status,
+      Value<int> contentVersion,
+      Value<String> currentStage,
+      Value<int?> currentSubIndex,
+      Value<String?> currentReadingId,
+      Value<String?> lastRouteKey,
       required DateTime startedAt,
       Value<DateTime?> completedAt,
       Value<double?> pretestRaw,
@@ -3642,6 +4066,11 @@ typedef $$LearningAttemptsTableUpdateCompanionBuilder =
       Value<int> moduleId,
       Value<int> attemptNumber,
       Value<String> status,
+      Value<int> contentVersion,
+      Value<String> currentStage,
+      Value<int?> currentSubIndex,
+      Value<String?> currentReadingId,
+      Value<String?> lastRouteKey,
       Value<DateTime> startedAt,
       Value<DateTime?> completedAt,
       Value<double?> pretestRaw,
@@ -3684,6 +4113,31 @@ class $$LearningAttemptsTableFilterComposer
 
   ColumnFilters<String> get status => $composableBuilder(
     column: $table.status,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get contentVersion => $composableBuilder(
+    column: $table.contentVersion,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get currentStage => $composableBuilder(
+    column: $table.currentStage,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get currentSubIndex => $composableBuilder(
+    column: $table.currentSubIndex,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get currentReadingId => $composableBuilder(
+    column: $table.currentReadingId,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get lastRouteKey => $composableBuilder(
+    column: $table.lastRouteKey,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -3782,6 +4236,31 @@ class $$LearningAttemptsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<int> get contentVersion => $composableBuilder(
+    column: $table.contentVersion,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get currentStage => $composableBuilder(
+    column: $table.currentStage,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get currentSubIndex => $composableBuilder(
+    column: $table.currentSubIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get currentReadingId => $composableBuilder(
+    column: $table.currentReadingId,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get lastRouteKey => $composableBuilder(
+    column: $table.lastRouteKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get startedAt => $composableBuilder(
     column: $table.startedAt,
     builder: (column) => ColumnOrderings(column),
@@ -3870,6 +4349,31 @@ class $$LearningAttemptsTableAnnotationComposer
 
   GeneratedColumn<String> get status =>
       $composableBuilder(column: $table.status, builder: (column) => column);
+
+  GeneratedColumn<int> get contentVersion => $composableBuilder(
+    column: $table.contentVersion,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get currentStage => $composableBuilder(
+    column: $table.currentStage,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get currentSubIndex => $composableBuilder(
+    column: $table.currentSubIndex,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get currentReadingId => $composableBuilder(
+    column: $table.currentReadingId,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get lastRouteKey => $composableBuilder(
+    column: $table.lastRouteKey,
+    builder: (column) => column,
+  );
 
   GeneratedColumn<DateTime> get startedAt =>
       $composableBuilder(column: $table.startedAt, builder: (column) => column);
@@ -3974,6 +4478,11 @@ class $$LearningAttemptsTableTableManager
                 Value<int> moduleId = const Value.absent(),
                 Value<int> attemptNumber = const Value.absent(),
                 Value<String> status = const Value.absent(),
+                Value<int> contentVersion = const Value.absent(),
+                Value<String> currentStage = const Value.absent(),
+                Value<int?> currentSubIndex = const Value.absent(),
+                Value<String?> currentReadingId = const Value.absent(),
+                Value<String?> lastRouteKey = const Value.absent(),
                 Value<DateTime> startedAt = const Value.absent(),
                 Value<DateTime?> completedAt = const Value.absent(),
                 Value<double?> pretestRaw = const Value.absent(),
@@ -3993,6 +4502,11 @@ class $$LearningAttemptsTableTableManager
                 moduleId: moduleId,
                 attemptNumber: attemptNumber,
                 status: status,
+                contentVersion: contentVersion,
+                currentStage: currentStage,
+                currentSubIndex: currentSubIndex,
+                currentReadingId: currentReadingId,
+                lastRouteKey: lastRouteKey,
                 startedAt: startedAt,
                 completedAt: completedAt,
                 pretestRaw: pretestRaw,
@@ -4014,6 +4528,11 @@ class $$LearningAttemptsTableTableManager
                 required int moduleId,
                 required int attemptNumber,
                 required String status,
+                Value<int> contentVersion = const Value.absent(),
+                Value<String> currentStage = const Value.absent(),
+                Value<int?> currentSubIndex = const Value.absent(),
+                Value<String?> currentReadingId = const Value.absent(),
+                Value<String?> lastRouteKey = const Value.absent(),
                 required DateTime startedAt,
                 Value<DateTime?> completedAt = const Value.absent(),
                 Value<double?> pretestRaw = const Value.absent(),
@@ -4033,6 +4552,11 @@ class $$LearningAttemptsTableTableManager
                 moduleId: moduleId,
                 attemptNumber: attemptNumber,
                 status: status,
+                contentVersion: contentVersion,
+                currentStage: currentStage,
+                currentSubIndex: currentSubIndex,
+                currentReadingId: currentReadingId,
+                lastRouteKey: lastRouteKey,
                 startedAt: startedAt,
                 completedAt: completedAt,
                 pretestRaw: pretestRaw,
@@ -4083,6 +4607,7 @@ typedef $$PracticeActivityResultsTableCreateCompanionBuilder =
       required int totalItems,
       required int score,
       required bool completed,
+      Value<String> draftJson,
       required DateTime updatedAt,
     });
 typedef $$PracticeActivityResultsTableUpdateCompanionBuilder =
@@ -4095,6 +4620,7 @@ typedef $$PracticeActivityResultsTableUpdateCompanionBuilder =
       Value<int> totalItems,
       Value<int> score,
       Value<bool> completed,
+      Value<String> draftJson,
       Value<DateTime> updatedAt,
     });
 
@@ -4144,6 +4670,11 @@ class $$PracticeActivityResultsTableFilterComposer
 
   ColumnFilters<bool> get completed => $composableBuilder(
     column: $table.completed,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get draftJson => $composableBuilder(
+    column: $table.draftJson,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -4202,6 +4733,11 @@ class $$PracticeActivityResultsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get draftJson => $composableBuilder(
+    column: $table.draftJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<DateTime> get updatedAt => $composableBuilder(
     column: $table.updatedAt,
     builder: (column) => ColumnOrderings(column),
@@ -4248,6 +4784,9 @@ class $$PracticeActivityResultsTableAnnotationComposer
 
   GeneratedColumn<bool> get completed =>
       $composableBuilder(column: $table.completed, builder: (column) => column);
+
+  GeneratedColumn<String> get draftJson =>
+      $composableBuilder(column: $table.draftJson, builder: (column) => column);
 
   GeneratedColumn<DateTime> get updatedAt =>
       $composableBuilder(column: $table.updatedAt, builder: (column) => column);
@@ -4307,6 +4846,7 @@ class $$PracticeActivityResultsTableTableManager
                 Value<int> totalItems = const Value.absent(),
                 Value<int> score = const Value.absent(),
                 Value<bool> completed = const Value.absent(),
+                Value<String> draftJson = const Value.absent(),
                 Value<DateTime> updatedAt = const Value.absent(),
               }) => PracticeActivityResultsCompanion(
                 id: id,
@@ -4317,6 +4857,7 @@ class $$PracticeActivityResultsTableTableManager
                 totalItems: totalItems,
                 score: score,
                 completed: completed,
+                draftJson: draftJson,
                 updatedAt: updatedAt,
               ),
           createCompanionCallback:
@@ -4329,6 +4870,7 @@ class $$PracticeActivityResultsTableTableManager
                 required int totalItems,
                 required int score,
                 required bool completed,
+                Value<String> draftJson = const Value.absent(),
                 required DateTime updatedAt,
               }) => PracticeActivityResultsCompanion.insert(
                 id: id,
@@ -4339,6 +4881,7 @@ class $$PracticeActivityResultsTableTableManager
                 totalItems: totalItems,
                 score: score,
                 completed: completed,
+                draftJson: draftJson,
                 updatedAt: updatedAt,
               ),
           withReferenceMapper: (p0) => p0
@@ -4376,6 +4919,8 @@ typedef $$AssessmentSessionsTableCreateCompanionBuilder =
       required String attemptId,
       required String assessmentType,
       required String answersJson,
+      Value<String> questionOrderJson,
+      Value<int> currentQuestionIndex,
       Value<bool> submitted,
       Value<double?> rawScore,
       Value<double?> weightedScore,
@@ -4391,6 +4936,8 @@ typedef $$AssessmentSessionsTableUpdateCompanionBuilder =
       Value<String> attemptId,
       Value<String> assessmentType,
       Value<String> answersJson,
+      Value<String> questionOrderJson,
+      Value<int> currentQuestionIndex,
       Value<bool> submitted,
       Value<double?> rawScore,
       Value<double?> weightedScore,
@@ -4427,6 +4974,16 @@ class $$AssessmentSessionsTableFilterComposer
 
   ColumnFilters<String> get answersJson => $composableBuilder(
     column: $table.answersJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get questionOrderJson => $composableBuilder(
+    column: $table.questionOrderJson,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get currentQuestionIndex => $composableBuilder(
+    column: $table.currentQuestionIndex,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -4495,6 +5052,16 @@ class $$AssessmentSessionsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get questionOrderJson => $composableBuilder(
+    column: $table.questionOrderJson,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get currentQuestionIndex => $composableBuilder(
+    column: $table.currentQuestionIndex,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<bool> get submitted => $composableBuilder(
     column: $table.submitted,
     builder: (column) => ColumnOrderings(column),
@@ -4553,6 +5120,16 @@ class $$AssessmentSessionsTableAnnotationComposer
 
   GeneratedColumn<String> get answersJson => $composableBuilder(
     column: $table.answersJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get questionOrderJson => $composableBuilder(
+    column: $table.questionOrderJson,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<int> get currentQuestionIndex => $composableBuilder(
+    column: $table.currentQuestionIndex,
     builder: (column) => column,
   );
 
@@ -4630,6 +5207,8 @@ class $$AssessmentSessionsTableTableManager
                 Value<String> attemptId = const Value.absent(),
                 Value<String> assessmentType = const Value.absent(),
                 Value<String> answersJson = const Value.absent(),
+                Value<String> questionOrderJson = const Value.absent(),
+                Value<int> currentQuestionIndex = const Value.absent(),
                 Value<bool> submitted = const Value.absent(),
                 Value<double?> rawScore = const Value.absent(),
                 Value<double?> weightedScore = const Value.absent(),
@@ -4643,6 +5222,8 @@ class $$AssessmentSessionsTableTableManager
                 attemptId: attemptId,
                 assessmentType: assessmentType,
                 answersJson: answersJson,
+                questionOrderJson: questionOrderJson,
+                currentQuestionIndex: currentQuestionIndex,
                 submitted: submitted,
                 rawScore: rawScore,
                 weightedScore: weightedScore,
@@ -4658,6 +5239,8 @@ class $$AssessmentSessionsTableTableManager
                 required String attemptId,
                 required String assessmentType,
                 required String answersJson,
+                Value<String> questionOrderJson = const Value.absent(),
+                Value<int> currentQuestionIndex = const Value.absent(),
                 Value<bool> submitted = const Value.absent(),
                 Value<double?> rawScore = const Value.absent(),
                 Value<double?> weightedScore = const Value.absent(),
@@ -4671,6 +5254,8 @@ class $$AssessmentSessionsTableTableManager
                 attemptId: attemptId,
                 assessmentType: assessmentType,
                 answersJson: answersJson,
+                questionOrderJson: questionOrderJson,
+                currentQuestionIndex: currentQuestionIndex,
                 submitted: submitted,
                 rawScore: rawScore,
                 weightedScore: weightedScore,

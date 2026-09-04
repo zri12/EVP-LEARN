@@ -5,6 +5,12 @@ class LearningAttempts extends Table {
   IntColumn get moduleId => integer()();
   IntColumn get attemptNumber => integer()();
   TextColumn get status => text()();
+  IntColumn get contentVersion => integer().withDefault(const Constant(1))();
+  TextColumn get currentStage =>
+      text().withDefault(const Constant('overview'))();
+  IntColumn get currentSubIndex => integer().nullable()();
+  TextColumn get currentReadingId => text().nullable()();
+  TextColumn get lastRouteKey => text().nullable()();
   DateTimeColumn get startedAt => dateTime()();
   DateTimeColumn get completedAt => dateTime().nullable()();
   RealColumn get pretestRaw => real().nullable()();

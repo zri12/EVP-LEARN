@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,18 +11,21 @@ import '../../../app/theme/app_spacing.dart';
 import '../../../core/constants/app_assets.dart';
 import '../../../core/widgets/app_page.dart';
 import '../../../data/content/audio_asset_resolver.dart';
+import '../../../data/providers/database_providers.dart';
+import '../../../data/repositories/persistence_repository.dart';
 import '../../../domain/models/module_content.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../learning/providers/learning_audio_controller.dart';
 import '../../learning/providers/learning_providers.dart';
 import '../../modules/presentation/widgets/module_card.dart';
+import '../../root/providers/root_dashboard_provider.dart';
 
-class ModuleOverviewPage extends StatelessWidget {
+class ModuleOverviewPage extends ConsumerWidget {
   const ModuleOverviewPage({required this.moduleId, super.key});
   final String moduleId;
 
   @override
-  Widget build(BuildContext context) => _ModulePage(
+  Widget build(BuildContext context, WidgetRef ref) => _ModulePage(
     moduleId: moduleId,
     builder: (context, module) {
       final visual = moduleVisualFor(module.metadata.number);
@@ -86,8 +91,21 @@ class ModuleOverviewPage extends StatelessWidget {
           const SizedBox(height: AppSpacing.xl),
           _PrimaryButton(
             label: AppLocalizations.of(context)!.startLearning,
-            onPressed: () =>
-                context.push(AppRoutes.objectives(module.metadata.number)),
+            onPressed: () async {
+              final repository = ref.read(attemptRepositoryProvider);
+              final attempt = await repository.startAttempt(
+                module.metadata.number,
+              );
+              await repository.updateStage(
+                attempt.id,
+                PersistedLearningStage.objectives,
+                routeKey: AppRoutes.objectives(module.metadata.number),
+              );
+              ref.read(rootDashboardProvider.notifier).refresh();
+              if (context.mounted) {
+                context.push(AppRoutes.objectives(module.metadata.number));
+              }
+            },
           ),
         ],
       );
@@ -342,6 +360,7 @@ class LearningPageScaffold extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final visual = moduleVisualFor(module.metadata.number);
+    _persistLearningLocation(context, ref, module);
     return Scaffold(
       appBar: AppBar(
         leading: Semantics(
@@ -385,6 +404,49 @@ class LearningPageScaffold extends ConsumerWidget {
       ),
     );
   }
+}
+
+void _persistLearningLocation(
+  BuildContext context,
+  WidgetRef ref,
+  LearningModuleContent module,
+) {
+  late final String path;
+  try {
+    path = GoRouterState.of(context).uri.path;
+  } catch (_) {
+    // Learning pages are also rendered in isolated widget tests without a
+    // GoRouter ancestor; persistence is simply skipped in that environment.
+    return;
+  }
+  final stage = switch (path.split('/')) {
+    [_, 'module', _, 'objectives'] => PersistedLearningStage.objectives,
+    [_, 'module', _, 'theory'] => PersistedLearningStage.theory,
+    [_, 'module', _, 'vocabulary'] => PersistedLearningStage.vocabulary,
+    [_, 'module', _, 'reading', ...] => PersistedLearningStage.reading,
+    _ => null,
+  };
+  if (stage == null) return;
+  final parts = path.split('/');
+  final readingId = stage == PersistedLearningStage.reading && parts.length > 4
+      ? parts[4]
+      : null;
+  final subIndex = readingId == null
+      ? null
+      : module.readings.indexWhere((reading) => reading.id == readingId);
+  unawaited(() async {
+    final repository = ref.read(attemptRepositoryProvider);
+    final active = await repository.getCurrentAttempt(module.metadata.number);
+    if (active != null) {
+      await repository.updateStage(
+        active.id,
+        stage,
+        subIndex: subIndex != null && subIndex >= 0 ? subIndex : null,
+        readingId: readingId,
+        routeKey: path,
+      );
+    }
+  }());
 }
 
 class _ModulePage extends ConsumerWidget {

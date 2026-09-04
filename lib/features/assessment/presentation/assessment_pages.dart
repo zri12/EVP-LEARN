@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +9,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_radius.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/widgets/app_page.dart';
+import '../../../data/providers/database_providers.dart';
 import '../../../domain/models/assessment_result.dart';
 import '../../../domain/models/module_content.dart';
 import '../../../domain/scoring/practice_scoring.dart';
@@ -69,6 +72,20 @@ class _AssessmentBody extends ConsumerWidget {
     );
     final state = ref.watch(assessmentSessionProvider(key));
     final controller = ref.read(assessmentSessionProvider(key).notifier);
+    if (!controller.isPersistenceAttached) {
+      unawaited(() async {
+        final active = await ref
+            .read(attemptRepositoryProvider)
+            .getCurrentAttempt(module.metadata.number);
+        if (active != null && !controller.isPersistenceAttached) {
+          controller.attachPersistence(
+            ref.read(attemptRepositoryProvider),
+            active.id,
+          );
+          await controller.restoreDraft();
+        }
+      }());
+    }
     final l10n = AppLocalizations.of(context)!;
     if (type == AssessmentType.posttest &&
         enforcePracticeGuard &&
@@ -226,6 +243,13 @@ class _AssessmentBody extends ConsumerWidget {
       if (confirmed != true) return;
       return;
     }
+    final repository = ref.read(attemptRepositoryProvider);
+    final activeAttempt = await repository.getCurrentAttempt(
+      int.parse(state.moduleId.replaceFirst('module_', '')),
+    );
+    if (activeAttempt != null) {
+      controller.attachPersistence(repository, activeAttempt.id);
+    }
     final result = await controller.submit();
     if (result == null || !context.mounted) return;
     final attempt = ref.read(currentAttemptProvider(result.moduleId).notifier);
@@ -329,7 +353,7 @@ class AssessmentResultPage extends ConsumerWidget {
   }
 }
 
-class _AssessmentResultView extends StatelessWidget {
+class _AssessmentResultView extends ConsumerWidget {
   const _AssessmentResultView({
     required this.module,
     required this.result,
@@ -340,7 +364,7 @@ class _AssessmentResultView extends StatelessWidget {
   final AssessmentType type;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context)!;
     final pretest = type == AssessmentType.pretest;
     final accent = moduleVisualFor(module.metadata.number).accent;
@@ -435,11 +459,29 @@ class _AssessmentResultView extends StatelessWidget {
         const SizedBox(height: AppSpacing.xl),
         FilledButton(
           key: const Key('assessment-result-continue'),
-          onPressed: () => context.go(
-            pretest
-                ? AppRoutes.theory(module.metadata.number)
-                : AppRoutes.finalResult(module.metadata.number),
-          ),
+          onPressed: () async {
+            if (!pretest) {
+              final repository = ref.read(attemptRepositoryProvider);
+              final active = await repository.getCurrentAttempt(
+                module.metadata.number,
+              );
+              if (active != null) {
+                try {
+                  await repository.finalizeAttempt(active.id);
+                } on StateError {
+                  // The final result page remains available for a recoverable
+                  // incomplete attempt; it must not erase its draft.
+                }
+              }
+            }
+            if (context.mounted) {
+              context.go(
+                pretest
+                    ? AppRoutes.theory(module.metadata.number)
+                    : AppRoutes.finalResult(module.metadata.number),
+              );
+            }
+          },
           child: Text(
             pretest ? l10n.continueToTheory : l10n.continueToMaterial,
           ),

@@ -5,6 +5,10 @@ class AssessmentSessions extends Table {
   TextColumn get attemptId => text()();
   TextColumn get assessmentType => text()();
   TextColumn get answersJson => text()();
+  TextColumn get questionOrderJson =>
+      text().withDefault(const Constant('[]'))();
+  IntColumn get currentQuestionIndex =>
+      integer().withDefault(const Constant(0))();
   BoolColumn get submitted => boolean().withDefault(const Constant(false))();
   RealColumn get rawScore => real().nullable()();
   RealColumn get weightedScore => real().nullable()();

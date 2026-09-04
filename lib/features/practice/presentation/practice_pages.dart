@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +9,7 @@ import '../../../app/theme/app_colors.dart';
 import '../../../app/theme/app_radius.dart';
 import '../../../app/theme/app_spacing.dart';
 import '../../../core/widgets/app_page.dart';
+import '../../../data/providers/database_providers.dart';
 import '../../../domain/models/module_content.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../learning/providers/current_attempt_provider.dart';
@@ -46,6 +49,19 @@ class _PracticeBody extends ConsumerWidget {
     );
     final state = ref.watch(practiceSessionProvider(key));
     final controller = ref.read(practiceSessionProvider(key).notifier);
+    if (!controller.isPersistenceAttached) {
+      unawaited(() async {
+        final active = await ref
+            .read(attemptRepositoryProvider)
+            .getCurrentAttempt(module.metadata.number);
+        if (active != null && !controller.isPersistenceAttached) {
+          controller.attachPersistence(
+            ref.read(attemptRepositoryProvider),
+            active.id,
+          );
+        }
+      }());
+    }
     final l10n = AppLocalizations.of(context)!;
     if (state.summaryVisible)
       return _PracticeSummary(module: module, state: state);
@@ -100,7 +116,19 @@ class _PracticeBody extends ConsumerWidget {
             FilledButton(
               key: const Key('practice-check'),
               onPressed: state.isReadyForCheck
-                  ? () {
+                  ? () async {
+                      final repository = ref.read(attemptRepositoryProvider);
+                      final activeAttempt = await repository.getCurrentAttempt(
+                        int.parse(
+                          module.metadata.id.replaceFirst('module_', ''),
+                        ),
+                      );
+                      if (activeAttempt != null) {
+                        controller.attachPersistence(
+                          repository,
+                          activeAttempt.id,
+                        );
+                      }
                       controller.checkCurrentActivity();
                       final freshState = ref.read(practiceSessionProvider(key));
                       if (freshState.isComplete) {

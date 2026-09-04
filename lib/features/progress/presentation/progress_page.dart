@@ -159,6 +159,19 @@ class _ProgressModuleEntry extends StatelessWidget {
                       ),
                     ],
                   ),
+                  if (progress.latestScore != null ||
+                      progress.bestScore != null) ...[
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      '${l10n.latestScore}: ${progress.latestScore ?? '—'}  ·  '
+                      '${l10n.bestScore}: ${progress.bestScore ?? '—'}',
+                      style: const TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: AppSpacing.xs),
                   AppProgressBar(
                     value: progress.percent,

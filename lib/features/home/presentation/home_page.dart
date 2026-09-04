@@ -43,6 +43,12 @@ class HomePage extends ConsumerWidget {
             moduleId: dashboard.resume!.moduleId,
             progress: dashboard.resume!.percent,
             stageLabel: dashboard.resume!.stageLabel,
+            onTap: () => context.go(
+              _resumeRoute(
+                dashboard.resume!.moduleId,
+                dashboard.resume!.stageLabel,
+              ),
+            ),
           ),
         const SizedBox(height: AppSpacing.xl),
         _SectionHeader(
@@ -386,45 +392,66 @@ class _ContinueLearningCard extends StatelessWidget {
     required this.moduleId,
     required this.progress,
     required this.stageLabel,
+    required this.onTap,
   });
 
   final int moduleId;
   final int progress;
   final String stageLabel;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border.all(color: AppColors.border),
-        borderRadius: AppRadius.card,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.continueLearning.toUpperCase(),
-            style: const TextStyle(
-              color: AppColors.primary,
-              fontSize: 11,
-              fontWeight: FontWeight.w800,
-              letterSpacing: .8,
+    return InkWell(
+      onTap: onTap,
+      borderRadius: AppRadius.card,
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          border: Border.all(color: AppColors.border),
+          borderRadius: AppRadius.card,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              l10n.continueLearning.toUpperCase(),
+              style: const TextStyle(
+                color: AppColors.primary,
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                letterSpacing: .8,
+              ),
             ),
-          ),
-          const SizedBox(height: AppSpacing.xs),
-          Text(
-            l10n.moduleLabel(moduleId),
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 4),
-          Text(stageLabel, style: Theme.of(context).textTheme.bodySmall),
-          const SizedBox(height: AppSpacing.sm),
-          AppProgressBar(value: progress),
-        ],
+            const SizedBox(height: AppSpacing.xs),
+            Text(
+              l10n.moduleLabel(moduleId),
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 4),
+            Text(stageLabel, style: Theme.of(context).textTheme.bodySmall),
+            const SizedBox(height: AppSpacing.sm),
+            AppProgressBar(value: progress),
+          ],
+        ),
       ),
     );
   }
+}
+
+String _resumeRoute(int moduleId, String stage) {
+  return switch (stage) {
+    'objectives' => AppRoutes.objectives(moduleId),
+    'pretest' => AppRoutes.pretest(moduleId),
+    'pretest_result' => AppRoutes.pretestResult(moduleId),
+    'theory' => AppRoutes.theory(moduleId),
+    'vocabulary' => AppRoutes.vocabulary(moduleId),
+    'reading' => AppRoutes.reading(moduleId),
+    'practice' => AppRoutes.practice(moduleId),
+    'posttest' => AppRoutes.posttest(moduleId),
+    'result' => AppRoutes.finalResult(moduleId),
+    _ => AppRoutes.moduleOverview(moduleId),
+  };
 }
